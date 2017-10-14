@@ -35,3 +35,40 @@ end
 
 # palindrome_permutation("Tact Coa")
 
+def one_away(str1, str2)
+  return false if str1.length - str2.length > 1 || str2.length - str1.length > 1
+  
+  diff_counter = 0
+
+  if str1.length == str2.length
+    i = 0
+    while i < str1.length
+      if str1[i] != str2[i]
+        diff_counter += 1
+      end
+      return false if diff_counter > 1
+      i += 1
+    end
+  else
+    longer_str  = str1.length > str2.length ? str1 : str2
+    i = 0
+    longer_str.each_char do |el|
+      if el != str2[i]
+        diff_counter += 1
+        return false if diff_counter > 1
+        next
+      end
+      i += 1
+    end
+  end
+
+  true
+end
+
+p one_away("pale", "ple")
+p one_away("pales", "pale")
+p one_away("pale", "bale")
+p one_away("pale", "bake")
+
+
+
