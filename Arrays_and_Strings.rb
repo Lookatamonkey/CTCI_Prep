@@ -71,6 +71,22 @@ end
 # p one_away("pale", "bale")
 # p one_away("pale", "bake")
 
+def string_compression(str)
+  res_string = ""
+  temp = str[0]
+  char_counter = 1
+  str[1..-1].each_char do |char|
+    if temp == char
+      char_counter += 1
+    else
+      res_string = res_string + temp + char_counter.to_s
+      temp = char
+      char_counter = 1
+    end
+  end
+  res_string + temp + char_counter.to_s
+end
 
+# p string_compression("aabbcccccaaa")
 
 
