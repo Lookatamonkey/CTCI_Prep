@@ -11,7 +11,7 @@ def urlify(str, len)
   str[0...len + add_space]
 end
 
-# urlify("Mr John Smith    ", 13)
+# p urlify("Mr John Smith    ", 13)
 
 def palindrome_permutation(str)
   char_hash = Hash.new(0)
@@ -33,7 +33,8 @@ def palindrome_permutation(str)
   true
 end
 
-# palindrome_permutation("Tact Coa")
+# p palindrome_permutation("Tact Coa")
+
 
 def one_away(str1, str2)
   return false if str1.length - str2.length > 1 || str2.length - str1.length > 1
@@ -65,10 +66,11 @@ def one_away(str1, str2)
   true
 end
 
-p one_away("pale", "ple")
-p one_away("pales", "pale")
-p one_away("pale", "bale")
-p one_away("pale", "bake")
+# p one_away("pale", "ple")
+# p one_away("pales", "pale")
+# p one_away("pale", "bale")
+# p one_away("pale", "bake")
+
 
 
 
