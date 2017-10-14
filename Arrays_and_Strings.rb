@@ -84,9 +84,11 @@ def string_compression(str)
       char_counter = 1
     end
   end
-  res_string + temp + char_counter.to_s
+  res_string += temp + char_counter.to_s
+  res_string.length > str.length ? str : res_string
 end
 
 # p string_compression("aabbcccccaaa")
+# p string_compression("abcdefg")
 
 
