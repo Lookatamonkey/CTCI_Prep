@@ -91,4 +91,6 @@ end
 # p string_compression("aabbcccccaaa")
 # p string_compression("abcdefg")
 
-
+def zero_matrix(matrix)
+  
+end
