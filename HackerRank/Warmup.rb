@@ -81,7 +81,6 @@ arr.each do |num|
 end
 
 # Staircase
-
 i = 1
 res = ""
 until i == n + 1
