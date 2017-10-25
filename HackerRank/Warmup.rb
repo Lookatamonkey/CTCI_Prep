@@ -90,7 +90,7 @@ until i == n + 1
     i += 1
 end
 
-# Minimax
+# Mini-Max Sum
 lowest_num = arr[0]
 greatest_num = arr[0]
 total = 0 
@@ -101,3 +101,18 @@ arr.each do |num|
 end
 
 print (total - greatest_num).to_s + " " + (total - lowest_num).to_s
+
+def birthdayCakeCandles(n, ar)
+    tallest = 0
+    counter = 1
+    ar.each do |candle|
+       if candle > tallest
+           tallest = candle
+           counter = 1
+       elsif candle == tallest
+           counter += 1
+       end
+    end
+    
+    counter
+end
