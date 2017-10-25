@@ -61,3 +61,15 @@ while j < len
     j += 1
 end
 
+positive = 0.0
+negative = 0.0
+zero = 0.0
+arr.each do |num|
+    if num === 0
+        zero += 1
+    elsif num > 0
+        positive += 1
+    else
+        negative += 1
+    end
+end
