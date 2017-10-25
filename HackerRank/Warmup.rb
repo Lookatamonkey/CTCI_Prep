@@ -73,3 +73,31 @@ arr.each do |num|
         negative += 1
     end
 end
+
+
+
+i = 1
+res = ""
+until i == n + 1
+    (n - i).times do |spaces|
+        res += " "
+    end
+    i.times do |hashes|
+        res += "#"
+    end
+    puts res
+    res = ""
+    i += 1
+end
+
+# Minimax
+lowest_num = arr[0]
+greatest_num = arr[0]
+total = 0 
+arr.each do |num|
+    total += num
+    num < lowest_num   ? lowest_num = num : nil
+    num > greatest_num  ? greatest_num = num : nil
+end
+
+print (total - greatest_num).to_s + " " + (total - lowest_num).to_s
