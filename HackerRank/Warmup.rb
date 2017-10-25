@@ -10,6 +10,8 @@ def simpleArraySum(n, ar)
     sum
 end
 
+
+# Compare the Triplets
 def solve(a0, a1, a2, b0, b1, b2)
     a = [a0, a1, a2]
     b = [b0, b1, b2]
@@ -28,6 +30,7 @@ def solve(a0, a1, a2, b0, b1, b2)
 end
 
 
+# Grading Students
 def solve(grades)
     grades.each_with_index do |grade, i|
         if (grade % 5 >= 3) && ( grade >= 38 )
@@ -45,6 +48,8 @@ def aVeryBigSum(n, ar)
     sum
 end
 
+
+# Diagonal Difference
 sum_diag_one = 0
 sum_diag_two = 0
 
@@ -61,6 +66,7 @@ while j < len
     j += 1
 end
 
+# Plus Minus
 positive = 0.0
 negative = 0.0
 zero = 0.0
@@ -74,7 +80,7 @@ arr.each do |num|
     end
 end
 
-
+# Staircase
 
 i = 1
 res = ""
@@ -115,4 +121,27 @@ def birthdayCakeCandles(n, ar)
     end
     
     counter
+end
+
+def timeConversion(s)
+    if s[-2] == "P" && s[0..1] != "12"
+        twelve = 1
+    elsif s[-2] == "A" && s[0..1] == "12"
+        twelve = -1
+    else
+        twelve = 0
+    end
+    stripped = s[0..-3]
+ 
+    if twelve == 0
+        return stripped
+    end
+    arr = stripped.split(":")
+    if twelve == 1
+        arr.unshift((arr.shift().to_i + 12).to_s)
+    elsif twelve == -1
+        arr.shift()
+        arr.unshift("00")
+    end
+    arr.join(":")
 end
