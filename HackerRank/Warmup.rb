@@ -44,3 +44,20 @@ def aVeryBigSum(n, ar)
     end
     sum
 end
+
+sum_diag_one = 0
+sum_diag_two = 0
+
+i = 0
+len = a[0].length 
+while i < len
+    sum_diag_one += a[i][i]
+    i += 1
+end
+
+j = 0
+while j < len
+    sum_diag_two += a[len-j - 1][j]
+    j += 1
+end
+
