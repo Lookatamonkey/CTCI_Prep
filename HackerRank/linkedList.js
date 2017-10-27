@@ -9,7 +9,6 @@ function print(head) {
 
 // Insert a Node at the Tail of a Linked List
 
-
 function insert(head, data) {
     if (head === null) {
         head = new Node(data);
@@ -21,6 +20,20 @@ function insert(head, data) {
         node.next = new Node();
         node.next.data = data;
     }
+    return head;
+}
+
+// Insert a node at the head of a linked list
+
+function insert(head, data) {
+    if (head === null) {
+        head = new Node(data);
+    } else {
+        let node = head;
+        head = new Node(data);
+        head.next = node;
+    }
+    
     return head;
 }
 
