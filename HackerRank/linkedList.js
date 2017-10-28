@@ -61,3 +61,28 @@ function insert(head, data, position) {
     }
     return head;
 }
+
+// Delete a Node
+
+function deleteNode(head, position) {
+    let counter = 0;
+    let node = head;
+    
+    if (position === 0) {
+        head = node.next;    
+    } else {
+        while (counter + 1 !== position) {
+            node = node.next;
+            counter += 1;
+        }
+        if (node.next) {
+            if (node.next.next) {
+                node.next = node.next.next;        
+            } else {
+                node.next = null;
+            }
+        }    
+    }
+    return head;
+}
+
