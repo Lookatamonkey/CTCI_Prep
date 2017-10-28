@@ -107,3 +107,22 @@ function reversePrint(head) {
    }
 }
 
+// Reverse Linked List
+function reverseLinkedList(head) {
+    let node = head;
+    if (node === null) {
+            return null;
+    } else {
+        let fast = node.next;
+        node.next = null;
+        while (fast) {
+            let temp = fast;
+            fast = fast.next;
+            temp.next = node;
+            node = temp;
+        }
+    }
+    return node;
+}
+
+
