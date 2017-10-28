@@ -125,4 +125,17 @@ function reverseLinkedList(head) {
     return node;
 }
 
+// Compare Linked Lists
+function compareLinkedLists( headA, headB) {
+    let nodeA = headA;
+    let nodeB = headB;
+    while (nodeA !== null || nodeB !== null) {
+        if ((nodeA === null && nodeB !== null || nodeA !== null && nodeB === null) || (nodeA.data !== nodeB.data)) {
+            return 0;
+        }
+        nodeA = nodeA.next;
+        nodeB = nodeB.next;
+    }
+    return 1;
+}
 
