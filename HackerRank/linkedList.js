@@ -37,3 +37,27 @@ function insert(head, data) {
     return head;
 }
 
+// Insert a node at a specific position in a linked list
+
+function insert(head, data, position) {
+    let counter = 0;
+    let node = head;
+    let insert = new Node(data);
+    
+    if (position === 0) {
+        if (head) {
+            insert.next = head;
+        }
+        head = insert;
+    } else {
+        while (counter + 1 !== position) {
+            node = node.next;
+            counter += 1;
+        }
+        if (node.next !== null) {
+            insert.next = node.next;
+        }
+        node.next = insert;
+    }
+    return head;
+}
