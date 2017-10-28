@@ -86,3 +86,19 @@ function deleteNode(head, position) {
     return head;
 }
 
+// Reverse Linked List
+function reversePrint(head) {
+    if (head === null) {
+        return null;
+    } else {
+        let node = head;
+        let fast = node.next;
+        while (fast) {
+            let temp = fast;
+            fast = fast.next;
+            temp.next = node;
+            node = temp;
+        }        
+    }
+}
+
