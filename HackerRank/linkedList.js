@@ -205,4 +205,23 @@ function getNodeValue( head, position) {
     return node1.data;
 }
 
+// Remove Duplicate Nodes
 
+function removeDuplicates(head) {
+    if (head === null) {
+        return;
+    }
+    
+    let node = head.next;
+    let current = head;
+    
+    while ( node !== null ) {
+        if ( current.data !== node.data) {
+            current.next = node;
+            current = current.next;
+        }
+        node = node.next;
+    }
+    
+    return current;
+}
