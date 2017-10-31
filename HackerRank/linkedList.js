@@ -139,3 +139,47 @@ function compareLinkedLists( headA, headB) {
     return 1;
 }
 
+// Merge Linked List
+
+function mergeLinkedLists( headA, headB) {
+    let nodeA = headA;
+    let nodeB = headB;
+    let current = null;
+    let head = null;
+    
+    if ( nodeA === null ) {
+        return nodeB;
+    } else if (nodeB === null) {
+        return nodeA;
+    }
+    
+     if (nodeA.data > nodeB.data) {
+         current = nodeB;
+         nodeB = nodeB.next; 
+     } else {
+         current = nodeA;
+         nodeA = nodeA.next; 
+     }
+   
+    head = current; 
+    while (nodeA !== null && nodeB !== null) {
+        if (nodeA.data > nodeB.data) {
+            current.next = nodeB;
+            current = current.next;
+            nodeB = nodeB.next;
+        } else {
+            current.next = nodeA;
+            current = current.next;
+            nodeA = nodeA.next;
+        }
+    }
+    
+    if (nodeA !== null) {
+        current.next = nodeA;
+    } else if (nodeB !== null) {
+        current.next = nodeB;
+    }
+    
+    return head;
+}
+
