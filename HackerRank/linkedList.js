@@ -183,3 +183,26 @@ function mergeLinkedLists( headA, headB) {
     return head;
 }
 
+// Get Node Value
+
+function getNodeValue( head, position) {
+    let len = 0;
+    let node = head;
+    
+    while (node !== null) {
+        len += 1;
+        node = node.next;
+    }
+    
+    let steps = len - position;
+    let i = 1;
+    let node1 = head;
+    while (i < steps) {
+        node1 = node1.next;
+        i += 1;
+    }
+    
+    return node1.data;
+}
+
+
