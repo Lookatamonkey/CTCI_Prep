@@ -38,7 +38,7 @@ end
 
 def one_away(str1, str2)
   return false if str1.length - str2.length > 1 || str2.length - str1.length > 1
-  
+
   diff_counter = 0
 
   if str1.length == str2.length
@@ -91,6 +91,9 @@ end
 # p string_compression("aabbcccccaaa")
 # p string_compression("abcdefg")
 
+print "hello";
+p "goodbye"
+
 def zero_matrix(matrix)
-  
+
 end
