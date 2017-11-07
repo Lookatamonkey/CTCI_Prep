@@ -9,7 +9,6 @@ def island_perimeter(grid)
     while j < len
         while i < len
             if i == 0 
-                
                 if grid[j][i] == 1
                     perimeter += 4
                 end
