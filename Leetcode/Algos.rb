@@ -99,3 +99,23 @@ def intersection(nums1, nums2)
     
     res
 end
+
+# Infamous FizzBuzz
+def fizz_buzz(n)
+    i= 1
+    res = []
+    until i > n
+        if i % 15 == 0
+            res << "FizzBuzz"
+        elsif i % 5 == 0
+            res << "Buzz"
+        elsif i % 3 == 0
+            res << "Fizz"
+        else
+            res << i.to_s
+        end
+        i += 1
+    end
+    
+    res
+end
