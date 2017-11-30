@@ -42,7 +42,6 @@ def island_perimeter(grid)
 end
 
 # Distribute candies
-
 def distribute_candies(candies)
     sorted = candies.sort
     sister = {};
@@ -60,7 +59,6 @@ def distribute_candies(candies)
 end
 
 # Intersection of two arrays
-
 def intersection(nums1, nums2)
     unique = {}
      res = []
@@ -78,3 +76,26 @@ def intersection(nums1, nums2)
      
      res
  end
+
+ # Intersection II
+ def intersect(nums1, nums2)
+    hashed = {}
+    res = []
+    
+    nums1.each do |num|
+        if !(hashed[num])
+            hashed[num] = 1
+        else
+            hashed[num] += 1
+        end
+    end
+    
+    nums2.each do |num|
+        if (hashed[num]) && (hashed[num] > 0)
+            hashed[num] -= 1
+            res.push(num)
+        end
+    end
+    
+    res
+end
