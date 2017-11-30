@@ -58,3 +58,23 @@ def distribute_candies(candies)
     end
     counter
 end
+
+# Intersection of two arrays
+
+def intersection(nums1, nums2)
+    unique = {}
+     res = []
+     nums1.each do |num|
+         if !(unique[num])
+             unique[num] = true
+         end
+     end
+     
+     nums2.each do |num|
+         if unique[num] && !(res.include?(num))
+             res.push(num)
+         end
+     end
+     
+     res
+ end
