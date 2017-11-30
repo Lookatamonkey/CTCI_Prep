@@ -119,3 +119,10 @@ def fizz_buzz(n)
     
     res
 end
+
+#Can Win
+def can_win_nim(n)
+    return true if n <= 3
+    return false if n % 4 == 0
+    true
+end
