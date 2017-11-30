@@ -40,3 +40,21 @@ def island_perimeter(grid)
     end
     perimeter -= (2 * nxt)
 end
+
+# Distribute candies
+
+def distribute_candies(candies)
+    sorted = candies.sort
+    sister = {};
+    counter = 0 
+    sorted.each do |candy|
+        if !(sister[candy])
+            sister[candy] = true
+            if counter + 1 > candies.length / 2 
+            break
+            end
+            counter += 1
+        end
+    end
+    counter
+end
