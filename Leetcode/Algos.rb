@@ -126,3 +126,21 @@ def can_win_nim(n)
     return false if n % 4 == 0
     true
 end
+
+# Pivot Index
+def pivot_index(nums)
+    return -1 if nums.empty?
+    
+    left = 0
+    right = nums[1..-1].reduce(:+)
+    i = 0
+    return i if left == right
+    
+    until i == (nums.length - 1)
+        left += nums[i]
+        i += 1
+        right -= nums[i]
+        return i if left == right
+    end
+    -1
+end
