@@ -144,3 +144,18 @@ def pivot_index(nums)
     end
     -1
 end
+
+# Better Pivot Index
+def pivot_index(nums)
+    return -1 if nums.empty?
+    left = 0
+    total = nums.reduce(:+)
+    
+    i = 0
+    until i == ( nums.length )
+        return i if total - left - nums[i] == left
+        left += nums[i]
+        i += 1
+    end
+    -1
+end
