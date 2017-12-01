@@ -159,3 +159,49 @@ def pivot_index(nums)
     end
     -1
 end
+
+# VERY VERY VERY BAD Find max length of repeated subarray
+def find_length(a, b)
+    longest = 0
+    temp = 0
+    return longest if (a.empty? || b.empty?)
+    
+    indexes = {}
+    b.each_with_index do |num, idx|
+        if !(indexes[num])
+            indexes[num] = [idx]
+        else
+            indexes[num] << idx
+        end
+    end
+    
+    a.each_with_index do |num, idx|
+        if !(indexes[num])
+            next 
+        else
+            b_idxes = indexes[num]
+            b_idxes.each do |b_idx|  
+                temp = does_repeat?(a[idx..-1], b[b_idx..-1])
+                
+                temp > longest ? longest = temp : nil
+            end
+        end
+    end
+    
+    longest
+end
+
+def does_repeat?(arr_a, arr_b)
+    repeat = 0
+    i = 0
+    while (i < arr_a.length) && (i < arr_b.length)
+        
+        if arr_a[i] == arr_b[i]
+            repeat += 1
+            i += 1
+        else
+            return repeat
+        end
+    end
+    repeat
+end
