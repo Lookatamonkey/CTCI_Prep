@@ -205,3 +205,19 @@ def does_repeat?(arr_a, arr_b)
     end
     repeat
 end
+
+# Binary Search
+def b_search(arr, target)
+    midpoint = arr.length / 2
+    return midpoint if arr[midpoint] == target
+
+    if arr.empty?
+        return "empty" 
+    elsif arr[midpoint] > target
+        b_search(arr[0...midpoint], target)
+    elsif arr[midpoint] < target
+        b_search(arr[(midpoint + 1)..-1], -1)
+    end
+end
+
+p b_search([1, 2, 3, 4, 5], 4)
