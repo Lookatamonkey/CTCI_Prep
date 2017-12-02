@@ -212,7 +212,7 @@ def b_search(arr, target)
     return midpoint if arr[midpoint] == target
 
     if arr.empty?
-        return "empty" 
+        return "empty"
     elsif arr[midpoint] > target
         b_search(arr[0...midpoint], target)
     elsif arr[midpoint] < target
