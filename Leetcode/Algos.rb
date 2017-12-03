@@ -220,4 +220,3 @@ def b_search(arr, target)
     end
 end
 
-p b_search([1, 2, 3, 4, 5], 4)
