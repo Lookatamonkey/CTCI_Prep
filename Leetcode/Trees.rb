@@ -21,6 +21,7 @@ def trim_bst(root, l, r)
         root.left = trim_bst(root.left, l, r)
         root.right = trim_bst(root.right, l, r)
     end
-    p root
     root
 end
+
+
