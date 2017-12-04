@@ -237,12 +237,12 @@ def is_self_dividing_numbers(num, og_num)
     return true if num == 0
     dup = num
     divisor = dup % 10
-    return false if divisor == 0
-    if og_num % divisor == 0
+    if divisor == 0 || og_num % divisor != 0
+        return false
+    else
         new_num = dup / 10
         is_self_dividing_numbers(new_num, og_num)
-    else
-        return false
     end    
 end
 
+p is_self_dividing_numbers(10, 10)
