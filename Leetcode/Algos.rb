@@ -220,3 +220,29 @@ def b_search(arr, target)
     end
 end
 
+# Self Dividing Numbers
+def self_dividing_numbers(left, right)
+    arr = (left..right).to_a
+    res = []
+    
+    arr.each do |num|
+        if is_self_dividing_numbers(num, num)
+            res.push(num)
+        end
+    end
+    res
+end
+
+def is_self_dividing_numbers(num, og_num)
+    return true if num == 0
+    dup = num
+    divisor = dup % 10
+    return false if divisor == 0
+    if og_num % divisor == 0
+        new_num = dup / 10
+        is_self_dividing_numbers(new_num, og_num)
+    else
+        return false
+    end    
+end
+
