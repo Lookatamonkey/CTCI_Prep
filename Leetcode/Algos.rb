@@ -245,4 +245,20 @@ def is_self_dividing_numbers(num, og_num)
     end    
 end
 
-p is_self_dividing_numbers(10, 10)
+# Matrix Reshape
+def matrix_reshape(nums, r, c)
+    arr = nums.flatten
+    return nums if arr.length / r != c 
+    
+    res = []
+    temp = []
+    arr.each do |num|
+        temp.push(num) if temp.length != c
+        if temp.length == c
+            res.push(temp)
+            temp = []
+        end
+    end
+    
+    res
+end
