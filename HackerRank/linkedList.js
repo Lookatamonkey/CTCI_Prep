@@ -42,22 +42,22 @@ function insert(head, data) {
 function insert(head, data, position) {
     let counter = 0;
     let node = head;
-    let insert = new Node(data);
+    let append = new Node(data);
     
     if (position === 0) {
         if (head) {
-            insert.next = head;
+            append.next = head;
         }
-        head = insert;
+        head = append;
     } else {
         while (counter + 1 !== position) {
             node = node.next;
             counter += 1;
         }
         if (node.next !== null) {
-            insert.next = node.next;
+            append.next = node.next;
         }
-        node.next = insert;
+        node.next = append;
     }
     return head;
 }

@@ -24,4 +24,73 @@ def trim_bst(root, l, r)
     root
 end
 
+# Average Level of Trees
+def average_of_levels(root)
+    queue1 = []
+    queue2 = []
+    queue1.push(root)
+    res = 0
+    averages = []
+    
+    until queue1.empty? && queue2.empty?
+        if !(queue1.empty?)
+            divisor = queue1.length.to_f
+            until queue1.empty?
+                pop = queue1.shift()
+                res += pop.val
+                if (pop.left != nil)
+                    queue2.push(pop.left)
+                end
+                if (pop.right != nil)
+                    queue2.push(pop.right)            
+                end
+            end
+        elsif !(queue2.empty?)
+            divisor = queue2.length.to_f
+            until queue2.empty?
+                pop = queue2.shift()
+                res += pop.val
+                if (pop.left != nil)
+                    queue1.push(pop.left)
+                end
+                if (pop.right != nil)
+                    queue1.push(pop.right)
+                end
+            end
+        end
+        averages.push(res/divisor)    
+        res = 0
+    end
+    averages
+end
 
+# BETTER Average Levels of Trees
+def average_of_levels(root)
+    queue1 = []
+    queue2 = []
+    queue1.push(root)
+    res = 0
+    averages = []
+    divisor = 0
+    
+    until queue1.empty? && queue2.empty?
+        if !(queue1.empty?)
+            divisor = queue1.length.to_f
+            until queue1.empty?
+                pop = queue1.shift()
+                res += pop.val
+                if (pop.left != nil)
+                    queue2.push(pop.left)
+                end
+                if (pop.right != nil)
+                    queue2.push(pop.right)            
+                end
+            end
+        end
+        averages.push(res/divisor)
+        res = 0
+        queue1 = queue2;
+        queue2 = []
+    end
+    averages
+end
