@@ -290,3 +290,21 @@ def find_max_consecutive_ones(nums)
     
     longest
 end
+
+# Find better max consecutive
+def find_max_consecutive_ones(nums)
+    counter = 0
+    max = 0
+    
+    nums.each do |num|
+        if num == 0
+            counter = 0
+        else
+            counter += 1
+            if counter > max
+                max = counter
+            end
+        end  
+    end
+    max
+end
