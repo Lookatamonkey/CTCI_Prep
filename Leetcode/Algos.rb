@@ -335,3 +335,19 @@ def single_number(nums)
     end
     
 end
+
+# Detect capital use
+def detect_capital_use(word)
+    return true if word.length < 2
+    first_letter = word[0]
+    second_letter = word[1]
+    return false if (first_letter.capitalize != first_letter) && (second_letter.capitalize == second_letter)
+    word[2..-1].each_char do |letter|
+        if (first_letter.capitalize == first_letter) && (second_letter.capitalize == second_letter)
+            return false if (letter.capitalize != letter)
+        else
+            return false if (letter.capitalize == letter)
+        end
+    end
+    true
+end
