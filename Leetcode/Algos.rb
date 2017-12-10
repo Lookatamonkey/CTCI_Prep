@@ -262,3 +262,31 @@ def matrix_reshape(nums, r, c)
     
     res
 end
+
+# Find Max Consecutive
+def find_max_consecutive_ones(nums)
+    counter = 0
+    longest = 0
+    consecutive = false
+    
+    nums.each do |num|
+        if num == 0
+            if counter > longest
+                longest = counter
+            end
+            counter = 0
+            consecutive = false
+        elsif num == 1 and consecutive == true
+            counter += 1
+        elsif num == 1 and consecutive == false
+            counter = 1
+            consecutive = true
+        end
+    end
+    
+    if counter > longest
+        longest = counter
+    end
+    
+    longest
+end
