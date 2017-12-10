@@ -24,6 +24,16 @@
 # information, we would not give it to you on the timed challenge. :-)
 
 def caesar_cipher(offset, string)
+  res = ""
+  
+  string.each_char do |letter|
+    if letter != " "
+      letter = (((letter.ord + offset - 97) % 26) + 97).chr 
+    end
+    res += letter
+  end
+
+  res
 end
 
 # These are tests to check that your code is working. After writing
