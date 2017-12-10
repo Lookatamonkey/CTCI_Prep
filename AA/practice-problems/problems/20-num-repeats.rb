@@ -7,6 +7,17 @@
 # Difficulty: hard.
 
 def num_repeats(string)
+   hashed = {}
+   
+   string.each_char do |letter|
+    if hashed[letter]
+        hashed[letter] += 1
+    else
+        hashed[letter] = 1
+    end
+   end
+
+   hashed.select { |k, v| v > 1 }.length
 end
 
 # These are tests to check that your code is working. After writing
