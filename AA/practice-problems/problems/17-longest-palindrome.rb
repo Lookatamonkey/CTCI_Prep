@@ -16,20 +16,36 @@
 #
 # Difficulty: hard.
 
-def palindrome?(string)
+def longest_palindrome(string)
+  longest = ""
   i = 0
-  while i < string.length
-    if string[i] != string[(string.length - 1) - i]
-      return false
-    end
+  j = 0
 
+  while i < string.length
+    while j < string.length
+      if is_palindrome?(string[i..j]) && string[i..j].length > longest.length
+        longest = string[i..j]
+      end
+      j += 1
+    end
     i += 1
+    j = i + 1
   end
 
-  return true
+  longest
 end
 
-def longest_palindrome(string)
+def is_palindrome?(string)
+  first_idx = 0
+  second_idx = string.length - 1
+
+  until first_idx >= second_idx
+    return false if string[first_idx] != string[second_idx]
+    first_idx += 1
+    second_idx -= 1
+  end
+
+  true
 end
 
 # These are tests to check that your code is working. After writing
