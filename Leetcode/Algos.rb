@@ -308,3 +308,30 @@ def find_max_consecutive_ones(nums)
     end
     max
 end
+
+# Find Longest Uncommon Subsequence
+# If they're equal, return -1, else return the length of the longer string. 
+# If they're the same length, but not equal, then the longest uncommon substring
+# would be the length of either of the strings
+def find_lu_slength(a, b)
+    return -1 if a == b
+    a.length > b.length ? a.length : b.length
+end
+
+# Find Single Number
+def single_number(nums)
+    hash = {}
+    
+    nums.each do |num|
+        if hash[num]
+            hash[num] = 0
+        else
+            hash[num] = 1
+        end
+    end
+    
+    nums.each do |num|
+        return num if hash[num] == 1
+    end
+    
+end
