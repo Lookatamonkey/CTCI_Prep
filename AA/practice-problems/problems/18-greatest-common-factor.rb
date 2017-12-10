@@ -5,6 +5,14 @@
 # Difficulty: medium.
 
 def greatest_common_factor(number1, number2)
+  num = number1 > number2 ? number2 : number1
+
+  until num == 1
+    return num if number1 % num == 0 && number2 % num == 0
+    num -= 1
+  end
+
+  num
 end
 
 # These are tests to check that your code is working. After writing
