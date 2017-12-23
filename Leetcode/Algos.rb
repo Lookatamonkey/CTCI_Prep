@@ -351,3 +351,14 @@ def detect_capital_use(word)
     end
     true
 end
+
+# Next Greatest Letter
+def next_greatest_letter(letters, target)
+    return letters.first if target.ord >= letters.last.ord
+        
+    letters.each do |letter|
+        if letter.ord > target.ord
+            return letter
+        end
+    end
+end
