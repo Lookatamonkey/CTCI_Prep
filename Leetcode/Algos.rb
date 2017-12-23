@@ -362,3 +362,18 @@ def next_greatest_letter(letters, target)
         end
     end
 end
+
+# Arrange Coins
+def arrange_coins(n)
+    fs = 0
+    i = 0
+    counter = 0
+    
+    until i >= n
+        fs += 1
+        counter += 1
+        i += counter
+    end
+
+    return i == n ? fs : fs - 1
+end
