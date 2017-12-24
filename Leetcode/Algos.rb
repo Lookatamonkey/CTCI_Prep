@@ -377,3 +377,34 @@ def arrange_coins(n)
 
     return i == n ? fs : fs - 1
 end
+
+# Construct Rectangle
+def construct_rectangle(area)
+    if perfect_sqrt(area)
+        return [perfect_sqrt(area), perfect_sqrt(area)]
+    else
+        num = Math.sqrt(area).floor.round
+        num.downto(1) do |i|
+           if area % i == 0
+               return [area/i, i]
+           end
+        end
+        [area, 1]
+    end
+end
+
+def perfect_sqrt(num)
+    return Math.sqrt(num) == Math.sqrt(num).floor ? Math.sqrt(num).round : nil
+end
+
+# Better Construct Rectangle
+def construct_rectangle(area)
+    num = Math.sqrt(area).floor.round
+    num.downto(1) do |i|
+       if area % i == 0
+           return [area/i, i]
+       end
+    end
+    [area, 1]
+end
+
