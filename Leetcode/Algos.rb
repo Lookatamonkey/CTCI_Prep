@@ -412,9 +412,27 @@ end
 def min_moves(nums)
     sum = 0
     min = nums.min
-    
+
     nums.each do |num|
         sum += (num - min)
     end 
     sum
+end
+
+# Minimum moves II
+def min_moves2(nums)
+    nums.sort!
+    
+    if nums.length.odd? 
+        median = nums[(nums.length - 1) / 2]
+    else
+        median = (nums[(nums.length / 2)] + nums[(nums.length / 2) - 1]) / 2
+    end
+    
+    distance = 0
+    nums.each do |num|
+        distance += (num - median).abs
+    end
+    
+    distance
 end
