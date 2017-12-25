@@ -408,3 +408,13 @@ def construct_rectangle(area)
     [area, 1]
 end
 
+# Minimum moves
+def min_moves(nums)
+    sum = 0
+    min = nums.min
+    
+    nums.each do |num|
+        sum += (num - min)
+    end 
+    sum
+end
