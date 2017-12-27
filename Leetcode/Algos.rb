@@ -436,3 +436,47 @@ def min_moves2(nums)
     
     distance
 end
+
+# max profit
+def max_profit(prices)
+    total = 0
+    max = 0
+    
+    return 0 if prices.empty?
+    
+    prices[1..-1].each_with_index do |price, idx|
+        prev = prices[idx]
+        diff = price - prev
+        if diff >= 0
+            total += diff
+            total > max ? max = total : nil    
+        else
+            if total + diff < 0
+                total = 0
+            else
+                total += diff
+            end
+        end
+    end
+    
+    max
+end
+
+# First unique character
+def first_uniq_char(s)
+    uniques = {}
+    
+    s.each_char do |char|
+        if uniques[char] 
+            uniques[char] += 1
+        else
+            uniques[char] = 1 
+        end
+    end
+    
+    s.split('').each_with_index do |char, idx|
+        return idx if uniques[char] == 1
+    end
+    
+    -1
+end
