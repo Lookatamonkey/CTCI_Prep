@@ -498,3 +498,25 @@ def find_max_consecutive_ones(nums)
     end
     max
 end
+
+# Invert tree
+def invert_tree(root)
+    
+    return nil if root.nil?
+    queue1 = []
+    queue2 = []
+    
+    queue1.push(root)
+    until queue1.empty? && queue2.empty?
+        until queue1.empty?
+            parent = queue1.pop()
+            parent.left, parent.right = parent.right, parent.left
+            queue2.push(parent.left) if parent.left
+            queue2.push(parent.right) if parent.right
+        end
+        queue1 = queue2
+        queue2 = []
+    end
+    
+    root
+end
