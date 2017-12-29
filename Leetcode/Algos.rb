@@ -480,3 +480,21 @@ def first_uniq_char(s)
     
     -1
 end
+
+# Max consecutive nums
+def find_max_consecutive_ones(nums)
+    counter = 0
+    max = 0
+    
+    nums.each do |num|
+        if num == 0
+            counter = 0
+        else
+            counter += 1
+            if counter > max
+                max = counter
+            end
+        end  
+    end
+    max
+end
