@@ -520,3 +520,63 @@ def invert_tree(root)
     
     root
 end
+
+
+# sort roman numeral
+def sort_romans(arr)
+    return arr[0] if arr.length == 1 
+    return nil if arr.empty? 
+
+    res = []
+    arr.each do |name|
+       res.push( name.split(" ") )
+    end
+
+    res.sort do |x, y|
+        if x.first > y.first
+            1
+        elsif x.first < y.first
+            -1
+        else
+             if make_num(x.last) > make_num(y.last)
+                1
+             else
+                -1
+             end
+        end
+    end
+end
+
+def make_num(rn)
+
+    store = {
+       "I" => 1,
+       "V" => 5,
+       "X" => 10,
+       "L" => 50,
+       "C" => 100,
+       "D" => 500,
+       "M" => 1000
+    }
+
+    uniques = {"IV" => true, "IX" => true, "XL" => true, "XC" => true, "CD" => true, "CM" => true}
+
+    num = store[rn[0]]
+    prev = rn[0]
+    return num if rn.length == 1
+
+    rn[1..-1].each_char do |ltr|
+        if uniques[prev + ltr]
+            num += store[ltr] - (2 * store[prev])
+
+        else
+            num += store[ltr]
+        end
+        prev = ltr
+    end
+
+    return num
+end
+
+
+sort_romans(["Elizbeth VI", "Henry VII", "Elizbeth IX", "John III", "Elizbeth XII"])
