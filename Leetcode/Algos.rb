@@ -577,6 +577,106 @@ def make_num(rn)
 
     return num
 end
+# sort_romans(["Elizbeth VI", "Henry VII", "John IV", "Elizbeth IX", "John VI", "Elizbeth XII"])
+
+def two_nums(arr1, arr2)
+    arr1.sort!
+    hashed = {}
+    counter = 1
 
 
-sort_romans(["Elizbeth VI", "Henry VII", "Elizbeth IX", "John III", "Elizbeth XII"])
+    arr1.each_with_index do |num, idx|
+        if hashed[num]
+            counter += 1
+            hashed[num][0] += 1
+            
+        else
+            counter = 1
+            hashed[num] = [counter, idx + 2]
+        end
+    end
+
+    res = []
+    arr2.each_with_index do |num, idx|
+        if hashed[num]
+            res.push(hashed[num][1])
+        else
+            if num > arr1[-1]
+                res.push(arr1.length)
+            else
+                hashed.each do |key, value|
+                    if key > num
+                        
+                        res.push(hashed[key][1] - hashed[key][0])
+                        break
+                    end
+                end
+            end
+        end 
+    end
+    res
+end
+
+# two_nums([1, 1, 2, 3, 3, 7, 7], [3, 4, 8, 7, 7, 6]) # => [5, 5, 5, 7, 7, 7]
+
+def steps(maze)
+    width = maze[0].length
+    height = maze.length
+
+    dup = (Array.new(3) { Array.new(3) {0} })
+
+    i = 0
+    # across the top
+    while i < width
+        if maze[0][i] == 1
+            dup[0][i] = 1
+        else
+            break
+        end
+        i += 1
+    end
+
+    j = 0
+    # across the left side
+    while j < height
+        if maze[j][0] == 1
+            dup[j][0] = 1
+        else
+            break
+        end
+        j += 1
+    end
+
+    i = 1
+    j = 1
+    # centery
+    while j < height
+        while i < width
+            if maze[j][i] == 1
+                counter = 0
+                # above
+                if maze[j - 1][i] == 1
+                    counter += dup[j - 1][i]
+                end
+                # left
+                if  maze[j][i - 1] == 1
+                    counter += dup[j][i - 1]
+                end
+                dup[j][i] = counter
+            end
+            i += 1
+        end
+        i = 1
+        j += 1
+    end
+    p dup
+    dup[width - 1][height - 1]
+end
+
+p steps([
+    [1,0,1],
+    [1,0,1],
+    [1,1,1]
+])
+
+
