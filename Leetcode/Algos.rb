@@ -568,7 +568,6 @@ def make_num(rn)
     rn[1..-1].each_char do |ltr|
         if uniques[prev + ltr]
             num += store[ltr] - (2 * store[prev])
-
         else
             num += store[ltr]
         end
@@ -589,10 +588,10 @@ def two_nums(arr1, arr2)
         if hashed[num]
             counter += 1
             hashed[num][0] += 1
-            
+            hashed[num][1] += 1
         else
             counter = 1
-            hashed[num] = [counter, idx + 2]
+            hashed[num] = [counter, idx + 1]
         end
     end
 
@@ -603,10 +602,11 @@ def two_nums(arr1, arr2)
         else
             if num > arr1[-1]
                 res.push(arr1.length)
+            elsif num < arr1[0]
+                res.push(0)
             else
                 hashed.each do |key, value|
                     if key > num
-                        
                         res.push(hashed[key][1] - hashed[key][0])
                         break
                     end
@@ -617,7 +617,7 @@ def two_nums(arr1, arr2)
     res
 end
 
-# two_nums([1, 1, 2, 3, 3, 7, 7], [3, 4, 8, 7, 7, 6]) # => [5, 5, 5, 7, 7, 7]
+p two_nums([1, 1, 2, 4], [0, 3, 5])
 
 def steps(maze)
     width = maze[0].length
@@ -673,10 +673,10 @@ def steps(maze)
     dup[height - 1][width - 1]
 end
 
-p steps([
-    [1,0,1,1],
-    [1,1,0,1],
-    [1,1,1,1],
-])
+# steps([
+#     [1,0,1,1],
+#     [1,1,0,1],
+#     [1,1,1,1],
+# ])
 
 
