@@ -623,7 +623,7 @@ def steps(maze)
     width = maze[0].length
     height = maze.length
 
-    dup = (Array.new(3) { Array.new(3) {0} })
+    dup = Array.new(height) { Array.new(width) {0} }
 
     i = 0
     # across the top
@@ -649,7 +649,7 @@ def steps(maze)
 
     i = 1
     j = 1
-    # centery
+    # center
     while j < height
         while i < width
             if maze[j][i] == 1
@@ -669,14 +669,14 @@ def steps(maze)
         i = 1
         j += 1
     end
-    p dup
-    dup[width - 1][height - 1]
+
+    dup[height - 1][width - 1]
 end
 
 p steps([
-    [1,0,1],
-    [1,0,1],
-    [1,1,1]
+    [1,0,1,1],
+    [1,1,0,1],
+    [1,1,1,1],
 ])
 
 
