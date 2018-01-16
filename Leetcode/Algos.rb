@@ -532,7 +532,7 @@ def sort_romans(arr)
        res.push( name.split(" ") )
     end
 
-    res.sort do |x, y|
+    res.sort! do |x, y|
         if x.first > y.first
             1
         elsif x.first < y.first
@@ -545,6 +545,14 @@ def sort_romans(arr)
              end
         end
     end
+
+    res2 = []
+
+    res.each do |name|
+        res2.push(name.join(' '))
+    end
+
+    res2
 end
 
 def make_num(rn)
@@ -576,7 +584,7 @@ def make_num(rn)
 
     return num
 end
-# sort_romans(["Elizbeth VI", "Henry VII", "John IV", "Elizbeth IX", "John VI", "Elizbeth XII"])
+# p sort_romans(["Elizbeth VI", "Henry VII", "John IV", "Elizbeth IX", "John VI", "Elizbeth XII"])
 
 def two_nums(arr1, arr2)
     arr1.sort!
@@ -617,7 +625,7 @@ def two_nums(arr1, arr2)
     res
 end
 
-p two_nums([1, 1, 2, 4], [0, 3, 5])
+# p two_nums([1, 1, 2, 4], [0, 3, 5])
 
 def steps(maze)
     width = maze[0].length
@@ -673,10 +681,10 @@ def steps(maze)
     dup[height - 1][width - 1]
 end
 
-# steps([
-#     [1,0,1,1],
-#     [1,1,0,1],
-#     [1,1,1,1],
-# ])
+p steps([
+    [1,1,1,1],
+    [1,1,1,1],
+    [1,1,1,1],
+])
 
 
