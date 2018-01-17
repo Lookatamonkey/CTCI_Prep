@@ -698,32 +698,21 @@ def missing_intervals(collected_intervals, desired_intervals)
         end
     end
 
-    collected_intervals.flatten!
     temp_arr = [desired_intervals.first]
-    index = 0
+    prev = 0
 
-    # finds indicies
-    collected_intervals.each_with_index do |num, idx|
-        if num > desired_intervals.first
-            index = idx
-            break
-        elsif num == desired_intervals.first
-            index = idx + 1
-            break
-        end
-    end
+    collected_intervals.each do |duple|      
+        first = duple[0]
+        last = duple[1]
 
-    collected_intervals[index..-1].each do |num|
-        if num >= desired_intervals.last
-            temp_arr.push(desired_intervals.last)
+        if first > desired_intervals.first
+            temp_arr.push(first)
             res.push(temp_arr)
-            break
+            temp_arr = [last]
         end
-
-        temp_arr.push(num)
-        if temp_arr.length == 2
-            res.push(temp_arr)
-            temp_arr = []
+        
+        if last >= desired_intervals.last
+            break
         end
     end
 
@@ -731,4 +720,4 @@ def missing_intervals(collected_intervals, desired_intervals)
 end
 
 p missing_intervals([[10,15], [3,4], [7, 9]], [1, 12]) #== [[1, 3], [4, 7], [9, 10]]
-p missing_intervals([[10,15], [3,5], [7, 9]], [4, 12]) #== [[4, 5], [4, 7], [9, 10]]
+p missing_intervals([[10,15], [3,5], [7, 9]], [4, 12]) #== [[4, 5], [7, 9], [9, 10]]
