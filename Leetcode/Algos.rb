@@ -681,10 +681,54 @@ def steps(maze)
     dup[height - 1][width - 1]
 end
 
-p steps([
-    [1,1,1,1],
-    [1,1,1,1],
-    [1,1,1,1],
-])
+# p steps([
+#     [1,1,1,1],
+#     [1,1,1,1],
+#     [1,1,1,1],
+# ])
 
+def missing_intervals(collected_intervals, desired_intervals)
+    res = []
 
+    collected_intervals.sort! do |x, y|
+        if x.first > y.first
+            1
+        elsif x.first < y.first
+            -1
+        end
+    end
+
+    collected_intervals.flatten!
+    temp_arr = [desired_intervals.first]
+    index = 0
+
+    # finds indicies
+    collected_intervals.each_with_index do |num, idx|
+        if num > desired_intervals.first
+            index = idx
+            break
+        elsif num == desired_intervals.first
+            index = idx + 1
+            break
+        end
+    end
+
+    collected_intervals[index..-1].each do |num|
+        if num >= desired_intervals.last
+            temp_arr.push(desired_intervals.last)
+            res.push(temp_arr)
+            break
+        end
+
+        temp_arr.push(num)
+        if temp_arr.length == 2
+            res.push(temp_arr)
+            temp_arr = []
+        end
+    end
+
+    res
+end
+
+p missing_intervals([[10,15], [3,4], [7, 9]], [1, 12]) #== [[1, 3], [4, 7], [9, 10]]
+p missing_intervals([[10,15], [3,5], [7, 9]], [4, 12]) #== [[4, 5], [4, 7], [9, 10]]
