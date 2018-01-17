@@ -698,26 +698,48 @@ def missing_intervals(collected_intervals, desired_intervals)
         end
     end
 
-    temp_arr = [desired_intervals.first]
     prev = 0
+    temp_arr = []
 
     collected_intervals.each do |duple|      
+        # p duple
         first = duple[0]
         last = duple[1]
 
-        if first > desired_intervals.first
+        if temp_arr.empty?
+            # start with 4
+            if last > desired_intervals[0] && desired_intervals[0] > first
+                temp_arr = [last]
+            #start with 1
+            elsif last > desired_intervals[0] && first > desired_intervals[0]
+                temp_arr = [desired_intervals[0], first]
+                res.push(temp_arr)
+                temp_arr = [last]
+            end
+            next
+        end
+
+        # between
+        if desired_intervals[1] == last
+            temp_arr.push(first)
+            res.push(temp_arr)
+            break
+        elsif desired_intervals[1] < first && desired_intervals[1] < last
+            temp_arr.push(desired_intervals[1])
+            res.push(temp_arr)
+            break
+        else
             temp_arr.push(first)
             res.push(temp_arr)
             temp_arr = [last]
         end
-        
-        if last >= desired_intervals.last
-            break
-        end
+
     end
 
     res
 end
 
-p missing_intervals([[10,15], [3,4], [7, 9]], [1, 12]) #== [[1, 3], [4, 7], [9, 10]]
-p missing_intervals([[10,15], [3,5], [7, 9]], [4, 12]) #== [[4, 5], [7, 9], [9, 10]]
+p missing_intervals([[10, 15], [3, 4], [7, 9]], [1, 12]) == [[1, 3], [4, 7], [9, 10]]
+p missing_intervals([[10, 15], [3, 5], [7, 9]], [4, 12]) == [[5, 7], [9, 10]]
+p missing_intervals([[10, 15], [3, 5], [7, 9]], [4, 9]) == [[5, 7]]
+p missing_intervals([[10, 15], [3, 5], [7, 8]], [4, 9]) == [[5, 7], [8, 9]]
