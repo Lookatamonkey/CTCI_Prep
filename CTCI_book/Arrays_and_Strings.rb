@@ -91,9 +91,18 @@ end
 # p string_compression("aabbcccccaaa")
 # p string_compression("abcdefg")
 
-print "hello";
-p "goodbye"
+def my_flatten(arr)
+  res = []
+  arr.each do |el|
+    if el.is_a?(Array)
+      res.concat(my_flatten(el))
+    else
+      res.push(el)
+    end
+    p res
+  end
 
-def zero_matrix(matrix)
-
+  res
 end
+
+p my_flatten([1, 2, 3, [4, [5, 6]], [[[7]], 8]])

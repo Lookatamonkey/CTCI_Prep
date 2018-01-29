@@ -4,7 +4,7 @@
 # 1) recursively split the array in half by a middle element
 # 2) the middle element will be the root of the tree (or subtree)
 
-def sorted_array_to_bst(nums)
+def minimal_tree(nums)
     
     return nil if nums.empty?
     midpt = nums.length / 2
@@ -26,3 +26,5 @@ def is_same_tree(p, q)
     end
     false
 end
+
+# 
