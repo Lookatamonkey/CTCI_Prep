@@ -215,7 +215,7 @@ function removeDuplicates(head) {
     let node = head.next;
     let current = head;
     
-    while ( node !== null ) {git 
+    while ( node !== null ) {
         if ( current.data !== node.data) {
             current.next = node;
             current = current.next;

@@ -94,3 +94,18 @@ def average_of_levels(root)
     end
     averages
 end
+
+# Lowest Common Ancestor of Binary Tree
+
+def lowest_common_ancestor(root, p, q)
+    return nil if root.nil?
+    return root if root == p || root == q
+    
+    left_child = lowest_common_ancestor(root.left, p, q)
+    right_child = lowest_common_ancestor(root.right, p, q)
+    
+    return root if left_child && right_child
+    return right_child if left_child.nil? && right_child
+    return left_child if left_child && right_child.nil?
+    return nil if right_child.nil? && left_child.nil?
+end
