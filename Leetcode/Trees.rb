@@ -109,3 +109,23 @@ def lowest_common_ancestor(root, p, q)
     return left_child if left_child && right_child.nil?
     return nil if right_child.nil? && left_child.nil?
 end
+
+# Is Balanced Tree
+
+def is_balanced(root)
+    return true if root.nil?
+    
+    max_left_height = find_max_height(root.left)
+    max_right_height = find_max_height(root.right)
+    
+    if (max_left_height - max_right_height).abs > 1
+        false
+    else
+        is_balanced(root.left) && is_balanced(root.right)
+    end
+end
+
+def find_max_height(node)
+    return 0 if node.nil? 
+    1 + [find_max_height(node.left), find_max_height(node.right)].max
+end
