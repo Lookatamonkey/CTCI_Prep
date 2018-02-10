@@ -110,7 +110,7 @@ def lowest_common_ancestor(root, p, q)
     return nil if right_child.nil? && left_child.nil?
 end
 
-# Is Balanced Tree
+# Is Balanced Treeno
 
 def is_balanced(root)
     return true if root.nil?
@@ -128,4 +128,4 @@ end
 def find_max_height(node)
     return 0 if node.nil? 
     1 + [find_max_height(node.left), find_max_height(node.right)].max
-end
+endit st
