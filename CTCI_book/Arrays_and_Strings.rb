@@ -35,10 +35,8 @@ end
 
 # p palindrome_permutation("Tact Coa")
 
-
 def one_away(str1, str2)
   return false if str1.length - str2.length > 1 || str2.length - str1.length > 1
-
   diff_counter = 0
 
   if str1.length == str2.length
@@ -105,4 +103,4 @@ def my_flatten(arr)
   res
 end
 
-p my_flatten([1, 2, 3, [4, [5, 6]], [[[7]], 8]])
+# p my_flatten([1, 2, 3, [4, [5, 6]], [[[7]], 8]])

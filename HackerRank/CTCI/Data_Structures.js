@@ -20,40 +20,40 @@ function main() {
     let arrB = b.split("");
     
     
-    let store = {}
+    let store = {};
     
     arrA.forEach( letter => {
         if ( !store[letter] ) {
-            store[letter] = 1
+            store[letter] = 1;
         } else {
-            store[letter] -= 1
+            store[letter] -= 1;
         }
-    })
+    });
     
     arrB.forEach( letter => {
         if ( !store[letter] ) {
-            store[letter] = 1
+            store[letter] = 1;
         } else {
-            store[letter] -= 1
+            store[letter] -= 1;
         }
     });
     
-    arrS = Object.values(store);
+    let arrS = Object.values(store);
     
-    let counter = 0
+    let counter = 0;
     arrS.forEach( num => {
         if (num != 0) {
-            counter += Math.abs(num)
+            counter += Math.abs(num);
         }
     });
     
-    return counter
+    return counter;
 }
 
 function main() {
-    var m_temp = readLine().split(' ');
-    var m = parseInt(m_temp[0]);
-    var n = parseInt(m_temp[1]);
+    var mTemp = readLine().split(' ');
+    var m = parseInt(mTemp[0]);
+    var n = parseInt(mTemp[1]);
     let magazine = readLine().split(' ');
     let ransom = readLine().split(' ');
     
