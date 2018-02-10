@@ -1,18 +1,15 @@
-function Cat(name) {
-    this.name = name;
-    this.toys = ["string", "ball", "balloon"];
-}
-
-Cat.prototype.play = function meow() {
-    this.toys.forEach(
-        (toy) => {
-            console.log(`${this.name} plays with ${toy}`);
-        }
-    );
+const one = () => {
+    console.log("one");
+    return true;
 };
 
-let garfield = new Cat ('garfield');
-// garfield.play();
+const two = () => {
+    console.log("two");
+    return false;
+};
 
-let halfMyAge = myAge => (myAge / 2);
-
+function test() {
+    if ( one() || two() ) { 
+        console.log("hi"); 
+    }
+}
