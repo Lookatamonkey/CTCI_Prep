@@ -49,3 +49,18 @@ var anotherSameTree = function(p, q) {
             return false;
         }
     };
+
+// #538 - Convert BST to Greater Tree
+var convertBST = function(root) {    
+    findTotal(root);
+    return root;
+};
+
+var findTotal = function(root, total = 0) {
+    if (root === null) { return total; }
+    total = findTotal(root.right, total);
+    root.val += total;
+    let left = findTotal(root.left, root.val);
+
+    return left;
+};
