@@ -45,3 +45,19 @@ var removeElement = function(nums, val) {
     
     return notValIdx;
 };
+
+//  #26 - Remove Dups
+var removeDuplicates = function(nums) {
+    const set = new Set();
+    let uniqueIdx = 0;
+    
+    for (let i = 0; i < nums.length; i++) {
+        if ( !(set.has(nums[i])))  {
+            set.add(nums[i]);
+            nums[uniqueIdx] = nums[i];
+            uniqueIdx += 1;
+        }
+    }
+    
+    return uniqueIdx;
+};
