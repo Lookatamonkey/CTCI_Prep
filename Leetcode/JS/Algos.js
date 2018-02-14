@@ -61,3 +61,18 @@ var removeDuplicates = function(nums) {
     
     return uniqueIdx;
 };
+
+// #35 - Search Insert
+var searchInsert = function(nums, target) {
+    if (nums.length === 0)  { return 0; }
+    
+    let midpt = Math.floor(nums.length / 2);
+    
+    if (nums[midpt] === target) {
+        return midpt;
+    } else if (target > nums[midpt]) {
+        return searchInsert(nums.slice(midpt+1, nums.length), target) + (midpt+1);
+    } else {
+        return searchInsert(nums.slice(0, midpt), target);
+    }
+};
