@@ -112,3 +112,54 @@ function isPowerOfThree(n) {
 }
 
 // console.log(isPowerOfThree(27));
+
+function sumTo(n) {
+    if (n === 1) { return n; }
+
+    return n + sumTo(n-1);
+}
+
+// console.log(sumTo(3));
+
+function addNumbers(arr) {
+    if (arr.length === 0 ) { return 0; }
+
+    return arr[0] + addNumbers(arr.slice(1));
+}
+
+// console.log(addNumbers([1, 2, 3, 4]));
+
+function iceCreamShop(arr, fav) {
+    if (arr.length === 0) { return false; }
+    let currentIceCream = arr.shift();
+    if (currentIceCream === fav) {
+        return true;
+    } else {
+        return iceCreamShop(arr, fav);
+    }
+
+}
+
+// console.log(iceCreamShop(['vanilla', 'strawberry'], 'blue moon')); // => returns false
+// console.log(iceCreamShop(['pistachio', 'green tea', 'chocolate', 'mint chip'], 'green tea')); // => returns true
+// console.log(iceCreamShop(['cookies n cream', 'blue moon', 'superman', 'honey lavender', 'sea salt caramel'], 'pistachio'));  // => returns false
+// console.log(iceCreamShop(['moose tracks'], 'moose tracks'));  // => returns true
+// console.log(iceCreamShop([], 'honey lavender'));  // => returns false
+
+function bSearch(arr,target) {
+    console.log(arr);
+    if (arr.length === 0) { return 0; }
+
+    let mid = Math.floor(arr.length / 2);
+
+    
+    if (arr[mid] > target) {
+        return bSearch(arr.slice(0, mid), target);
+    } else if (arr[mid] < target) {
+        return bSearch(arr.slice(mid+1, arr.length), target);
+    } else {
+        return 1;
+    }
+}
+
+// console.log(bSearch([1, 2, 3, 4, 5, 6], 1));
