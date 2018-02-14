@@ -22,12 +22,26 @@ var moveZeroes = function(nums) {
     
     for (let i = 0; i < nums.length; i++) {
         if (nums[i] !== 0) {
-            nums[nonZeroIdx] = nums[i]
-            nonZeroIdx += 1
+            nums[nonZeroIdx] = nums[i];
+            nonZeroIdx += 1;
         }
     }
     
     for (let i = nonZeroIdx; i < nums.length; i++) {
         nums[i] = 0;
     }
+};
+
+// #27 - Remove Element
+var removeElement = function(nums, val) {
+    let notValIdx = 0;
+    
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] !== val) {
+            nums[notValIdx] = nums[i];
+            notValIdx += 1;
+        }
+    }
+    
+    return notValIdx;
 };
