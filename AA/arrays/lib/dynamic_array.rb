@@ -7,7 +7,6 @@ class DynamicArray
     @length = 0
     @capacity = 8
     @store = Array.new(8)
-    @start_idx = 0
   end
 
   # O(1)
@@ -86,10 +85,6 @@ class DynamicArray
   protected
   attr_accessor :capacity, :store
   attr_writer :length
-
-  def check_index(index)
-    
-  end
 
   # O(n): has to copy over all the elements to the new store.
   def resize!
