@@ -33,18 +33,35 @@ class IntSet
   end
 
   def insert(num)
+    if !(include?(num))
+      self[num] << num
+    end
   end
 
   def remove(num)
+    i = 0
+    while (i < self[num].length)
+      if self[num][i] == num
+        self[num][i] = self[num][i+1]
+      end
+      i += 1
+    end
   end
 
   def include?(num)
+    i = 0
+    while (i < self[num].length)
+      return true if self[num][i] == num
+      i += 1
+    end
+
+    false
   end
 
   private
 
   def [](num)
-    # optional but useful; return the bucket corresponding to `num`
+    @store[num % num_buckets]
   end
 
   def num_buckets
@@ -61,18 +78,42 @@ class ResizingIntSet
   end
 
   def insert(num)
+    resize! if @count >= num_buckets
+    if !(include?(num))
+      self[num] << num 
+      @count += 1
+    end
   end
 
   def remove(num)
+    flag = true if include?(num)
+    if flag
+      i = 0
+      while (i < self[num].length)
+        if self[num][i] == num
+          self[num][i] = self[num][i+1]
+        end
+        i += 1
+      end
+      @count -= 1
+    end
   end
 
   def include?(num)
+    i = 0
+    while (i < self[num].length)
+      return true if self[num][i] == num
+      i += 1
+    end
+
+    false
   end
 
   private
+  attr_accessor :store
 
   def [](num)
-    # optional but useful; return the bucket corresponding to `num`
+    @store[num % num_buckets]
   end
 
   def num_buckets
@@ -80,5 +121,20 @@ class ResizingIntSet
   end
 
   def resize!
+    temp_store = Array.new(num_buckets * 2) { [] }
+    i = 0
+    while i < num_buckets
+      j = 0
+      while j < @store[i].length
+        num = @store[i][j]
+        temp_store[num % temp_store.length] << num
+        j += 1
+      end
+      i += 1
+    end
+    
+    @store = temp_store
   end
+
+  
 end
