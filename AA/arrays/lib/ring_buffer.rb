@@ -108,13 +108,4 @@ class RingBuffer
     end
     @store = new_store
   end
-
-  def last_idx
-    if @length == 0
-      @start_idx + @length
-    else
-      (@start_idx + @length) % @length
-    end
-  end
-
 end
