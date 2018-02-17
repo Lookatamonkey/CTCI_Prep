@@ -1,3 +1,2 @@
 
-def kth_largest(tree_node, k)
-end
+def kth_largest(tree_node, k); end

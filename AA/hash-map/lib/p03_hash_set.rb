@@ -4,7 +4,7 @@ class HashSet
   attr_reader :count
 
   def initialize(num_buckets = 8)
-    @store = Array.new(num_buckets) { Array.new }
+    @store = Array.new(num_buckets) { [] }
     @count = 0
   end
 
@@ -44,7 +44,7 @@ class HashSet
   end
 
   def resize!
-    temp_store = Array.new(num_buckets * 2)  { [] }
+    temp_store = Array.new(num_buckets * 2) { [] }
     i = 0
     while i < @store.length
       j = 0
@@ -54,6 +54,6 @@ class HashSet
         j += 1
       end
       i += 1
-    end  
+    end
   end
 end

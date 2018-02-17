@@ -14,8 +14,7 @@ class LRUCache
     @map.count
   end
 
-  def get(key)
-  end
+  def get(key); end
 
   def to_s
     'Map: ' + @map.to_s + '\n' + 'Store: ' + @store.to_s
@@ -31,6 +30,5 @@ class LRUCache
     # suggested helper method; move a node to the end of the list
   end
 
-  def eject!
-  end
+  def eject!; end
 end

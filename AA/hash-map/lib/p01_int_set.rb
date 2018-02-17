@@ -22,35 +22,29 @@ class MaxIntSet
     raise 'Out of bounds' if num > @store.length || num < 0
   end
 
-  def validate!(num)
-  end
+  def validate!(num); end
 end
-
 
 class IntSet
   def initialize(num_buckets = 20)
-    @store = Array.new(num_buckets) { Array.new }
+    @store = Array.new(num_buckets) { [] }
   end
 
   def insert(num)
-    if !(include?(num))
-      self[num] << num
-    end
+    self[num] << num unless include?(num)
   end
 
   def remove(num)
     i = 0
-    while (i < self[num].length)
-      if self[num][i] == num
-        self[num][i] = self[num][i+1]
-      end
+    while i < self[num].length
+      self[num][i] = self[num][i + 1] if self[num][i] == num
       i += 1
     end
   end
 
   def include?(num)
     i = 0
-    while (i < self[num].length)
+    while i < self[num].length
       return true if self[num][i] == num
       i += 1
     end
@@ -73,14 +67,14 @@ class ResizingIntSet
   attr_reader :count
 
   def initialize(num_buckets = 20)
-    @store = Array.new(num_buckets) { Array.new }
+    @store = Array.new(num_buckets) { [] }
     @count = 0
   end
 
   def insert(num)
     resize! if @count >= num_buckets
-    if !(include?(num))
-      self[num] << num 
+    unless include?(num)
+      self[num] << num
       @count += 1
     end
   end
@@ -89,10 +83,8 @@ class ResizingIntSet
     flag = true if include?(num)
     if flag
       i = 0
-      while (i < self[num].length)
-        if self[num][i] == num
-          self[num][i] = self[num][i+1]
-        end
+      while i < self[num].length
+        self[num][i] = self[num][i + 1] if self[num][i] == num
         i += 1
       end
       @count -= 1
@@ -101,7 +93,7 @@ class ResizingIntSet
 
   def include?(num)
     i = 0
-    while (i < self[num].length)
+    while i < self[num].length
       return true if self[num][i] == num
       i += 1
     end
@@ -110,6 +102,7 @@ class ResizingIntSet
   end
 
   private
+
   attr_accessor :store
 
   def [](num)
@@ -132,9 +125,7 @@ class ResizingIntSet
       end
       i += 1
     end
-    
+
     @store = temp_store
   end
-
-  
 end

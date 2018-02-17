@@ -9,20 +9,15 @@ class HashMap
     @count = 0
   end
 
-  def include?(key)
-  end
+  def include?(key); end
 
-  def set(key, val)
-  end
+  def set(key, val); end
 
-  def get(key)
-  end
+  def get(key); end
 
-  def delete(key)
-  end
+  def delete(key); end
 
-  def each
-  end
+  def each; end
 
   # uncomment when you have Enumerable included
   # def to_s
@@ -32,8 +27,8 @@ class HashMap
   #   "{\n" + pairs.join(",\n") + "\n}"
   # end
 
-  alias_method :[], :get
-  alias_method :[]=, :set
+  alias [] get
+  alias []= set
 
   private
 
@@ -41,8 +36,7 @@ class HashMap
     @store.length
   end
 
-  def resize!
-  end
+  def resize!; end
 
   def bucket(key)
     # optional but useful; return the bucket corresponding to `key`

@@ -1,9 +1,9 @@
-require_relative "static_array"
+require_relative 'static_array'
 
 class RingBuffer
   attr_reader :length
 
-  def initialize(length = 0)
+  def initialize(_length = 0)
     @length = 0
     @capacity = 8
     @store = Array.new(8)
@@ -31,7 +31,7 @@ class RingBuffer
   # O(1)
   def pop
     if @length == 0
-      raise "index out of bounds"
+      raise 'index out of bounds'
     else
       popped = @store[((@start_idx + @length) % @capacity) - 1]
       @store[(@start_idx + @length) % @capacity - 1] = nil
@@ -42,9 +42,7 @@ class RingBuffer
 
   # O(1) ammortized
   def push(val)
-    if @capacity == @length
-      resize!
-    end
+    resize! if @capacity == @length
     if (@start_idx + @length) > @length
       @store[(@start_idx + @length) % @capacity] = val
     else
@@ -56,14 +54,12 @@ class RingBuffer
 
   # O(1)
   def shift
-    if @length == 0
-      raise 'index out of bounds'
-    end
+    raise 'index out of bounds' if @length == 0
     shifted = @store[@start_idx]
     @store[@start_idx] = nil
     if @start_idx == @capacity - 1
       @start_idx = 0
-    else  
+    else
       @start_idx += 1
     end
     @length -= 1
@@ -72,9 +68,7 @@ class RingBuffer
 
   # O(1) ammortized
   def unshift(val)
-    if @capacity == @length
-      resize!
-    end
+    resize! if @capacity == @length
     if @start_idx == 0
       @store[@capacity - 1] = val
       @start_idx = @capacity - 1
@@ -86,17 +80,16 @@ class RingBuffer
   end
 
   protected
+
   attr_accessor :capacity, :start_idx, :store
   attr_writer :length
 
-  def check_index(index)
-    
-  end
+  def check_index(index); end
 
   def resize!
     copy_array
     @start_idx = 0
-    @capacity = @capacity * 2
+    @capacity *= 2
   end
 
   def copy_array

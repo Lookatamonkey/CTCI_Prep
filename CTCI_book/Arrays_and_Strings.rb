@@ -2,9 +2,9 @@ def urlify(str, len)
   i = 0
   add_space = 0
   while i < len
-    if str[i] == " "
+    if str[i] == ' '
       add_space += 2
-      str[i] = "%20"
+      str[i] = '%20'
     end
     i += 1
   end
@@ -18,17 +18,17 @@ def palindrome_permutation(str)
   alphanum_counter = 0
 
   str.downcase.each_char do |char|
-    if ( char.ord >= 97 && char.ord <= 122 )
+    if char.ord >= 97 && char.ord <= 122
       alphanum_counter += 1
       char_hash[char] += 1
     end
   end
 
   if alphanum_counter.even?
-    return false if char_hash.values.any?{ |num| num.odd? }
+    return false if char_hash.values.any?(&:odd?)
   else
-    p char_hash.values.select { |num| num.odd? }
-    return false if char_hash.values.select { |num| num.odd? }.length.even?
+    p char_hash.values.select(&:odd?)
+    return false if char_hash.values.select(&:odd?).length.even?
   end
   true
 end
@@ -42,14 +42,12 @@ def one_away(str1, str2)
   if str1.length == str2.length
     i = 0
     while i < str1.length
-      if str1[i] != str2[i]
-        diff_counter += 1
-      end
+      diff_counter += 1 if str1[i] != str2[i]
       return false if diff_counter > 1
       i += 1
     end
   else
-    longer_str  = str1.length > str2.length ? str1 : str2
+    longer_str = str1.length > str2.length ? str1 : str2
     i = 0
     longer_str.each_char do |el|
       if el != str2[i]
@@ -70,7 +68,7 @@ end
 # p one_away("pale", "bake")
 
 def string_compression(str)
-  res_string = ""
+  res_string = ''
   temp = str[0]
   char_counter = 1
   str[1..-1].each_char do |char|

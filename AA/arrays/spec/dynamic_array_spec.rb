@@ -1,15 +1,15 @@
-require "dynamic_array"
+require 'dynamic_array'
 
 describe DynamicArray do
-  it "starts out empty" do
+  it 'starts out empty' do
     arr = DynamicArray.new
     expect(arr.length).to eq(0)
     expect do
       arr[0]
-    end.to raise_error("index out of bounds")
+    end.to raise_error('index out of bounds')
   end
 
-  it "pushes/pops items" do
+  it 'pushes/pops items' do
     arr = DynamicArray.new
     5.times { |i| arr.push(i) }
 
@@ -22,7 +22,7 @@ describe DynamicArray do
     expect(arr.length).to eq(0)
   end
 
-  it "unshifts/shifts items into array" do
+  it 'unshifts/shifts items into array' do
     arr = DynamicArray.new
 
     5.times { |i| arr.unshift(i) }
@@ -35,19 +35,19 @@ describe DynamicArray do
     expect(arr.length).to eq(0)
   end
 
-  it "raises error when shifting or popping when empty" do
+  it 'raises error when shifting or popping when empty' do
     arr = DynamicArray.new
 
     expect do
       arr.pop
-    end.to raise_error("index out of bounds")
+    end.to raise_error('index out of bounds')
 
     expect do
       arr.shift
-    end.to raise_error("index out of bounds")
+    end.to raise_error('index out of bounds')
   end
 
-  it "sets items at an index" do
+  it 'sets items at an index' do
     arr = DynamicArray.new
 
     5.times { arr.push(0) }
@@ -55,23 +55,23 @@ describe DynamicArray do
     5.times { |i| expect(arr[i]).to eq(i) }
   end
 
-  it "raises error when setting outside range" do
+  it 'raises error when setting outside range' do
     arr = DynamicArray.new
 
     5.times { |i| arr.push(i) }
 
     expect do
       arr[5]
-    end.to raise_error("index out of bounds")
+    end.to raise_error('index out of bounds')
   end
 
-  describe "internals" do
-    it "begins with a capacity of 8" do
+  describe 'internals' do
+    it 'begins with a capacity of 8' do
       arr = DynamicArray.new
       expect(arr.send(:capacity)).to eq(8)
     end
 
-    it "doubles capacity when filled" do
+    it 'doubles capacity when filled' do
       arr = DynamicArray.new
       store = arr.send(:store)
 

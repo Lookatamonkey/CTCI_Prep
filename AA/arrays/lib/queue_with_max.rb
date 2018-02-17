@@ -11,23 +11,13 @@ require_relative 'ring_buffer'
 class QueueWithMax
   attr_accessor :store
 
-  def initialize
-    
-  end
+  def initialize; end
 
-  def enqueue(val)
-    
-  end
+  def enqueue(val); end
 
-  def dequeue
-    
-  end
+  def dequeue; end
 
-  def max
-    
-  end
+  def max; end
 
-  def length
-  end
-
+  def length; end
 end

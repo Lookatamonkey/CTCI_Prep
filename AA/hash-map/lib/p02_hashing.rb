@@ -1,4 +1,4 @@
-class Fixnum
+class Integer
   # Fixnum#hash already implemented for you
 end
 

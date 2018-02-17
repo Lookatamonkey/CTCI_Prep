@@ -6,11 +6,7 @@ class BSTNode
     @value = value
   end
 
-  def left=(left)
-    @left = left
-  end
+  attr_writer :left
 
-  def right=(right)
-    @right = right
-  end
+  attr_writer :right
 end

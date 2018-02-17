@@ -1,15 +1,15 @@
-require "ring_buffer"
+require 'ring_buffer'
 
 describe RingBuffer do
-  it "starts out empty" do
+  it 'starts out empty' do
     arr = RingBuffer.new
     expect(arr.length).to eq(0)
     expect do
       arr[0]
-    end.to raise_error("index out of bounds")
+    end.to raise_error('index out of bounds')
   end
 
-  it "pushes/pops items" do
+  it 'pushes/pops items' do
     arr = RingBuffer.new
     5.times { |i| arr.push(i) }
 
@@ -22,7 +22,7 @@ describe RingBuffer do
     expect(arr.length).to eq(0)
   end
 
-  it "unshifts/shifts items into array" do
+  it 'unshifts/shifts items into array' do
     arr = RingBuffer.new
 
     5.times { |i| arr.unshift(i) }
@@ -35,7 +35,7 @@ describe RingBuffer do
     expect(arr.length).to eq(0)
   end
 
-  it "correctly handles a mix of pushes/pops and shifts/unshifts" do
+  it 'correctly handles a mix of pushes/pops and shifts/unshifts' do
     arr = RingBuffer.new
 
     4.times do |i|
@@ -44,8 +44,8 @@ describe RingBuffer do
     end
 
     4.times do |i|
-      expect(arr[i]).to eq(3-i)
-      expect(arr[i+4]).to eq(i)
+      expect(arr[i]).to eq(3 - i)
+      expect(arr[i + 4]).to eq(i)
     end
 
     3.downto(0) do |i|
@@ -54,16 +54,15 @@ describe RingBuffer do
     end
   end
 
-  it "can store more than 8 items" do
+  it 'can store more than 8 items' do
     arr = RingBuffer.new
 
     16.times { |i| arr.unshift(i) }
 
-    16.times { |i| expect(arr[i]).to eq(15-i) }
-
+    16.times { |i| expect(arr[i]).to eq(15 - i) }
   end
 
-  it "correctly handles pushes/pops/shifts/unshifts after resizing" do
+  it 'correctly handles pushes/pops/shifts/unshifts after resizing' do
     arr = RingBuffer.new
 
     5.times do |i|
@@ -72,8 +71,8 @@ describe RingBuffer do
     end
 
     5.times do |i|
-      expect(arr[i]).to eq(4-i)
-      expect(arr[i+5]).to eq(i)
+      expect(arr[i]).to eq(4 - i)
+      expect(arr[i + 5]).to eq(i)
     end
 
     4.downto(0) do |i|
@@ -82,19 +81,19 @@ describe RingBuffer do
     end
   end
 
-  it "raises error when shifting or popping when empty" do
+  it 'raises error when shifting or popping when empty' do
     arr = RingBuffer.new
 
     expect do
       arr.pop
-    end.to raise_error("index out of bounds")
+    end.to raise_error('index out of bounds')
 
     expect do
       arr.shift
-    end.to raise_error("index out of bounds")
+    end.to raise_error('index out of bounds')
   end
 
-  it "sets items at an index" do
+  it 'sets items at an index' do
     arr = RingBuffer.new
 
     5.times { arr.push(0) }
@@ -102,23 +101,23 @@ describe RingBuffer do
     5.times { |i| expect(arr[i]).to eq(i) }
   end
 
-  it "raises error when setting outside range" do
+  it 'raises error when setting outside range' do
     arr = RingBuffer.new
 
     5.times { |i| arr.push(i) }
 
     expect do
       arr[5]
-    end.to raise_error("index out of bounds")
+    end.to raise_error('index out of bounds')
   end
 
-  describe "internals" do
-    it "begins with a capacity of 8" do
+  describe 'internals' do
+    it 'begins with a capacity of 8' do
       arr = RingBuffer.new
       expect(arr.send(:capacity)).to eq(8)
     end
 
-    it "doubles capacity when filled" do
+    it 'doubles capacity when filled' do
       arr = RingBuffer.new
       store = arr.send(:store)
 
@@ -136,7 +135,7 @@ describe RingBuffer do
       # capacity should be doubled
       expect(arr.send(:capacity)).to eq(16)
     end
-    it "shifts/unshifts without O(n) copying" do
+    it 'shifts/unshifts without O(n) copying' do
       arr = RingBuffer.new
 
       allow(arr.send(:store)).to receive(:[]=).and_call_original

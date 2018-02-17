@@ -20,7 +20,7 @@ class StaticArray
   private
 
   def validate!(i)
-    raise "Overflow error" unless i.between?(0, @store.length - 1)
+    raise 'Overflow error' unless i.between?(0, @store.length - 1)
   end
 end
 
@@ -32,42 +32,32 @@ class DynamicArray
     @count = 0
   end
 
-  def [](i)
-  end
+  def [](i); end
 
-  def []=(i, val)
-  end
+  def []=(i, val); end
 
   def capacity
     @store.length
   end
 
-  def include?(val)
-  end
+  def include?(val); end
 
-  def push(val)
-  end
+  def push(val); end
 
-  def unshift(val)
-  end
+  def unshift(val); end
 
-  def pop
-  end
+  def pop; end
 
-  def shift
-  end
+  def shift; end
 
-  def first
-  end
+  def first; end
 
-  def last
-  end
+  def last; end
 
-  def each
-  end
+  def each; end
 
   def to_s
-    "[" + inject([]) { |acc, el| acc << el }.join(", ") + "]"
+    '[' + inject([]) { |acc, el| acc << el }.join(', ') + ']'
   end
 
   def ==(other)
@@ -75,11 +65,10 @@ class DynamicArray
     # ...
   end
 
-  alias_method :<<, :push
-  [:length, :size].each { |method| alias_method method, :count }
+  alias << push
+  %i[length size].each { |method| alias_method method, :count }
 
   private
 
-  def resize!
-  end
+  def resize!; end
 end

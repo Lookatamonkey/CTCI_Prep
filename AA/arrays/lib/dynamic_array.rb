@@ -1,9 +1,9 @@
-require_relative "static_array"
+require_relative 'static_array'
 
 class DynamicArray
   attr_reader :length
 
-  def initialize()
+  def initialize
     @length = 0
     @capacity = 8
     @store = Array.new(8)
@@ -30,7 +30,7 @@ class DynamicArray
   # O(1)
   def pop
     if @length == 0
-      raise "index out of bounds"
+      raise 'index out of bounds'
     else
       popped = @store[@length - 1]
       @store[@length - 1] = nil
@@ -56,14 +56,14 @@ class DynamicArray
       raise 'index out of bounds'
     else
       shifted = store[0]
-        i = 1
-        while i < @length + 1
-          @store[i-1] = @store[i]
-          i += 1
-        end
-        @store[@length] = nil
-        @length -= 1
-        shifted
+      i = 1
+      while i < @length + 1
+        @store[i - 1] = @store[i]
+        i += 1
+      end
+      @store[@length] = nil
+      @length -= 1
+      shifted
     end
   end
 
@@ -74,7 +74,7 @@ class DynamicArray
     else
       i = @length + 1
       while i > 0
-        @store[i] = @store[i-1]
+        @store[i] = @store[i - 1]
         i -= 1
       end
       @store[0] = val
@@ -83,6 +83,7 @@ class DynamicArray
   end
 
   protected
+
   attr_accessor :capacity, :store
   attr_writer :length
 
@@ -90,7 +91,7 @@ class DynamicArray
   def resize!
     copy_array
     @length = @length
-    @capacity = @capacity * 2
+    @capacity *= 2
   end
 
   def copy_array

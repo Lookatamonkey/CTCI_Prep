@@ -23,7 +23,6 @@ class Node
 end
 
 class LinkedList
-
   def initialize
     @head = Node.new
     @tail = Node.new
@@ -48,25 +47,20 @@ class LinkedList
     first.val.nil?
   end
 
-  def get(key)
-  end
+  def get(key); end
 
-  def include?(key)
-  end
+  def include?(key); end
 
   def append(key, val)
     node = Node.new(key, val)
     set_tail(node)
   end
 
-  def update(key, val)
-  end
+  def update(key, val); end
 
-  def remove(key)
-  end
+  def remove(key); end
 
-  def each
-  end
+  def each; end
 
   # uncomment when you have `each` working and `Enumerable` included
   # def to_s
@@ -74,6 +68,7 @@ class LinkedList
   # end
 
   private
+
   attr_accessor :tail
 
   def set_tail(node)
