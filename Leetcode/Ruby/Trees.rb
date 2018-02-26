@@ -110,7 +110,7 @@ def lowest_common_ancestor(root, p, q)
     return nil if right_child.nil? && left_child.nil?
 end
 
-# Is Balanced Treeno
+# Is Balanced Tree
 
 def is_balanced(root)
     return true if root.nil?
@@ -128,4 +128,18 @@ end
 def find_max_height(node)
     return 0 if node.nil? 
     1 + [find_max_height(node.left), find_max_height(node.right)].max
-endit st
+end
+
+# 572 - Subtree of Another Subtree
+def is_subtree(s, t)
+    return false if s.nil? || t.nil?
+    is_subtree_helper(s, t) || is_subtree(s.left, t) || is_subtree(s.right, t)
+end
+
+def is_subtree_helper(s, t)
+    return true if s.nil? && t.nil?
+    return false if s.nil? && !(t.nil?) || !(s.nil?) && t.nil?
+    return false if s.val != t.val
+    is_subtree_helper(s.left, t.left) && is_subtree_helper(s.right, t.right)
+
+
