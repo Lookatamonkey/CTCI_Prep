@@ -142,4 +142,25 @@ def is_subtree_helper(s, t)
     return false if s.val != t.val
     is_subtree_helper(s.left, t.left) && is_subtree_helper(s.right, t.right)
 
+# 563 - Binary Tree Tilt
+def find_tilt(root)
+    running_tilt = 0
+    find_tilt_helper(root, running_tilt = [running_tilt])
 
+    return running_tilt[0]
+end
+
+def find_tilt_helper(root, running_tilt)
+    if root.nil?
+       return 0
+    end
+    
+    left_sum = find_tilt_helper(root.left, running_tilt)
+    right_sum = find_tilt_helper(root.right, running_tilt)
+    
+    num = running_tilt[0] + (left_sum - right_sum).abs
+    running_tilt[0] = num
+        
+    return root.val + left_sum + right_sum
+    
+end
