@@ -64,3 +64,64 @@ var findTotal = function(root, total = 0) {
 
     return left;
 };
+
+// Min Diff between parent and child nodes
+var minDiff = function(root) {
+    let arr = [null];
+    minHelperFunc(root, arr);
+
+    return arr[0];
+};
+        
+var minHelperFunc = function( root, arr ) {
+    if (root === null) { return null; }
+    
+    let current = root.val;
+    let left = minHelper(root.left, arr);
+    let right = minHelper(root.right, arr);
+    let tempDiff1;
+    let tempDiff2;
+    
+    tempDiff1 = (left ? (current - left) : null);
+    tempDiff2 = (right ? (right - current) : null);
+    
+    if (!(arr[0])) { 
+        arr[0] = tempDiff1; 
+    }
+    if (!(arr[0])) { 
+        arr[0] = tempDiff2; 
+    }
+    
+    if (tempDiff1 && tempDiff1 < arr[0]) { arr[0] = tempDiff1; }
+    if (tempDiff2 && tempDiff2 < arr[0]) { arr[0] = tempDiff2; }
+    
+    return root.val;
+};
+
+// 783 - Minimum distance between BST
+var minDiffInBST = function(root) {
+    if ( root === null ) { return null; }
+    let arr = [];
+    minHelper(root, arr);
+    
+    let min = arr[1] - arr[0];
+    
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] - arr[i - 1] < min) {
+            min = arr[i] - arr[i - 1];
+        }
+    }
+    
+    return min;
+};
+        
+var minHelper = function(root, arr) {
+    if ( root === null ) { return null; }
+    
+    minHelper(root.left, arr);
+    let current = root.val; 
+    arr.push(current);
+    minHelper(root.right, arr);
+    
+    
+};
