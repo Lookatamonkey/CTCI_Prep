@@ -122,6 +122,4 @@ var minHelper = function(root, arr) {
     let current = root.val; 
     arr.push(current);
     minHelper(root.right, arr);
-    
-    
 };
