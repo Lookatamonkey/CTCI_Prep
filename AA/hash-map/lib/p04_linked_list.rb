@@ -13,16 +13,20 @@ class Node
   end
 
   def remove
-    prev = @prev
-    nxt = @next
+    prev = self.prev
+    nxt = self.next
     prev.next = nxt
     nxt.prev = prev
 
-    prev
+    self.next = nil
+    self.prev = nil
+
+    self
   end
 end
 
 class LinkedList
+  attr_reader :head
 
   def initialize
     @head = Node.new
@@ -37,48 +41,99 @@ class LinkedList
   end
 
   def first
-    @head
+    empty? ? nil : @head.next
   end
 
   def last
-    @tail
+    empty? ? nil : @tail.prev
   end
 
   def empty?
-    first.val.nil?
+    @head.next == @tail
   end
 
   def get(key)
+    if !(empty?)
+      node = first
+      until node.key == key || node == @tail
+        break if node.key == key
+        node = node.next
+      end
+
+      node == @tail ? nil : node.val
+    end
   end
 
   def include?(key)
+    if !(empty?)
+      node = first
+      until node.key == key || node == @tail
+        node = node.next
+      end
+    end
+      node.key == key ? true : false
   end
 
   def append(key, val)
     node = Node.new(key, val)
-    set_tail(node)
+    if empty?
+      @head.next = node
+      @tail.prev = node
+      node.prev = @head
+      node.next = @tail
+    else
+      node.prev = last
+      last.next = node
+      node.next = @tail
+      @tail.prev = node
+    end
   end
 
   def update(key, val)
+    if !(empty?)
+      node = first
+      until node.key == key
+        node = node.next
+      end
+      node.val = val
+    end
   end
 
   def remove(key)
+    if !(empty?)
+      node = first
+      until node.key == key || node == @tail
+        node = node.next
+      end
+
+      if node.key == key
+        before = node.prev
+        after = node.next
+
+        before.next = after
+        after.prev = before
+
+        node.next = nil
+        node.prev = nil
+      end
+
+      node == @tail ? nil : node
+    end
   end
 
   def each
+    if !(empty?)
+      node = first
+      until node == @tail
+        yield node
+        node = node.next
+      end
+    end
   end
 
   # uncomment when you have `each` working and `Enumerable` included
-  # def to_s
-  #   inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
-  # end
-
-  private
-  attr_accessor :tail
-
-  def set_tail(node)
-    @tail.next = node
-    node.prev = @tail
-    node.next = nil
+  def to_s
+    inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
   end
+
 end
