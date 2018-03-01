@@ -96,7 +96,6 @@ def average_of_levels(root)
 end
 
 # Lowest Common Ancestor of Binary Tree
-
 def lowest_common_ancestor(root, p, q)
     return nil if root.nil?
     return root if root == p || root == q
@@ -111,7 +110,6 @@ def lowest_common_ancestor(root, p, q)
 end
 
 # Is Balanced Tree
-
 def is_balanced(root)
     return true if root.nil?
     

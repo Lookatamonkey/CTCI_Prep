@@ -123,3 +123,37 @@ var minHelper = function(root, arr) {
     arr.push(current);
     minHelper(root.right, arr);
 };
+
+// 543 - Diameter of Binary Tree
+var diameterOfBinaryTree = function(root) {
+    if (root === null) { return 0}
+    
+    let max = 0;
+    let left = maxDepth(root.left);
+    let right = maxDepth(root.right);
+    
+    if (left + right > max) {
+        max = left + right;
+    }
+    
+    let child1 = diameterOfBinaryTree(root.left);
+    let child2 = diameterOfBinaryTree(root.right);
+    if (child1 && child1 > max) {
+        max = child1;
+    }
+    if (child2 && child2 > max) {
+        max = child2;
+    }
+        
+    return max;
+};
+
+var maxDepth = function(root) {
+    if (root === null) { return 0 }
+    
+    let left = maxDepth(root.left);
+    let right = maxDepth(root.right);
+    
+    return (1 + Math.max(left, right));
+    
+};
