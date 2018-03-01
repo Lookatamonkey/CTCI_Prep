@@ -26,7 +26,7 @@ class Node
 end
 
 class LinkedList
-  attr_reader :head
+  include Enumerable
 
   def initialize
     @head = Node.new
@@ -53,15 +53,7 @@ class LinkedList
   end
 
   def get(key)
-    if !(empty?)
-      node = first
-      until node.key == key || node == @tail
-        break if node.key == key
-        node = node.next
-      end
-
-      node == @tail ? nil : node.val
-    end
+    each { |node| return node.val if node.key == key }
   end
 
   def include?(key)
@@ -76,49 +68,32 @@ class LinkedList
 
   def append(key, val)
     node = Node.new(key, val)
-    if empty?
-      @head.next = node
-      @tail.prev = node
-      node.prev = @head
-      node.next = @tail
-    else
-      node.prev = last
-      last.next = node
-      node.next = @tail
-      @tail.prev = node
-    end
+    @tail.prev.next = node
+    node.prev = @tail.prev
+    node.next = @tail
+    @tail.prev = node
+
+    node
   end
 
   def update(key, val)
-    if !(empty?)
-      node = first
-      until node.key == key
-        node = node.next
+    each do |node|
+      if node.key == key
+        node.val = val
+        return node
       end
-      node.val = val
     end
   end
 
   def remove(key)
-    if !(empty?)
-      node = first
-      until node.key == key || node == @tail
-        node = node.next
-      end
-
+    each do |node|
       if node.key == key
-        before = node.prev
-        after = node.next
-
-        before.next = after
-        after.prev = before
-
-        node.next = nil
-        node.prev = nil
+        node.remove
+        return node.val
       end
-
-      node == @tail ? nil : node
     end
+
+    nil
   end
 
   def each
