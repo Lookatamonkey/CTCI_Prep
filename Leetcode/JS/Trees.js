@@ -126,7 +126,7 @@ var minHelper = function(root, arr) {
 
 // 543 - Diameter of Binary Tree
 var diameterOfBinaryTree = function(root) {
-    if (root === null) { return 0}
+    if (root === null) { return 0; }
     
     let max = 0;
     let left = maxDepth(root.left);
@@ -149,11 +149,10 @@ var diameterOfBinaryTree = function(root) {
 };
 
 var maxDepth = function(root) {
-    if (root === null) { return 0 }
+    if (root === null) { return 0; }
     
     let left = maxDepth(root.left);
     let right = maxDepth(root.right);
     
     return (1 + Math.max(left, right));
-    
 };
