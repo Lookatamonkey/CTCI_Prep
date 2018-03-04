@@ -109,6 +109,19 @@ def lowest_common_ancestor(root, p, q)
     return nil if right_child.nil? && left_child.nil?
 end
 
+def lowest_common_ancestor(root, p, q)
+    return nil if root.nil?
+    
+    left = lowest_common_ancestor(root.left, p, q)
+    right = lowest_common_ancestor(root.right, p, q)
+    
+    return root if root == p || root == q
+    return root if left && right
+    return left if left
+    return right if right
+    return nil
+end
+
 # Is Balanced Tree
 def is_balanced(root)
     return true if root.nil?
