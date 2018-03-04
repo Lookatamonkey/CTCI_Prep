@@ -170,3 +170,24 @@ def has_path_sum(root, sum)
     
     return has_path_sum(root.left, sum - root.val) || has_path_sum(root.right, sum - root.val)
 end
+
+# 230 - Kth Smallest
+def kth_smallest(root, k)
+    counter = [0]
+    helper(counter, root, k)
+end
+
+def helper(counter, root, k)
+    return nil if root.nil?
+    
+    left = helper(counter, root.left, k) 
+    return left if left
+    
+    counter[0] += 1
+    return root.val if counter[0] == k
+    
+    right = helper(counter, root.right, k)    
+    return right if right
+    
+    return nil
+end
