@@ -748,3 +748,28 @@ end
 # missing_intervals([[1, 3], [4, 6],[7, 12]], [1,12]) == [[3, 4], [6, 7]]
 # missing_intervals([[1, 2], [4, 6],[7, 16]], [1,12]) == [[2, 4], [6, 7]]
 # missing_intervals([[1, 2], [4, 6],[7, 10]], [1,12]) == [[2, 4], [6, 7]]
+
+# 763 - Partition Label
+def partition_labels(s)
+    store = Hash.new(0)
+    res = []
+    arr = s.split("")
+
+    arr.each_with_index do |ltr, idx|
+        store[ltr] = idx
+    end
+    
+    last_index = 0
+    partition = 0
+    arr.each_with_index do |ltr, idx|
+        last_index = store[ltr] if store[ltr] > last_index
+        if idx == last_index
+            res << idx - partition + 1
+            partition = idx + 1
+        end
+    end
+
+    res
+end
+
+# p partition_labels("ababcbacadefegdehijhklij")
