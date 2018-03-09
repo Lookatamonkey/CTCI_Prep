@@ -62,8 +62,8 @@ class LinkedList
       until node.key == key || node == @tail
         node = node.next
       end
-    end
       node.key == key ? true : false
+    end
   end
 
   def append(key, val)
