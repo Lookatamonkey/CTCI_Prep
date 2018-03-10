@@ -1,40 +1,38 @@
-# def isTreeSymmetric(t)
-#     return true if t.nil?
-#     q1 = []
-#     q2 = []
-    
-#     until q2.empty?
-#         q1.push(t)
-#         q1.each do |node|
-#             q2 << node.left
-#             q2 << node.right
-#         end
+def isTreeSymmetric(t)
+    return true if root.nil?
+    q1 = [root]
+    q2 = []
 
-#         res_str = ""
-#         q2.each do |child| 
-#             if child.nil?
-#                 res_str += "nil"
-#             else
-#                 res_str += child.value.to_s
-#             end
-#         end
+    until q1.empty?
+        q3 = []
+        q1.each do |node|
+            q2.push(node.left, node.right) if node
+            q3 = q2.map do |node|
+                if node
+                    node.val
+                else
+                    nil
+                end
+            end
+        end
+        
+        return false if !(q3.empty?) && (q3 != q3.reverse)
+        
+        q1 = q2
+        q2 = []
+    end
+    true
+end
 
-#         return false if is_palindrome?(res_str) == false
-#        q1 = q2
-#        q2 = []
-#     end
-#     true
-# end
-
-# def is_palindrome?(str)
-#     len = str.length
-#     i = 0
-#     while i < len
-#         return false if str[i] != str[len - i - 1]
-#         i += 1
-#     end
-#     true
-# end
+def is_palindrome?(str)
+    len = str.length
+    i = 0
+    while i < len
+        return false if str[i] != str[len - i - 1]
+        i += 1
+    end
+    true
+end
 
 def hasPathWithGivenSum(t, s)
     return s == 0 if t.nil?
