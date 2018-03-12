@@ -76,3 +76,30 @@ var searchInsert = function(nums, target) {
         return searchInsert(nums.slice(0, midpt), target);
     }
 };
+
+// #763 - Partition Labels
+var partitionLabels = function(S) {
+    let store = new Array(26);
+    let res = [];
+    
+    for (let i = 0; i < S.length; i++) {
+        store[(S[i].charCodeAt()) - 97] = i;
+    }
+
+    let partition = 0;
+    let lastSceneIdx = store[S[0].charCodeAt() - 97];
+    for (let i = 0; i < S.length; i++) {
+        if (store[S[i].charCodeAt() - 97] > lastSceneIdx) {
+            lastSceneIdx = store[S[i].charCodeAt() - 97];
+        }
+        if (lastSceneIdx === i) {
+            let word = S.slice(partition, i + 1);
+            res.push(word.length);
+            partition = i + 1;
+        }
+    }
+    
+    return res;
+};
+
+// console.log(partitionLabels("ababcbacadefegdehijhklij"));
