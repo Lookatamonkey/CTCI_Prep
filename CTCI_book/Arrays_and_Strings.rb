@@ -104,3 +104,39 @@ def my_flatten(arr)
 end
 
 # p my_flatten([1, 2, 3, [4, [5, 6]], [[[7]], 8]])
+
+def smallest_difference(arr1, arr2)
+  num1  = arr1[0]
+  num2  = arr1[1]
+  a1_smallest = num1 > num2 ? num2 : num1 
+  a1_largest = (num1 + num2) - a1_smallest
+  
+  num1  = arr2[0]
+  num2  = arr2[1]
+  a2_smallest = num1 > num2 ? num2 : num1 
+  a2_largest = (num1 + num2) - a2_smallest
+  
+
+  arr1[2..-1].each do |num|
+    if num > a1_largest
+      a1_largest = num
+    elsif num < a1_smallest
+      a1_smallest = num
+    end
+  end
+
+  arr2[2..-1].each do |num|
+    if num > a2_largest
+      a2_largest = num
+    elsif num < a2_smallest
+      a2_smallest = num
+    end
+  end
+  
+  a1_largest - a1_largest
+
+  res
+end
+arr1 = [1, 3, 15, 11, 2]
+arr2 = [23, 127, 235, 19, 8]
+p smallest_difference(arr1, arr2)
