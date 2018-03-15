@@ -101,5 +101,37 @@ var partitionLabels = function(S) {
     
     return res;
 };
-
 // console.log(partitionLabels("ababcbacadefegdehijhklij"));
+
+// 300. Longest Increasing Subsequence
+var lengthOfLIS = function(nums) {
+    let copy = nums.slice();
+    copy.sort((a, b) => { return a - b; });
+    let store = {};
+
+    for (let i = 0; i < nums.length; i++) {
+        store[nums[i]] = i;
+    }
+    
+    let maxCounter = 1;
+    let tempCounter = 1;
+    let prevIdx = store[copy[0]];
+
+    for (let i = 1; i < copy.length; i++) {
+        if (store[copy[i]] > prevIdx) {
+            tempCounter += 1;
+            
+        } else {
+            
+            tempCounter -= 1;
+        }
+        if (maxCounter < tempCounter) { maxCounter = tempCounter; }
+        prevIdx = store[copy[i]];
+    }
+
+    return maxCounter;
+};
+
+console.log(lengthOfLIS([10,9,2,5,3,7,101,18]));
+// [10,9,2,5,3,7,101,18]
+// [2,3,5,7,9,10,18,101]
