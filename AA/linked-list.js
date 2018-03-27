@@ -65,6 +65,22 @@ class DoubleLinkedList {
             return true;
         }
     }
+
+    push(val) {
+        if (this.last()) { 
+            this.last().append(val); 
+        } else {
+            return null;
+        }
+    }
+
+    pop(val) {
+        if (this.first()) {
+            this.remove(this.first.val);
+        } else {
+            return null;
+        }
+    }
 }
 
 
