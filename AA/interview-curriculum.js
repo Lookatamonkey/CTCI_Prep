@@ -212,5 +212,25 @@ function moveZeros(arr) {
 
     console.log(arr);
 }
+// console.log(moveZeros([1, 2, 0, 3, 4, 0, 5, 6, 0]) === [0, 0, 0, 1, 2, 6, 3, 4, 5]);
 
-console.log(moveZeros([1, 2, 0, 3, 4, 0, 5, 6, 0]) === [0, 0, 0, 1, 2, 6, 3, 4, 5]);
+function lookAndSay(arr) {
+    let counter = 1;
+    let res = [];
+    let current = arr[0];
+
+    for (let i = 1; i < arr.length; i++) {
+        if (current === arr[i]) {
+            counter += 1;
+        } else {
+            res.push([counter, current]);
+            counter = 1;
+            current = arr[i];
+        }
+    }
+
+    res.push([counter, current]);
+    return res;
+}
+
+console.log(lookAndSay([1, 2, 1, 1]) === [[1, 1], [1, 2], [2, 1]]);
