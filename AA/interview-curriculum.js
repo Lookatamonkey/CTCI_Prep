@@ -163,3 +163,28 @@ function bSearch(arr,target) {
 }
 
 // console.log(bSearch([1, 2, 3, 4, 5, 6], 1));
+
+// Write a method that takes a hash of symbol keys, for which the values are integers representing each key's weight. The method returns a key such that the chances of selecting a particular key are weighted by that key's value.
+
+// For the hash {:a => 1, :b => 2, :c => 3}, the chance of returning :c is 1/2, :b is 1/3, and :a is 1/6.
+
+function weightedKeys(obj) {
+    let keys = Object.keys(obj);
+    let values = keys.map((key) => obj[key] );
+    let total = values.reduce((acc, curr) => acc + curr, 0);
+    let store = [0];
+
+    for (let i = 0; i < keys.length; i++) {
+        let val = store[store.length - 1] + obj[keys[i]] * (1.0/ total);
+        store.push(val);
+    }
+
+    let random = Math.random();
+    for(let i = 0; i < keys.length; i++) {
+        if (random > store[i] && random < store[i + 1]) {
+            return keys[i];
+        }
+    }
+}
+
+// console.log(weightedKeys({ "a" : 1, "b" : 2, "c" : 3 }));
