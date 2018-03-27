@@ -186,5 +186,31 @@ function weightedKeys(obj) {
         }
     }
 }
-
 // console.log(weightedKeys({ "a" : 1, "b" : 2, "c" : 3 }));
+
+function median(arr1, arr2) {
+    // HARD LEVEL QUESTION ON LEETCODE
+}
+
+// console.log(median([1, 3, 15, 17], [0, 2, 6]) === 3);
+// console.log(median([1, 7, 11, 13], [2, 4, 6]) === 6);
+// console.log(median([1, 7, 11], [8, 10, 12]) === 10);
+
+function moveZeros(arr) {
+    let pointer = 0;
+    let current = 1;
+
+    while (current < arr.length) {
+        if (arr[current] === 0) {
+            let temp = arr[pointer];
+            arr[pointer] = arr[current];
+            arr[current] = temp;
+            pointer += 1;
+        }
+        current += 1;
+    }
+
+    console.log(arr);
+}
+
+console.log(moveZeros([1, 2, 0, 3, 4, 0, 5, 6, 0]) === [0, 0, 0, 1, 2, 6, 3, 4, 5]);
