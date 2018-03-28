@@ -274,3 +274,30 @@ function iterativeIsValidBST(root, stack = []) {
     return true;
 }
 
+function commonAncestor(root, p, q) {
+    if (root === null) { return false; }
+    
+    let left = commonAncestor(root.left, p, q);
+    let right = commonAncestor(root.right, p, q);
+    
+    if (left && right) { return root; }
+    if (left && !right) { 
+        if (root === p || root === q) {
+            return root; 
+        } else {
+            return left;
+        }
+    }
+        
+    if (!left && right) { 
+        if (root === p || root === q) {
+            return root;
+        } else {
+            return right;
+        }
+    }
+        
+    if (root === p || root === q) { return root; }
+    return false;
+}
+
