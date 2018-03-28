@@ -254,3 +254,23 @@ function checkSorted(res) {
 
     return true;
 }
+
+function iterativeIsValidBST(root, stack = []) {
+    if (root === null) { return true; }
+    let pre = null;
+
+    while (root !== null || stack.length > 0) {
+        while (root !== null) {
+            stack.push(root);
+            root = root.left;
+        }
+
+        root = stack.pop();
+        if (pre && root.val <= pre.val) { return false; }
+        pre = root;
+        root = root.right;
+    }
+
+    return true;
+}
+
