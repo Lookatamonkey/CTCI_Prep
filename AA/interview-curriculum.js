@@ -234,3 +234,23 @@ function lookAndSay(arr) {
 }
 
 // console.log(lookAndSay([1, 2, 1, 1]) === [[1, 1], [1, 2], [2, 1]]);
+
+function isValidBST(root, res = []) {
+    if (root === null) { return true; }
+
+    isValidBST(root.left, res);
+    res.push(root.val);
+    isValidBST(root.right, res);
+
+    return checkSorted(res);
+}
+
+function checkSorted(res) {
+    for (let i = 1; i < res.length; i++) {
+        if (res[i] <= res[i -1]) {
+            return false;
+        }
+    }
+
+    return true;
+}
