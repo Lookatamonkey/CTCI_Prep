@@ -123,3 +123,38 @@ class MaxStack {
         return this.stack[this.stack.length - 1];
     }
 }
+
+class StackQueue {
+    constructor() {
+        this.stack1 = [];
+        this.stack2 = [];
+    }
+
+    push(val) {
+        this.stack1.push(val);
+    }
+
+    pop() {
+        if (this.stack1.length === 0 && this.stack2.length === 0) { return null; }
+        if (this.stack2.length > 0) {
+            return this.stack2.pop();
+        }
+
+        while (this.stack1.length > 1) {
+            let popped = this.stack1.pop();
+            this.stack2.push(popped);
+        }
+        
+        return this.stack1.pop();
+    }
+
+    peek() {
+        if (this.stack1.length > 0) {
+            return this.stack1[0];
+        } else if (this.stack2.length > 0) {
+            return this.stack2[this.stack2.length - 1];
+        } else {
+            return null;
+        }
+    }
+}
