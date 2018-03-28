@@ -83,13 +83,43 @@ class DoubleLinkedList {
     }
 }
 
-
-
-
 class Node {
     constructor(val) {
         this.val = val;
         this.prev = null;
         this.next = null;
+    }
+}
+
+class MaxStack {
+    constructor() {
+        this.stack = [];
+        this.maxStack = [];
+    }
+
+    push(val) {
+        let pushed = this.stack.push(val);
+        if (pushed > this.maxStack[this.maxStack.length - 1]) {
+            this.pushToMax(val);
+        } 
+    }
+
+    pushToMax(val) {
+        this.maxStack.push(val);
+    }
+
+    pop() {
+        let popped = this.stack.pop();
+        if (this.maxStack === popped) {
+            this.maxStack.pop();
+        }
+    }
+
+    max() {
+        return this.maxStack[this.maxStack.length -1];
+    }
+
+    peek() {
+        return this.stack[this.stack.length - 1];
     }
 }
