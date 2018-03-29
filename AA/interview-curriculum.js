@@ -288,3 +288,36 @@ function lowestCommonAncestor(root, p, q) {
     return false;
 }
 
+function factorial(n) {
+    if (n < 0) {
+        return 0;
+    } else if (n === 1 || n === 0) {
+        return 1;
+    }
+
+    return n * factorial(n -1);
+}
+
+factorial(5);
+
+function cyclic(head) {
+    if (head === null) { return false; }
+
+    let slow = head;
+    let fast = head.next;
+
+    while (fast) {
+        if (slow === fast) {
+            return true;
+        }
+        slow = slow.next;
+        fast = fast.next;
+        if (fast === null) {
+            return false;
+        } else {
+            fast = fast.next;
+        }
+    }
+
+    return false;
+}
