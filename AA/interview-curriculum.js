@@ -349,9 +349,8 @@ function isShuffled(str1, str2, str3) {
     for (let i = 0; i < store.length; i++) {
         if (store[i] !== 0) { return false; }
     }
-
     
     return true;
 }
 
-console.log(isShuffled("abcd", "def", "abdecf"));
+// console.log(isShuffled("abcd", "def", "abdecf"));
