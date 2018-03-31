@@ -321,3 +321,37 @@ function cyclic(head) {
 
     return false;
 }
+
+function isShuffled(str1, str2, str3) {
+    if (str1.length + str2.length !== str3.length) { return false; }
+    let store = new Array(26);
+    store.fill(0);
+
+    let split1 = str1.split("");
+    let split2 = str2.split("");
+    let split3 = str3.split("");
+
+    for (let i = 0; i < split1.length; i++) {
+        store[split1[i].charCodeAt(0) - 97] += 1;
+    }
+
+    for (let i = 0; i < split2.length; i++) {
+        store[split2[i].charCodeAt(0) - 97] += 1;
+    }    
+    for (let i = 0; i < split3.length; i++) {
+        if (store[split3[i].charCodeAt(0) - 97] <= 0) {
+            return false;
+        } else {
+            store[split3[i].charCodeAt(0) - 97] -= 1;
+        }
+    }
+
+    for (let i = 0; i < store.length; i++) {
+        if (store[i] !== 0) { return false; }
+    }
+
+    
+    return true;
+}
+
+console.log(isShuffled("abcd", "def", "abdecf"));
