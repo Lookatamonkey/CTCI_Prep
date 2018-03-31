@@ -154,7 +154,7 @@ def is_subtree_helper(s, t)
     is_subtree_helper(s.left, t.left) && is_subtree_helper(s.right, t.right)
 
 # 563 - Binary Tree Tilt
-def find_tilt(roocodt)
+def find_tilt(root)
     running_tilt = 0
     find_tilt_helper(root, running_tilt = [running_tilt])
 
