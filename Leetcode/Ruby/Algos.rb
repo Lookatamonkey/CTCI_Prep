@@ -788,3 +788,31 @@ def find_lonely_pixel(picture)
     lonely_counter
 end
 
+# 418 Sentence screen fitting
+def words_typing(sentence, rows, cols)
+    rows_remaining = rows
+    cols_remaining = cols
+    full_rotations = 0
+    i = 0
+    
+    until rows_remaining == 0
+        if cols_remaining == cols
+            cols_remaining -= sentence[i % sentence.length].length
+            i += 1
+            full_rotations += 1 if (i % sentence.length) == 0
+        elsif cols_remaining < cols && cols_remaining >= sentence[i % sentence.length].length + 1
+            cols_remaining -= sentence[i % sentence.length].length + 1
+            i += 1
+            full_rotations += 1 if (i % sentence.length) == 0
+        else
+            cols_remaining = 0
+        end
+        
+        if cols_remaining == 0
+            rows_remaining -= 1
+            cols_remaining = cols
+        end
+    end
+    
+    full_rotations
+end
