@@ -255,6 +255,24 @@ function checkSorted(res) {
     return true;
 }
 
+function isValidBSTII(root) {
+    if (root === null) { return true; }
+
+    if (root.right && root.val > root.right.val) {
+        isValidBSTII(root.right);
+    } else {
+        return false;
+    }
+
+    if (root.left && root.left.val > root.val) {
+        isValidBSTII(root.left);
+    } else {
+        return false;
+    }
+
+    return true;
+}
+
 function iterativeIsValidBST(root, stack = []) {
     if (root === null) { return true; }
     let pre = null;

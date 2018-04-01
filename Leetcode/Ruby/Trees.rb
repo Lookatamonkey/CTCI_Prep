@@ -186,8 +186,7 @@ end
 
 # 230 - Kth Smallest
 def kth_smallest(root, k)
-    counter = [0]
-    helper(counter, root, k)
+    helper(counter = [0], root, k)
 end
 
 def helper(counter, root, k)
