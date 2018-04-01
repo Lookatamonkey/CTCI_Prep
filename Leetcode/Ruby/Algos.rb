@@ -816,3 +816,16 @@ def words_typing(sentence, rows, cols)
     
     full_rotations
 end
+
+# 121 Best time to buy and sell stock
+def max_profit(prices)
+    max_profit = 0
+    min_price = prices[0]
+    
+    prices.each do |price|
+        min_price = [min_price, price].min
+        max_profit = [max_profit, price - min_price].max
+    end
+    
+    max_profit
+end
