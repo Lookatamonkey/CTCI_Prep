@@ -1,44 +1,21 @@
 # Island Perimeter
 def island_perimeter(grid)
-    len = grid[0].length
-    perimeter = 0
-    nxt = 0
-    
+    height = grid.length
+    width = grid[0].length
+
     i = 0
     j = 0
-    while j < len
-        while i < len
-            if i == 0 
-                if grid[j][i] == 1
-                    perimeter += 4
-                end
-            else
-                if grid[j][i] == 1
-                    perimeter += 4
-                    if grid[j][i-1] == 1
-                        nxt += 1
-                    end
-                end
-            end
-            i += 1
-        end
-        i = 0
-        j += 1
-    end
     
-    i = 1
-    j = 0
-    while i < len
-        while j < len
-            if (grid[i][j] == 1) && (grid[i][j-1] == 1)    
-                nxt += 1
+    while i < height
+        while j < width
+            if perimeter[i][j] == 1
+                check_boundaries(grid, i , j)
             end
             j += 1
         end
-        j = 1
+        j = 0
         i += 1
     end
-    perimeter -= (2 * nxt)
 end
 
 # Distribute candies
@@ -773,3 +750,41 @@ def partition_labels(s)
 end
 
 # p partition_labels("ababcbacadefegdehijhklij")
+
+# 531 Lonely Pixel
+def find_lonely_pixel(picture)
+    height = picture.length
+    width = picture[0].length
+    lonely_counter = 0
+    row = {}
+    column = {}
+    i = 0
+    j = 0
+    
+    while i < height
+        while j < width
+            if picture[i][j] == "B"
+                column[i] ? column[i] += 1 : column[i] = 1
+                row[j] ? row[j] += 1 : row[j] = 1
+            end
+            j += 1
+        end
+        j = 0
+        i += 1
+    end
+    
+    i = 0
+    j = 0
+
+    while i < height
+        while j < width
+            lonely_counter += 1 if picture[i][j] == "B" && row[j] == 1 && column[i] == 1
+            j += 1
+        end
+        j = 0
+        i += 1
+    end
+    
+    lonely_counter
+end
+
