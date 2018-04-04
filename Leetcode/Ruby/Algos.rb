@@ -857,12 +857,10 @@ def length_of_longest_substring(s)
             store[char] + 1 > partition_idx ? partition_idx = store[char] + 1 : nil
             store[char] = idx 
         else
-            longest = idx - partition_idx + 1 if idx - partition_idx + 1 > longest
             store[char] = idx
         end
         longest = idx - partition_idx + 1 if idx - partition_idx + 1 > longest
     end
     
-    longest = store[s[-1]] - partition_idx + 1 if store[s[-1]] - partition_idx + 1 > longest
     longest    
 end
