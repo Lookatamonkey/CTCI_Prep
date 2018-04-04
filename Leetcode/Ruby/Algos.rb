@@ -829,3 +829,40 @@ def max_profit(prices)
     
     max_profit
 end
+
+# 122 Best time to buy and sell stock
+def max_profit(prices)
+    return 0 if prices.empty?
+    total_profit = 0
+    idx = 1
+    while idx < prices.length
+        total_profit += (prices[idx] - prices[idx - 1]) if prices[idx] > prices[idx - 1]
+        idx += 1
+    end
+    
+    total_profit
+end
+
+#3. Longest Substring Without Repeating Characters
+def length_of_longest_substring(s)
+    return 0 if s.length == 0
+    return 1 if s.length == 1
+    
+    store = {}
+    longest = 1
+    partition_idx = 0
+    
+    s.split("").each_with_index do |char, idx|
+        if store[char]
+            store[char] + 1 > partition_idx ? partition_idx = store[char] + 1 : nil
+            store[char] = idx 
+        else
+            longest = idx - partition_idx + 1 if idx - partition_idx + 1 > longest
+            store[char] = idx
+        end
+        longest = idx - partition_idx + 1 if idx - partition_idx + 1 > longest
+    end
+    
+    longest = store[s[-1]] - partition_idx + 1 if store[s[-1]] - partition_idx + 1 > longest
+    longest    
+end
