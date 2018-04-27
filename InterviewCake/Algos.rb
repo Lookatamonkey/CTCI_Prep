@@ -240,3 +240,17 @@ def kth_helper(root, k, counter)
     right = kth_helper(root.right, k, counter)
     return right if right
 end
+
+def binary_search(arr, target)
+    return -1 if arr.length < 1
+
+    mid = arr.length / 2
+    return mid if arr[mid] == target
+
+    left = binary_search(arr[0...mid], target)
+    right = binary_search(arr[mid+1..-1], target)
+
+    return right > -1 ? 1 + mid + right : left
+end
+
+p binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9], 9)
