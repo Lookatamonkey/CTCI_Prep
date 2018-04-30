@@ -185,16 +185,15 @@ end
 
 # Binary Search
 def b_search(arr, target)
-    midpoint = arr.length / 2
-    return midpoint if arr[midpoint] == target
 
-    if arr.empty?
-        return "empty"
-    elsif arr[midpoint] > target
-        b_search(arr[0...midpoint], target)
-    elsif arr[midpoint] < target
-        b_search(arr[(midpoint + 1)..-1], -1)
-    end
+    
+end
+
+i = 0
+arr = [1, 2, 3, 4, 5, 6, 7]
+while i < arr.length
+    b_search(arr, i + 1)
+    i += 1
 end
 
 # Self Dividing Numbers
@@ -845,22 +844,78 @@ end
 
 #3. Longest Substring Without Repeating Characters
 def length_of_longest_substring(s)
-    return 0 if s.length == 0
     return 1 if s.length == 1
     
-    store = {}
-    longest = 1
-    partition_idx = 0
+    hash = {}
+    str = ""
+    head = 0
     
-    s.split("").each_with_index do |char, idx|
-        if store[char]
-            store[char] + 1 > partition_idx ? partition_idx = store[char] + 1 : nil
-            store[char] = idx 
+    s.split("").each_with_index do |ch, idx|
+        if hash[ch]
+            head = hash[ch] + 1 if hash[ch] + 1 > head
+            hash[ch] = idx    
         else
-            store[char] = idx
+            hash[ch] = idx
         end
-        longest = idx - partition_idx + 1 if idx - partition_idx + 1 > longest
+        str = s[head..idx] if s[head..idx].length > str.length
     end
-    
-    longest    
+    str.length
 end
+
+#807. Max Increase to Keep Skyline
+
+def max_increase_keeping_skyline(grid)
+    width_store, height_store = create_stores(grid)
+    find_max_diff(grid, width_store, height_store)
+end
+
+def create_stores(grid)
+    width_store = {}
+    height_store = {}
+    
+    width = 0
+    height = 0
+    
+    while height < grid.length
+        while width < grid[0].length
+            if width_store[width]
+                width_store[width] = grid[height][width] if grid[height][width] > width_store[width]
+            else
+                width_store[width] = grid[height][width]
+            end
+
+            if height_store[height]
+                height_store[height] = grid[height][width] if grid[height][width] >  height_store[height]
+            else
+                height_store[height] = grid[height][width]
+            end
+            width += 1
+        end
+
+        width = 0
+        height += 1
+    end
+
+    return width_store, height_store
+end
+
+def find_max_diff(grid, width_store, height_store)
+    total = 0
+    height = 0
+    width = 0
+
+    while height < grid.length
+        while width < grid[0].length
+            max_of_min_towers = [width_store[width], height_store[height]].min
+            total += max_of_min_towers - grid[height][width]
+            width += 1
+        end
+
+        width = 0
+        height += 1
+    end
+
+    total
+end
+
+max_increase_keeping_skyline([[3,0,8,4], [2,4,5,7], [9,2,6,3], [0,3,1,0]])
