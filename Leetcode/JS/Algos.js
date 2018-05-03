@@ -135,3 +135,23 @@ var lengthOfLIS = function(nums) {
 console.log(lengthOfLIS([10,9,2,5,3,7,101,18]));
 // [10,9,2,5,3,7,101,18]
 // [2,3,5,7,9,10,18,101]
+
+// #205 Isomorphic Strings
+var isIsomorphic = function(s, t) {
+    let dictionaryA = {};
+    let dictionaryB = {};
+    
+    for (let i = 0; i < s.length; i++) {
+        if ( dictionaryA[s[i]] && (dictionaryA[s[i]] !== t[i])) {
+            return false;
+        } else {
+            dictionaryA[s[i]] = t[i];
+        }
+        if ( dictionaryB[t[i]] && (dictionaryB[t[i]] !== s[i])) {
+            return false;
+        } else {
+            dictionaryB[t[i]] = s[i];
+        }
+    }
+    return true;
+};
