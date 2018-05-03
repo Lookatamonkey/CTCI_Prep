@@ -919,3 +919,25 @@ def find_max_diff(grid, width_store, height_store)
 end
 
 # max_increase_keeping_skyline([[3,0,8,4], [2,4,5,7], [9,2,6,3], [0,3,1,0]])
+
+# 6. ZigZag Conversion
+
+def convert(s, num_rows)
+    res = Array.new(num_rows) { "" }
+    direction = 1
+    slot = 0
+
+    s.each_char do |ch|
+        res[slot] += ch
+        if slot == 0
+            direction = 1
+        elsif slot == num_rows - 1
+            direction = -1
+        end
+        slot += direction
+    end
+
+    res.join("")
+end
+
+# p convert("PAYPALISHIRING", 3)

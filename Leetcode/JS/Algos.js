@@ -132,7 +132,7 @@ var lengthOfLIS = function(nums) {
     return maxCounter;
 };
 
-console.log(lengthOfLIS([10,9,2,5,3,7,101,18]));
+// console.log(lengthOfLIS([10,9,2,5,3,7,101,18]));
 // [10,9,2,5,3,7,101,18]
 // [2,3,5,7,9,10,18,101]
 
@@ -155,3 +155,48 @@ var isIsomorphic = function(s, t) {
     }
     return true;
 };
+
+
+// 6. ZigZag Conversion
+// 0 1 2 3 4 5 6 7 8 9 0 1 2 13
+// P A Y P A L I S H I R I N G (3)
+// P A H N A P L S I I G Y I R
+
+// P   A   H   N
+// A P L S I I G
+// Y   I   R
+
+// P     I    N
+// A   L S  I G
+// Y A   H R
+// P     I
+
+// P      H
+// A    S I   
+// Y   I  R  
+// P L    I G
+// A      N
+
+var convert = function(s, numRows) {
+    let result = [];
+    let step = 1, index = 0;
+    for (let i = 0; i < s.length; i++) {
+        if (result[index] === undefined) {
+            result[index] = '';
+        }
+        result[index] += s[i];
+        if (index === 0) {
+            step = 1;
+        } else if (index === numRows - 1) {
+            step = -1;
+        }
+        index += step;
+    }
+    console.log(result);
+    return result.join('');
+};
+
+// console.log(convert("PAYPALISHIRING", 3));
+// console.log(convert("PAYPALISHIRING", 3) === "PAHNAPLSIIGYIR");
+console.log(convert("PAYPALISHIRING", 4) === "PINALSIGYAHRPI");
+// console.log(convert("PAYPALISHIRING", 5));
