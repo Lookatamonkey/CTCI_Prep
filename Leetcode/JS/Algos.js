@@ -198,5 +198,106 @@ var convert = function(s, numRows) {
 
 // console.log(convert("PAYPALISHIRING", 3));
 // console.log(convert("PAYPALISHIRING", 3) === "PAHNAPLSIIGYIR");
-console.log(convert("PAYPALISHIRING", 4) === "PINALSIGYAHRPI");
+// console.log(convert("PAYPALISHIRING", 4) === "PINALSIGYAHRPI");
 // console.log(convert("PAYPALISHIRING", 5));
+
+// 13. Roman Numeral to Integer
+
+var romanToInt = function(s) {
+    const dictionary = {
+        "I": 1,
+        "V": 5,
+        "X": 10,
+        "L": 50,
+        "C": 100,
+        "D": 500,
+        "M": 1000
+    };
+
+    let arr = s.split("");
+    let total = dictionary[arr[0]];
+    let prev = s[0];
+
+    for (let i = 1; i < arr.length; i++) {
+        prev = dictionary[s[i-1]];
+        let current = dictionary[arr[i]];
+        if (current > prev) {
+            total -= prev;
+            total += (current - prev);
+        } else {
+            total += current;
+        }
+    }
+
+    return total;
+};
+
+// console.log(romanToInt("LVIII"));
+
+// #12 Int to Roman Numeral
+
+// Input: 58
+// Output: "LVIII"
+
+// Input: 1994
+// Output: "MCMXCIV"
+
+var intToRoman = function(num) {
+    const dictionary = {
+        1: "I",
+        4: "IV",
+        5: "V",
+        9: "IX",
+        10: "X",
+        40: "XL",
+        50: "L",
+        90: "XC",
+        100: "C",
+        400: "CD",
+        500: "D",
+        900: "CM",
+        1000: "M",
+    };
+
+    const keys = Object.keys(dictionary).reverse();
+    let arr = splitNum(num);
+    let idx = 0;
+    let res = "";
+    let multiplier = Math.pow(10, arr.length - (idx + 1));
+
+    while (idx < arr.length) {
+        multiplier = Math.pow(10, arr.length - (idx + 1));
+        let tempNum = arr[idx] * multiplier;
+        res += createRN(tempNum, dictionary);
+        idx++;
+    }
+    return res;
+};
+
+var createRN = function(num, dictionary) {
+    const keys = Object.keys(dictionary).reverse();
+    let res = "";
+
+    while (num > 0) {
+        for (let i = 0; i < keys.length; i++) {
+            if (num >= keys[i]) {
+                res += dictionary[keys[i]];
+                num -= keys[i];
+                break;
+            }
+        }
+    }
+    return res;
+};
+
+var splitNum = function(num) {
+    let res = [];
+
+    while (num > 9) {
+     let digit = num % 10;
+     res.unshift(digit);
+     num = Math.floor(num / 10);
+    }
+    res.unshift(num);
+    return res;
+};
