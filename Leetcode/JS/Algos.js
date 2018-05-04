@@ -261,15 +261,12 @@ var intToRoman = function(num) {
 
     const keys = Object.keys(dictionary).reverse();
     let arr = splitNum(num);
-    let idx = 0;
     let res = "";
-    let multiplier = Math.pow(10, arr.length - (idx + 1));
-
-    while (idx < arr.length) {
-        multiplier = Math.pow(10, arr.length - (idx + 1));
-        let tempNum = arr[idx] * multiplier;
+    
+    for (let i = 0; i < arr.length; i++) {
+        let multiplier = Math.pow(10, arr.length - (i + 1));
+        let tempNum = arr[i] * multiplier;
         res += createRN(tempNum, dictionary);
-        idx++;
     }
     return res;
 };
