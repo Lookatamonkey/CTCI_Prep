@@ -27,3 +27,27 @@ def add_two_numbers(l1, l2)
     node3.next = ListNode.new(carry_over) if carry_over == 1
     dummy.next
 end
+
+def swap_pairs(head)
+    return nil if head.nil?
+    return head if head.next.nil?
+    
+    temp = head.next
+    new_head = swap_pairs(head.next.next)
+    temp.next = head
+    head.next = new_head
+    head = temp
+    return head
+end
+
+def swap_pairs(head)
+    return nil if head.nil?
+    return head if head.next.nil?
+    
+    temp = head.next
+    new_head = swap_pairs(head.next.next)
+    temp.next = head
+    head.next = new_head
+    head = temp
+    return head
+end
