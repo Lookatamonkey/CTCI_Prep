@@ -941,31 +941,3 @@ def convert(s, num_rows)
 end
 
 # p convert("PAYPALISHIRING", 3)
-
-# require 'set'
-def flight_length(mins, arr_of_movie_lengths)
-    
-    store = {}
-
-    arr_of_movie_lengths.each_with_index do |movie_time, idx|
-        store[movie_time] = idx
-    end
-
-    arr_of_movie_lengths.each do |movie_time, idx|
-        return true if store[min - movie_time] != idx
-    end
-
-    false
-end
-
-def fibs(num, store = {})
-    # p num
-    return 0 if num == 0
-    return 1 if num == 1
-
-    return store[num] if store[num]
-    val = fibs(num - 1, store) + fibs(num - 2, store)
-    return store[num] = val
-end
-
-fibs(2)
