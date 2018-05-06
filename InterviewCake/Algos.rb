@@ -253,4 +253,103 @@ def binary_search(arr, target)
     return right > -1 ? 1 + mid + right : left
 end
 
-p binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9], 9)
+# p binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9], 9)
+
+def find_rotation_pt(arr)
+    return 0 if arr.length == 1 || arr.empty?
+
+    mid = arr.length / 2
+    return mid if out_of_order?(arr[mid - 1], arr[mid]) == -1
+
+    left = find_rotation_pt(arr[0...mid])
+    right = find_rotation_pt(arr[mid..-1])
+
+    return right > 0 ? mid + right : left
+end
+
+def out_of_order?(word1, word2)
+    i = 0
+    while i < [word1.length, word2.length].min
+        return -1 if word1[i].ord > word2[i].ord
+        return 1 if word2[i].ord > word1[i].ord
+        i += 1
+    end
+    
+    return -1 if word1.length > word2.length
+    1
+end
+
+words = [
+    'ptolemaic',
+    'retrograde',
+    'supplant',
+    'undulate',
+    'xenoepist',
+    'asymptote',  # <-- rotates here!
+    'babka',
+    'banoffee',
+    'engender',
+    'karpatka',
+    'othellolagkage',
+]
+
+def better_find_rotation_pt(arr)
+    return arr[0] if arr.length == 1
+
+    floor_idx = 0
+    ceiling_idx = arr.length - 1
+    total = 0
+
+    while ceiling_idx > floor_idx
+        mid = (floor_idx + ceiling_idx) / 2
+        if arr[mid] >= arr[0]
+            floor_idx = mid
+        else
+            ceiling_idx = mid
+        end
+        return ceiling_idx if floor_idx + 1 == ceiling_idx
+    end
+end
+
+better_find_rotation_pt(words)
+
+def flight_length(mins, arr_of_movie_lengths)
+    
+    store = {}
+
+    arr_of_movie_lengths.each_with_index do |movie_time, idx|
+        store[movie_time] = idx
+    end
+
+    arr_of_movie_lengths.each do |movie_time, idx|
+        return true if store[min - movie_time] != idx
+    end
+
+    false
+end
+
+def fibs(num, store = {})
+    return 0 if num == 0
+    return 1 if num == 1
+
+    return store[num] if store[num]
+    val = fibs(num - 1, store) + fibs(num - 2, store)
+    return store[num] = val
+end
+
+# p fibs(10)
+
+def iterative_fibs(num)
+    prev = 1
+    prev_prev = 0
+    total = prev + prev_prev
+
+    (num - 1).times do |time|
+        total = prev  + prev_prev
+        prev_prev = prev
+        prev = total
+    end
+    total
+end
+
+# p iterative_fibs(10)
