@@ -406,7 +406,7 @@ def max_duffel_bag_value(cake_arrays, weight_capacity)
           # value at that integer capacity in our array max_values_at_capacities
           p [current_capacity, cake_weight], max_values_at_capacities
           remaining_capacity = current_capacity - cake_weight
-           max_value_using_cake = cake_value + max_values_at_capacities[remaining_capacity]
+          max_value_using_cake = cake_value + max_values_at_capacities[remaining_capacity]
         #    p max_values_at_capacities
           # now we see if it's worth taking the cake. how does the
           # value with the cake compare to the current_max_value?
@@ -421,4 +421,30 @@ def max_duffel_bag_value(cake_arrays, weight_capacity)
     return max_values_at_capacities[weight_capacity]
   end
 
-p max_duffel_bag_value([[3, 40], [5, 70]], 9)
+# p max_duffel_bag_value([[3, 40], [5, 70]], 9)
+
+class QueueWithStacks
+    def initialize
+        @stack1 = []
+        @stack2 = []
+    end
+
+    def enqueue(node)
+        @stack1.push(node)
+    end
+
+    def dequeue
+        if @stack2.empty? && @stack1.empty?
+            throw 'nothing to dequeue'
+        elsif !(@stack2.empty?)
+            return @stack2.pop
+        elsif !(@stack1.empty?)
+            until @stack1.empty?
+                popped = @stack1.pop
+                @stack2.push(popped)
+            end
+
+            return @stack2.pop
+        end
+    end
+end
