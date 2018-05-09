@@ -941,3 +941,23 @@ def convert(s, num_rows)
 end
 
 # p convert("PAYPALISHIRING", 3)
+
+# 746 Min Cost Climbing Stairs
+def min_cost_climbing_stairs(cost)
+    i = cost.length - 3
+    while i >= 0
+        p "before", cost
+        cost[i] += [cost[i+1], cost[i+2]].min
+        p "after", cost
+        i -= 1
+    end
+
+    [cost[0], cost[1]]
+end
+
+cost1 = [10, 15, 20]
+cost2 = [1, 100, 1, 1, 1, 100, 1, 1, 100, 1]
+# p min_cost_climbing_stairs(cost1) # == 15
+min_cost_climbing_stairs(cost2) # == 6
+
+
