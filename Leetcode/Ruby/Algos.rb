@@ -946,9 +946,7 @@ end
 def min_cost_climbing_stairs(cost)
     i = cost.length - 3
     while i >= 0
-        p "before", cost
         cost[i] += [cost[i+1], cost[i+2]].min
-        p "after", cost
         i -= 1
     end
 
@@ -960,4 +958,80 @@ cost2 = [1, 100, 1, 1, 1, 100, 1, 1, 100, 1]
 # p min_cost_climbing_stairs(cost1) # == 15
 min_cost_climbing_stairs(cost2) # == 6
 
+#276 Paint Fence
+def paint_fence(n, k)
+    total = k;
+ 
+    #There are 0 ways for single post to
+    #violate (same color_ and k ways to
+    #not violate (different color)
+    same = 0, diff = k;
+ 
+    #Fill for 2 posts onwards
+    i = 2
+    while i <= n
+        #Current same is same as previous diff
+        same = diff;
 
+        #We always have k-1 choices for next post
+        diff = total * (k-1);
+
+        #Total choices till i.
+        total = (same + diff);
+        i += 1
+    end
+
+    total
+end
+
+# paint_fence(4, 3)
+
+# 62. Unique Paths
+def unique_paths_iterative(m, n)
+    return 0 if m == 0 || n == 0
+
+    grid = Array.new(m) { Array.new(n) {0} }
+    grid[0][0] = 1
+
+    row = 0
+    column = 0
+
+    while row < m
+        while column < n
+            # check top
+            if row > 0
+                grid[row][column] += grid[row - 1][column]
+            end
+            # check left
+            if column > 0
+                grid[row][column] += grid[row][column - 1]
+            end
+
+            column += 1
+        end
+        column = 0
+        row += 1
+    end
+
+    grid[row - 1][column - 1]
+end
+
+# p unique_paths_iterative(7, 3)
+# p unique_paths_iterative(3, 3)
+
+def unique_paths_recursive(m, n, store = {})
+    return store[[m, n]] if store[[m, n]]
+
+    if m == 1 && n == 1
+        store[[m, n]] = 1
+        return 1
+    end
+
+    above = m > 1 ? unique_paths_recursive(m - 1, n, store) : 0
+    left = n > 1 ? unique_paths_recursive(m, n - 1, store) : 0
+
+    total = above + left
+end
+
+# p unique_paths_recursive(7, 3)
+# p unique_paths_recursive(3, 3)
