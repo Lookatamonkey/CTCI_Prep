@@ -1030,8 +1030,10 @@ def unique_paths_recursive(m, n, store = {})
     above = m > 1 ? unique_paths_recursive(m - 1, n, store) : 0
     left = n > 1 ? unique_paths_recursive(m, n - 1, store) : 0
 
+    store[[m - 1, n]] = above
+    store[[m, n - 1]] = left
     total = above + left
 end
 
-# p unique_paths_recursive(7, 3)
+# p unique_paths_recursive(23, 12)
 # p unique_paths_recursive(3, 3)
