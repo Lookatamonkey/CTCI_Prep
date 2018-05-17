@@ -298,3 +298,24 @@ var splitNum = function(num) {
     res.unshift(num);
     return res;
 };
+
+// #198 House Robber
+var rob = function(nums) {
+    if (nums.length < 1) { return 0; }
+    let option1 = nums[0];
+    let option2 = 0;
+
+    for (let i = 1; i < nums.length; i++) {
+        if (i % 2 === 0) {
+            option1 = Math.max(option1 + nums[i], option2);
+        } else {
+            option2 = Math.max(option1, option2 + nums[i]);
+        }
+    }
+
+    return Math.max(option1, option2);
+};
+
+// console.log(rob([1, 2, 3, 1]));
+console.log(rob([2, 7, 9, 3, 1]));
+console.log(rob([2, 7, 3, 9, 1]));
