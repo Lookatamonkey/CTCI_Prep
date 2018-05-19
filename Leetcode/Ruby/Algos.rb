@@ -1037,3 +1037,70 @@ end
 
 # p unique_paths_recursive(23, 12)
 # p unique_paths_recursive(3, 3)
+
+def max_profit_cooldown(prices)
+    return 0 if prices.length < 2
+
+    p "has1_doNothing", has1_doNothing = -prices[0]
+	p "has0_Buy", has0_Buy = -prices[0]
+	p "has0_doNothing", has0_doNothing = 0
+    p "has1_Sell", has1_Sell = 0
+    i = 1
+    while i < prices.length
+		p "has1_doNothing", has1_doNothing = has1_doNothing > has0_Buy ? has1_doNothing : has0_Buy
+		p "has0_Buy", has0_Buy = -prices[i] + has0_doNothing
+		p "has0_doNothing", has0_doNothing = has0_doNothing > has1_Sell ? has0_doNothing : has1_Sell
+		p "has1_Sell", has1_Sell = prices[i] + has1_doNothing
+        i += 1
+	end
+    has1_Sell > has0_doNothing ? has1_Sell : has0_doNothing
+end
+
+# p max_profit_cooldown([1, 2, 3, 0])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def factorial_rec(num)
+    return [1] if num == 1
+    res = factorial_rec(num - 1)
+    res << (num - 1) * res[-1]
+end
+
+def number_of_arithmetic_slices(a)
+    return 0 if a.length <= 2
+    counter = 0
+    total = 0
+    prev_diff = a[1] - a[0]
+
+    idx = 2
+    while idx < a.length
+        curr_diff = a[idx] - a[idx-1]
+        if curr_diff == prev_diff
+            counter += 1
+        else
+            if counter > 0
+                total += (0..counter).reduce(:+)
+                counter = 0
+            end
+        end  
+        prev_diff = curr_diff
+        idx += 1
+    end
+    counter > 0 ? total += (0..counter).reduce(:+) : total
+end
+
+# p number_of_arithmetic_slices([1,2,3,4])
+# p number_of_arithmetic_slices([1, 2, 3, 8, 9, 10])
+
