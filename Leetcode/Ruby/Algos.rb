@@ -1089,18 +1089,15 @@ def number_of_arithmetic_slices(a)
         curr_diff = a[idx] - a[idx-1]
         if curr_diff == prev_diff
             counter += 1
+            total += counter
         else
-            if counter > 0
-                total += (0..counter).reduce(:+)
-                counter = 0
-            end
+            counter = 0
         end  
         prev_diff = curr_diff
         idx += 1
     end
-    counter > 0 ? total += (0..counter).reduce(:+) : total
+    total
 end
 
 # p number_of_arithmetic_slices([1,2,3,4])
 # p number_of_arithmetic_slices([1, 2, 3, 8, 9, 10])
-
