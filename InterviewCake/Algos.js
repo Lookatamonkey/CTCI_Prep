@@ -77,4 +77,28 @@ function permute(nums) {
 // console.log(permute([1, 2]));// === [[1, 2], [2, 1]];
 // permute([1, 2, 3, 4]); //=== [[1, 2, 3], [1, 3, 2], [2, 3, 1], [2, 1, 3], [3, 1, 2], [3, 2, 1]];
 
+function sortScores(scores, highestScore) {
+    let resScores = new Array(highestScore) ;
+    let sortedScores = [];
 
+    for (let i = 0; i < scores.length; i++) {
+        let score = scores[i];
+        if (resScores[score]) {
+            resScores[score] += 1;
+        } else {
+            resScores[score] = 1;
+        }
+    }
+
+    for (let i = resScores.length - 1; i >= 0; i--) {
+        if (resScores[i] >= 1) {
+            for (let j = 0; j < resScores[i]; j++) {
+                sortedScores.push(i);
+            }
+        }
+    }
+
+    return sortedScores;
+}
+
+console.log(sortScores([37, 89, 41, 65, 91, 53, 53], 100));
