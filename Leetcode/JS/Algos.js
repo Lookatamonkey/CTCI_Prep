@@ -306,6 +306,8 @@ var rob = function(nums) {
     let option2 = 0;
 
     for (let i = 1; i < nums.length; i++) {
+        console.log("option1", option1);
+        console.log("option2", option2);
         if (i % 2 === 0) {
             option1 = Math.max(option1 + nums[i], option2);
         } else {
@@ -317,5 +319,30 @@ var rob = function(nums) {
 };
 
 // console.log(rob([1, 2, 3, 1]));
-console.log(rob([2, 7, 9, 3, 1]));
-console.log(rob([2, 7, 3, 9, 1]));
+// console.log(rob([2, 7, 9, 3, 1]));
+// console.log(rob([2, 7, 6, 9, 1]));
+// console.log(rob([100, 50, 200, 1000, 10]));
+
+// #53. Maximum Subarray
+var maxSubArray = function(nums) {
+    if (nums.length < 1) { return 0; }
+    let max = nums[0];
+    let tempMax = nums[0];
+
+    for (let i = 1; i < nums.length; i++) {
+        if (tempMax > max) { max = tempMax; }
+        if (tempMax < 0 && nums[i] > tempMax) { 
+            tempMax = nums[i];
+            continue;
+        }
+        if (tempMax + nums[i] > 0) {
+            tempMax += nums[i];
+        } else {
+            tempMax = nums[i];
+        }
+    }
+
+    return max;
+};
+
+console.log(maxSubArray([-2,1,-3,4,-1,2,1,-5,4])); // => 6
