@@ -328,6 +328,13 @@ def flight_length(mins, arr_of_movie_lengths)
     false
 end
 
+# def fibs(num)
+#     return 0 if num == 0
+#     return 1 if num == 1
+
+#     return fibs(num - 1) + fibs(num - 2)
+# end
+
 def fibs(num, store = {})
     return 0 if num == 0
     return 1 if num == 1
@@ -337,7 +344,7 @@ def fibs(num, store = {})
     return store[num] = val
 end
 
-# p fibs(10)
+p fibs(100)
 
 def iterative_fibs(num)
     prev = 1
