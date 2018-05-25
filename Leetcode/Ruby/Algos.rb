@@ -1100,4 +1100,23 @@ def number_of_arithmetic_slices(a)
 end
 
 # p number_of_arithmetic_slices([1,2,3,4])
-# p number_of_arithmetic_slices([1, 2, 3, 8, 9, 10])
+# p number_of_arithmetic_slices([1, 2, 3, 8, 9, 10]
+
+def permute(arr)
+    return [array] if array.length <= 1
+
+    first = array.shift
+    perms = permute(array)
+    total_permutations = []
+  
+  
+    # Now we iterate over the result of our recusive call say [[1, 2], [2, 1]]
+    # and for each permutation add first into every index. This new subarray
+    # gets added to total_permutations.
+    perms.each do |perm|
+      (0..perm.length).each do |i|
+        total_permutations << perm[0...i] + [first] + perm[i..-1]
+      end
+    end
+    total_permutations
+end
