@@ -58,22 +58,23 @@ function getClosingParen(str, openingParenIdx) {
 // console.log(getClosingParen("Sometimes (when I nest them (my parentheticals) too much (like this (and this))) they get confusing.", 10));
 
 // console.log(getClosingParen("((()()))", 1) === 6);
-// function permutation(arr) {
-//     if (arr.length === 0) { return []; }
 
-//     let total = [];
+function permute(nums) {
+    if (nums.length <= 1) { return [nums]; }
+    let total = [];
+    let start = nums.shift();
+    let prev = permute(nums);
+    for (let i = 0; i < prev.length; i++) {
+        for (let j = 0; j <= prev[i].length; j++) {
+            let temp = prev[i];
+            let test = temp.slice(0, j).concat(start).concat(temp.slice(j, temp.length));
+            total.push(test);
+        }
+    }
+    return total;
+}
 
-//     let last = arr.length - 1;
-//     let start = arr.splice(1);
-//     console.log(arr);
-//     let prev = permutation(arr);
-//     for (let i = 0; i < prev.length; i++) {
-//         for (let j = 0; j < prev[i].length; j++) {
-//             console.log(prev);
-//         }
-//     }
+// console.log(permute([1, 2]));// === [[1, 2], [2, 1]];
+// permute([1, 2, 3, 4]); //=== [[1, 2, 3], [1, 3, 2], [2, 3, 1], [2, 1, 3], [3, 1, 2], [3, 2, 1]];
 
-// }
 
-// permutation([1, 2]) === [[1, 2], [2, 1]];
-// permutation([1, 2, 3]) === [[1, 2, 3], [1, 3, 2], [2, 3, 1], [2, 1, 3], [3, 1, 2], [3, 2, 1]];
