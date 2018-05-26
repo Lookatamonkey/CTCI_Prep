@@ -345,4 +345,82 @@ var maxSubArray = function(nums) {
     return max;
 };
 
-console.log(maxSubArray([-2,1,-3,4,-1,2,1,-5,4])); // => 6
+// console.log(maxSubArray([-2,1,-3,4,-1,2,1,-5,4])); // => 6
+
+var spiralOrder = function(matrix) {
+    if (matrix.length === 0 ) { return []; }
+    
+    let rightBoundary = matrix[0].length - 1;
+    let leftBoundary = 0;
+    let upperBoundary = 0;
+    let lowerBoundary = matrix.length - 1;
+    let direction = "right";
+    let nums = [];
+
+    let col = 0;
+    let row = 0;
+
+    nums.push(matrix[col][row]);
+    while ((leftBoundary <= rightBoundary) && (upperBoundary <= lowerBoundary)) {
+        
+        // goes right
+        if (direction === "right") {
+            while (row < rightBoundary) {
+                row += 1;
+                nums.push(matrix[col][row]);
+            }
+            upperBoundary += 1;
+            direction = "down";
+
+        // goes down
+        } else if (direction === "down") {
+            while (col < lowerBoundary) {
+                col += 1;
+                nums.push(matrix[col][row]);
+            }
+            rightBoundary -= 1;
+            direction = "left";
+
+            // goes left
+         } else if (direction === "left") {
+            while (row > leftBoundary) {
+                row -= 1;
+                nums.push(matrix[col][row]);
+            }
+            lowerBoundary -= 1;
+            direction = "up";
+
+            // goes up
+         } else {
+            while (col > upperBoundary) {
+                col -= 1;
+                nums.push(matrix[col][row]);
+            }
+            leftBoundary += 1;
+            direction = "right";
+         }
+    }
+
+    return nums;
+};
+
+let matrix = [
+    [ 1, 2, 3 ],
+    [ 8, 9, 4 ],
+    [ 7, 6, 5 ]
+];
+
+// let matrix = [
+//     [ 1, 2, 3, 4 ],
+//     [ 10, 11, 12, 5 ],
+//     [ 9, 8, 7, 6 ]
+// ];
+
+// let matrix = [
+//     [ 1, 2, 3, 4 ],
+//     [ 12, 13, 14, 5 ],
+//     [ 11, 16, 15, 6 ],
+//     [ 10, 9, 8, 7 ],
+// ];
+
+console.log(spiralOrder(matrix));
