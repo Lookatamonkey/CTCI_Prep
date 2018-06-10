@@ -1058,20 +1058,6 @@ end
 
 # p max_profit_cooldown([1, 2, 3, 0])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def factorial_rec(num)
     return [1] if num == 1
     res = factorial_rec(num - 1)
@@ -1120,3 +1106,100 @@ def permute(arr)
     end
     total_permutations
 end
+
+# 256 Paint House (need to redo)
+
+def min_cost(costs)
+    prev_color_path1 = 0
+    prev_color_path2 = 1
+    path1 = costs[0][prev_color_path1]
+    path2 = costs[0][prev_color_path2]
+    
+    if costs[0][2] < path1
+        if path1 < path2
+            path2 = path1
+            prev_color_path2 = prev_color_path1
+            path1 = costs[0][2]
+            prev_color_path1 = 2
+        end
+    elsif costs[0][2] < path2
+        if path2 < path1
+            path1 = path2
+            prev_color_path1 = prev_color_path2
+            path2 = costs[0][2]
+            prev_color_path2 = 2
+        end
+    end
+
+    costs[1..-1].each do |cost|
+        min1 = nil
+        min1idx = nil
+        # for first path
+        cost.each_with_index do |amt, idx|
+            next if idx == prev_color_path1
+            if min1
+                if amt < min1
+                    min1 = amt
+                    prev_color_path1 = idx
+                else
+                    next
+                end
+            else
+                min1 = amt
+                min1idx = idx
+            end
+        end
+        path1 += min1
+
+        
+        min2 = nil
+        min2idx = nil
+        # for second path
+        cost.each_with_index do |amt, idx|
+            next if idx == prev_color_path2
+            if min2
+                if amt < min2
+                    min2 = amt
+                    prev_color_path2 = idx
+                else
+                    next
+                end
+            else
+                min2 = amt
+                min2idx = idx
+            end
+        end
+        
+        path2 += min2
+    end
+
+    path1 < path2 ? path1 : path2
+end
+
+input = [[17,2,17],[16,16,5],[14,3,19]]
+# input = [[7, 6, 2]]
+# p min_cost(input)
+
+def min_cost2(costs)
+    return 0 if costs.empty?
+        
+    pre_red = costs[0][0]
+    pre_green = costs[0][1]
+    pre_blue = costs[0][2]
+
+    costs[1..-1].each_with_index do |house, i|
+        current_red = house[0] + [pre_blue, pre_green].min
+        current_green = house[1] + [pre_red, pre_blue].min
+        current_blue = house[2] + [pre_red, pre_green].min
+
+        pre_red = current_red
+        pre_green = current_green
+        pre_blue = current_blue
+    end
+
+    p [pre_red, pre_green, pre_blue]
+    [pre_red, pre_green, pre_blue].min
+end
+
+costs = [[17,2,17],[16,16,5],[14,3,19]]
+p min_cost2(costs)
