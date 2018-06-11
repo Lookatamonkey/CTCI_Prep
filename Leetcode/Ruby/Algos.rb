@@ -1176,7 +1176,7 @@ def min_cost(costs)
     path1 < path2 ? path1 : path2
 end
 
-input = [[17,2,17],[16,16,5],[14,3,19]]
+costs = [[17,2,17],[16,16,5],[14,3,19]]
 # input = [[7, 6, 2]]
 # p min_cost(input)
 
@@ -1187,10 +1187,10 @@ def min_cost2(costs)
     pre_green = costs[0][1]
     pre_blue = costs[0][2]
 
-    costs[1..-1].each_with_index do |house, i|
-        current_red = house[0] + [pre_blue, pre_green].min
-        current_green = house[1] + [pre_red, pre_blue].min
-        current_blue = house[2] + [pre_red, pre_green].min
+    costs[1..-1].each_with_index do |cost, i|
+        current_red = cost[0] + [pre_blue, pre_green].min
+        current_green = cost[1] + [pre_red, pre_blue].min
+        current_blue = cost[2] + [pre_red, pre_green].min
 
         pre_red = current_red
         pre_green = current_green
