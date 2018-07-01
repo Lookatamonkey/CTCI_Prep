@@ -1197,9 +1197,108 @@ def min_cost2(costs)
         pre_blue = current_blue
     end
 
-    p [pre_red, pre_green, pre_blue]
+    # p [pre_red, pre_green, pre_blue]
     [pre_red, pre_green, pre_blue].min
 end
 
 costs = [[17,2,17],[16,16,5],[14,3,19]]
-p min_cost2(costs)
+# p min_cost2(costs)
+
+# 324 Wiggle Sort II (REDO)
+def wiggle_sort(nums)
+    nums = nums.sort!
+
+    greater_num_idx = nums.length / 2
+    lesser_num_idx = 1
+
+    until lesser_num_idx >= greater_num_idx
+        nums[lesser_num_idx], nums[greater_num_idx] = nums[greater_num_idx], nums[lesser_num_idx]
+        lesser_num_idx += 2
+        greater_num_idx += 1
+    end
+    nums
+end
+
+# p wiggle_sort([1, 5, 1, 1, 6, 4]) # [1, 1, 1, 4, 5, 6] => [1, 4, 1, 5, 1, 6]
+
+# procedure three-way-partition(A : array of values, mid : value):
+# i ← 0
+# j ← 0
+# n ← size of A - 1
+
+# while j ≤ n:
+#     if A[j] < mid:
+#         swap A[i] and A[j]
+#         i ← i + 1
+#         j ← j + 1
+#     else if A[j] > mid:
+#         swap A[j] and A[n]
+#         n ← n - 1
+#     else:
+#         j ← j + 1
+
+def three_way_partitioning(arr)
+    i = 0
+    j = 0
+    mid = arr.length / 2 
+    n = arr.length - 1
+
+    while j <= n
+        if arr[j] < mid
+            arr[i], arr[j] = arr[j], arr[i]
+            i += 1
+            j += 1
+        elsif arr[j] > mid
+            arr[j], arr[n] = arr[n], arr[j]
+            n -= 1
+        else
+            j += 1
+        end
+    end
+    arr
+end
+
+# p three_way_partitioning([1, 1, 2, 2, 3, 3])
+
+def words_typing(sentence, rows, cols)
+    i = 0
+    remaining_cols = cols
+    res = ""
+    until rows == 0
+        word_length = sentence[i % sentence.length].length
+        if word_length <= remaining_cols
+            remaining_cols == word_length ? res += sentence[i % sentence.length] + "|" : res += sentence[i % sentence.length]  + "-"
+            i += 1 #next word
+            remaining_cols -= (word_length + 1)
+        else
+            rows -= 1
+            remaining_cols = cols
+        end
+        p ["res", res]
+    end
+
+    i / sentence.length
+end
+
+# INPUT: rows = 3, cols = 6, sentence = ["a", "bcd", "e"]
+sentence = ["a"]
+row = 10000
+col = 10000
+# p words_typing(sentence, row, col)
+
+def plus_one(digits)
+    leftover = 1
+   
+    digits.reverse!.each_with_index do |digit, idx|
+        digits[idx] += leftover
+        leftover = 0 
+        if digits[idx] >= 10
+            leftover = 1
+            digits[idx] %= 10
+        end
+    end
+
+   leftover > 0 ? digits.push(leftover).reverse : digits.reverse
+end
+
+# p plus_one([9])
