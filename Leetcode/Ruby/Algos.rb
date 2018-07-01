@@ -1302,3 +1302,42 @@ def plus_one(digits)
 end
 
 # p plus_one([9])
+
+#17. Letter Combinations of a Phone Number
+def letter_combinations(digits)
+    dictionary = {
+        '1' => [],
+        '2' => ['a', 'b', 'c'],
+        '3' => ['d', 'e', 'f'],
+        '4' => ['g', 'h', 'i'],
+        '5' => ['j', 'k', 'l'],
+        '6' => ['m', 'n', 'o'],
+        '7' => ['p', 'q', 'r', 's'],
+        '8' => ['t', 'u', 'v'],
+        '9' => ['w', 'x', 'y', 'z']
+    }
+
+    res = [[]]
+    digits.split("").each do |num|
+        ltrs = dictionary[num]
+        res = permute(res, ltrs)
+    end
+
+    new_res = []
+    res.each { |bucket| new_res << bucket.join("") }
+    new_res 
+end
+
+def permute(res, ltrs)
+    new_res = []
+    ltrs.each_with_index do |ltr, idx|
+        res.each do |bucket|
+            new_res.push(bucket + [ltr])
+        end
+    end
+
+    new_res
+end
+
+# p permute([[[]]], ['d', 'e', 'f'])
+p letter_combinations("23")
