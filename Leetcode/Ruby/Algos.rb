@@ -1340,4 +1340,66 @@ def permute(res, ltrs)
 end
 
 # p permute([[[]]], ['d', 'e', 'f'])
-p letter_combinations("23")
+# p letter_combinations("23")
+
+# 681 - Next Closest Time
+def next_closest_time(time)
+    store = Array.new(9)
+    past = []
+
+    time.split('').each do |num| 
+        if (num.ord >= 48 && num.ord <= 57)
+            store[num.to_i] = true 
+            past.push(num.to_i)
+        end
+    end
+
+    future = past
+    place = 3
+    until (place == -1)
+        limit = find_limit(place, past[place])
+        if next_greatest(store, past[place], limit)
+            if place == 1 && next_greatest(store, past[place], limit) >= 5 && future[0] == 2
+                next_num = next_greatest(store, 0, 2)
+                future[0] = next_num
+                future[1] = next_num
+            else 
+                future[place] = next_greatest(store, past[place], limit)
+            end
+            break
+        else
+            future[place] = lowest(store)
+            place -= 1
+        end
+    end
+
+    future[0..1].join("").to_s + ":" + future[2..3].join("").to_s
+end
+
+def find_limit(place, num)
+    limit = 9 if place == 3
+    limit = 5 if place == 2
+    limit = 9 if place == 1
+    limit = 2 if place == 0
+    
+    limit
+end
+
+def lowest(store)
+    store.each_index do |idx|
+        return idx if store[idx]
+    end
+end
+
+def next_greatest(store, num, limit)
+    num += 1
+    while num <= limit
+        return num if store[num] == true
+        num += 1
+    end
+
+    false
+end
+
+p next_closest_time("19:34");
+p next_closest_time("23:59");
