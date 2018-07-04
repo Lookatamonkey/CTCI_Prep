@@ -101,4 +101,31 @@ function sortScores(scores, highestScore) {
     return sortedScores;
 }
 
-console.log(sortScores([37, 89, 41, 65, 91, 53, 53], 100));
+// console.log(sortScores([37, 89, 41, 65, 91, 53, 53], 100));
+
+function riffleShuffle(deck) {
+    let half1 = deck.pop()
+    let half2;
+
+    while (deck.length > 0) {
+        let nextCard = deck.pop()
+
+        if ( half1 - 1 === nextCard ) {
+            half1 = nextCard;
+        } else if ( half1-1 !== nextCard && !half2) {
+            half2 = nextCard;
+        } else if ( half1-1 !== nextCard || half2-1 !== nextCard  ) {
+            return false;
+        } else if ( half2 - 1 === nextCard ) {
+            half2 = nextCard
+        }
+    }
+    
+    return true;
+}
+// let deck = []
+// for (let i = 1; i < 53; i++) {
+//     deck.push(i)
+// }
+// console.log(riffleShuffle(deck));
+
