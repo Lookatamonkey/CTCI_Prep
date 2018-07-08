@@ -1401,5 +1401,31 @@ def next_greatest(store, num, limit)
     false
 end
 
-p next_closest_time("19:34");
-p next_closest_time("23:59");
+# p next_closest_time("19:34");
+# p next_closest_time("23:59");
+
+def judge_circle(moves)
+    return false if moves.length <= 1
+    up_down = 0
+    left_right = 0
+
+    store = {
+        "L" => 1,
+        "R" => -1,
+        "U" => 1,
+        "D" => -1,
+    }
+
+    move.each_char do |move|
+        calc = store[move]
+        if move == "L" || move == "R"
+            left_right += calc    
+        else
+            up_down += calc
+        end
+    end
+
+    up_down == 0 && left_right == 0
+end
+
+# p judge_circle("LDRRLRUULR");
