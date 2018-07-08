@@ -1404,6 +1404,7 @@ end
 # p next_closest_time("19:34");
 # p next_closest_time("23:59");
 
+# 657. Judge Route Circle
 def judge_circle(moves)
     return false if moves.length <= 1
     up_down = 0
@@ -1429,3 +1430,26 @@ def judge_circle(moves)
 end
 
 # p judge_circle("LDRRLRUULR");
+
+
+# 22. Generate Parentheses
+def generate_parenthesis(n)
+    insert_p(res = [],'', n, 0, 0)
+    res
+end
+
+def insert_p(res, ele, n, num_open_p, num_closed_p)
+    return res.push(ele) if num_closed_p == n
+
+    if num_open_p == n
+        insert_p(res, ele + ')', n, num_open_p, num_closed_p + 1)
+    else
+        insert_p(res, ele + '(', n, num_open_p + 1, num_closed_p)
+        if (num_open_p > num_closed_p)
+            insert_p(res, ele + ')', n, num_open_p, num_closed_p + 1)
+        end
+    end
+end
+
+# p generate_parenthesis(3)
+
