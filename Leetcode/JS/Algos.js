@@ -425,3 +425,35 @@ let matrix = [
 
 // console.log(spiralOrder(matrix));
 
+// #345 Reverse Vowels of a String
+
+var reverseVowels = function(s) {
+    if (s.length <= 1) { return s }
+
+    let head = 0;
+    let tail = s.length - 1;
+    const vowels = new Set(['a', 'e','i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'])
+    s = s.split('');
+    while (head < tail) {
+        while (!vowels.has(s[head])) {
+            if (head > tail) { return s.join('') }
+            head += 1;
+
+        }
+        while (!vowels.has(s[tail])) {
+            tail -= 1;
+        }
+
+        if (head > tail) { break }
+        let temp = s[head];
+        s[head] = s[tail];
+        s[tail] = temp;
+        head += 1;
+        tail -= 1;
+
+    }
+    
+    return s.join('');
+};
+
+console.log(reverseVowels(".,"));
