@@ -455,5 +455,54 @@ var reverseVowels = function(s) {
     
     return s.join('');
 };
+// console.log(reverseVowels(".,"));
 
-console.log(reverseVowels(".,"));
+// #200 Number of Islands
+var numIslands = function(grid) {
+    // FOR SOME REASON USING A SET DOESNT WORK BUT USING A HASHMAP WORKS?
+    if (grid.length === 0 || grid[0].length === 0) { return 0; }
+    let store = {};
+    // let store = new Set([]);
+    return islandHelper(grid, store);
+
+    function islandHelper(grid, store) {
+        let maxRow = grid.length;
+        let maxCol = grid[0].length;
+        let numIslands = 0;
+    
+        for (let r = 0; r < maxRow; r++) {
+            for (let c = 0; c < maxCol; c++) {
+                // seen square already
+                if (store[[r, c]]) { 
+                // if (store.has([r, c])) { 
+                    continue 
+                }
+                if (grid[r][c] === '1') {
+                    islandTracker(grid, store, r, c, maxRow, maxCol);
+                    numIslands += 1;
+                }
+            }
+            c = 0;
+        }
+
+        return numIslands;
+    }
+
+    function islandTracker(grid, store, r, c, maxRow, maxCol) {
+        if (c >= maxCol || r >= maxRow || c < 0 || r < 0) { return }
+        if (store[[r, c]]) { return };
+        // store.add([r, c]);
+        
+        store[[r, c]] = true;
+        if (grid[r][c] === '1') {
+            islandTracker(grid, store, r, c+1, maxRow, maxCol); //goes left
+            islandTracker(grid, store, r+1, c, maxRow, maxCol); //goes down
+            islandTracker(grid, store, r, c-1, maxRow, maxCol); //goes right
+            islandTracker(grid, store, r-1, c, maxRow, maxCol); //goes up
+        }
+    }
+};
+
+// let island = [["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]];
+let island = [["1","1","1"],["0","1","0"],["1","1","1"]];
+console.log(numIslands(island));
