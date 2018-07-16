@@ -461,11 +461,10 @@ var reverseVowels = function(s) {
 var numIslands = function(grid) {
     // FOR SOME REASON USING A SET DOESNT WORK BUT USING A HASHMAP WORKS?
     if (grid.length === 0 || grid[0].length === 0) { return 0; }
-    let store = {};
     // let store = new Set([]);
-    return islandHelper(grid, store);
+    return islandHelper(grid);
 
-    function islandHelper(grid, store) {
+    function islandHelper(grid) {
         let maxRow = grid.length;
         let maxCol = grid[0].length;
         let numIslands = 0;
@@ -473,12 +472,8 @@ var numIslands = function(grid) {
         for (let r = 0; r < maxRow; r++) {
             for (let c = 0; c < maxCol; c++) {
                 // seen square already
-                if (store[[r, c]]) { 
-                // if (store.has([r, c])) { 
-                    continue 
-                }
                 if (grid[r][c] === '1') {
-                    islandTracker(grid, store, r, c, maxRow, maxCol);
+                    islandTracker(grid, r, c, maxRow, maxCol);
                     numIslands += 1;
                 }
             }
@@ -488,17 +483,15 @@ var numIslands = function(grid) {
         return numIslands;
     }
 
-    function islandTracker(grid, store, r, c, maxRow, maxCol) {
+    function islandTracker(grid, r, c, maxRow, maxCol) {
         if (c >= maxCol || r >= maxRow || c < 0 || r < 0) { return }
-        if (store[[r, c]]) { return };
-        // store.add([r, c]);
         
-        store[[r, c]] = true;
         if (grid[r][c] === '1') {
-            islandTracker(grid, store, r, c+1, maxRow, maxCol); //goes left
-            islandTracker(grid, store, r+1, c, maxRow, maxCol); //goes down
-            islandTracker(grid, store, r, c-1, maxRow, maxCol); //goes right
-            islandTracker(grid, store, r-1, c, maxRow, maxCol); //goes up
+            grid[r][c] = '0';
+            islandTracker(grid, r, c+1, maxRow, maxCol); //goes left
+            islandTracker(grid, r+1, c, maxRow, maxCol); //goes down
+            islandTracker(grid, r, c-1, maxRow, maxCol); //goes right
+            islandTracker(grid, r-1, c, maxRow, maxCol); //goes up
         }
     }
 };
