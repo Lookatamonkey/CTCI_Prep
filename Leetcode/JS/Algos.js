@@ -497,5 +497,63 @@ var numIslands = function(grid) {
 };
 
 // let island = [["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]];
-let island = [["1","1","1"],["0","1","0"],["1","1","1"]];
-console.log(numIslands(island));
+// let island = [["1","1","1"],["0","1","0"],["1","1","1"]];
+// console.log(numIslands(island));
+
+// 2228. Summary Ranges
+var summaryRanges = function(nums) {
+    if (nums.length < 1) { return []; }
+    if (nums.length === 1) { return [nums[0].toString()]; }
+    let res = [];
+    let head = nums[0];
+    let tail = head;
+    
+    for (let i = 1; i < nums.length; i++) {
+        if (nums[i] === tail + 1) {
+            tail = nums[i];
+        } else {
+            if (head === tail) {
+                res.push(head.toString());
+            } else {
+                res.push(head.toString() + "->" + tail.toString());
+            }
+            head = nums[i];
+            tail = nums[i];
+        }
+    }
+    
+    head === tail ? res.push(head.toString()) : res.push(head.toString() + "->" + tail.toString())
+    
+    return res;
+};
+
+// 162. Find Peak Element
+// Question claims this could be done in O(logn) but it impossible to determine with 100% certainty
+// which side has the peak if it's a flat range like [1, 1, 1, 1, 1, 1, 1, 2].
+var findPeakElement = function(nums) {
+    return fpeHelper(nums, 0, nums.length - 1);
+};
+
+var fpeHelper = function(nums, low, high) {
+    console.log('nums: ', nums, 'low: ', low, 'high: ', high)
+    if (low === high) { 
+        return low;
+    } else {
+        let mid1 = Math.floor((low+high) / 2);
+        let mid2 = mid1 + 1;
+
+        if(nums[mid1] > nums[mid2]) {
+            return fpeHelper(nums, low, mid1);
+        } else {
+            return fpeHelper(nums, mid2, high);    
+        }
+    }
+}
+
+// let nums = [1,2,3,1];
+// let nums = [1,2,1,1];
+// let nums = [1,1,1,2];
+// let nums = [2,1,1,1];
+// let nums = [1,2,1,3,5,6,4];
+// console.log(findPeakElement(nums))
+
