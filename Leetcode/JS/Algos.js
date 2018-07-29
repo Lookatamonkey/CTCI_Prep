@@ -557,3 +557,42 @@ var fpeHelper = function(nums, low, high) {
 // let nums = [1,2,1,3,5,6,4];
 // console.log(findPeakElement(nums))
 
+// #253 Meeting Rooms II TODO
+var minMeetingRooms = function(intervals) {
+    
+};
+
+
+// let res = [[0, 30],[5, 10],[15, 20]];
+// let res = [[7,10],[2,4]];
+// console.log(minMeetingRooms(res));
+
+var mergeIntervals = function(intervals) {
+    if (intervals.length <= 0) { return []; }
+    if (intervals.length === 1) { return [intervals[0]]; }
+    intervals.sort((a, b) => a[0] - b[0]);
+
+    let resStack = [intervals[0]];
+
+    for (let i = 1; i < intervals.length; i++) {
+        let prev = resStack.pop();
+        let next = intervals[i];
+
+        // merge
+        if (prev[1] >= next[0]) {
+            if (prev[1] >= next[1]) {
+                resStack.push(prev);
+            } else {
+                let temp = [prev[0], next[1]];
+                resStack.push(temp);
+            }
+        } else {
+        // dont merge
+            resStack.push(prev, next);
+        }
+    }
+
+    return resStack;
+}
+
+console.log(mergeIntervals([[1,4],[0,2],[3,5]]));
