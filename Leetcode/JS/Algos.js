@@ -715,3 +715,20 @@ var productExceptSelf = function (nums) {
     return res;
 }
 // console.log(productExceptSelf([1, 2, 3, 4]));
+
+// 1. Two Sum
+var twoSum = function (nums, target) {
+    let store = {};
+    for (let i = 0; i < nums.length; i++) {
+        store[nums[i]] = i;
+    }
+    console.log('store: ', store);
+
+    for (let i = 0; i < nums.length; i++) {
+        if (store[target - nums[i]] === i) continue;
+        if (store[target - nums[i]]) {
+            return [store[target - nums[i]], i];
+        }
+    }
+}
+console.log(twoSum([2, 7, 11, 15], 9));
