@@ -339,24 +339,24 @@ var maxSubArray = function(nums) {
     return 0;
   }
   let max = nums[0];
-  let tempMax = nums[0];
+  let current = nums[0];
 
   for (let i = 1; i < nums.length; i++) {
-    if (tempMax > max) {
-      max = tempMax;
+    if (current > max) {
+      max = current;
     }
-    if (tempMax < 0 && nums[i] > tempMax) {
-      tempMax = nums[i];
+    if (current < 0 && nums[i] > current) {
+      current = nums[i];
       continue;
     }
-    if (tempMax + nums[i] > 0) {
-      tempMax += nums[i];
+    if (current + nums[i] > 0) {
+      current += nums[i];
     } else {
-      tempMax = nums[i];
+      current = nums[i];
     }
   }
 
-  return tempMax > max ? tempMax : max;
+  return current > max ? current : max;
 };
 
 // console.log(maxSubArray([-2,1,-3,4,-1,2,1,-5,4])); // => 6
@@ -778,17 +778,77 @@ var wordBreak = function(s, wordDict) {
   for (let i = 1; i <= s.length; i++) {
     for (let j = 0; j < i; j++) {
       if (arr[j] && wordSet.has(s.substring(j, i))) {
-        console.log("j: ", j, "i: ", i);
+        // console.log("substring:", s.substring(j, i), "j: ", j, "i: ", i);
         arr[i] = true;
         break;
       }
     }
   }
-  console.log("arr: ", arr);
+  // console.log("arr: ", arr);
   return arr[s.length];
 };
 
-let s = "leetcode";
+// let s = "catsandog";
+// let wordDict = ["cats", "dog", "sand", "and", "cat"];
+// console.log(wordBreak(s, wordDict));
 
-let wordDict = ["leet", "code"];
-console.log(wordBreak(s, wordDict));
+// 22. Generate Parentheses
+var generateParenthesis = function(n) {
+  let store = [];
+  generateHelper(n * 2, 1, 0, "(", store);
+  return store;
+};
+
+function generateHelper(total, open, close, current, store) {
+  if (current.length === total) {
+    return store.push(current);
+  }
+
+  if (open > close) {
+    if (open === total / 2) {
+      // used all your open parentheses
+      generateHelper(total, open, close + 1, current + ")", store);
+    } else {
+      generateHelper(total, open + 1, close, current + "(", store);
+      generateHelper(total, open, close + 1, current + ")", store);
+    }
+  } else {
+    generateHelper(total, open + 1, close, current + "(", store);
+  }
+}
+
+// console.log(generateParenthesis(3));
+
+/* 48. Rotate Image
+Given input matrix =
+[
+  [1,2,3],
+  [4,5,6],
+  [7,8,9]
+],
+
+rotate the input matrix in-place such that it becomes:
+[
+  [7,4,1],
+  [8,5,2],
+  [9,6,3]
+] */
+
+var rotate = function(matrix) {
+  matrix.reverse();
+
+  let offset = 0;
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = offset; col < matrix[0].length; col++) {
+      let A = matrix[row][col];
+      let B = matrix[col][row];
+
+      matrix[row][col] = B;
+      matrix[col][row] = A;
+    }
+    offset += 1;
+  }
+};
+
+let test = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+console.log(rotate(test));
