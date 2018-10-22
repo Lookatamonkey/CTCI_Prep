@@ -874,7 +874,7 @@ var subsets = function (nums) {
 
   for (let i = 0; i < nums.length; i++) {
     res.push([nums[i]]);
-    let temp = [nums[i]]
+    let temp = [nums[i]];
     subHelper(nums.slice(i + 1, nums.length), temp, res);
   }
 
@@ -882,7 +882,6 @@ var subsets = function (nums) {
 };
 
 var subHelper = function (nums, current, res) {
-
   if (nums.length === 0) {
     return null;
   }
@@ -891,6 +890,156 @@ var subHelper = function (nums, current, res) {
     res.push(temp);
     subHelper(nums.slice(i + 1, nums.length), temp, res);
   }
-
-}
+};
 // console.log(subsets([1, 2, 3, 4]));
+
+// 31. Next Permutation MINE IS TRASH
+var nextPermutation = function (nums) {
+  if (nums.length === 1) {
+    return;
+  }
+  if (inOrder(nums)) {
+    nums.reverse();
+    return;
+  }
+
+  let startSearchIdx = startOfWrongOrder(nums);
+  swapWithNextLargestNum(nums);
+  let startIndexToReverse = startSearchIdx + 1;
+  reverse(nums);
+  console.log("nums", nums);
+
+  function reverse(nums) {
+    let head = startIndexToReverse;
+    let tail = nums.length - 1;
+    while (tail > head) {
+      let temp = nums[head];
+      nums[head] = nums[tail];
+      nums[tail] = temp;
+      tail -= 1;
+      head += 1;
+    }
+  }
+
+  function swapWithNextLargestNum(nums) {
+    let nextLargestNum = null;
+    let nextLargestNumIdx = null;
+    for (let i = nums.length - 1; i > startSearchIdx; i--) {
+      if (nextLargestNum === null && nextLargestNumIdx === null) {
+        if (nums[i] > nums[startSearchIdx]) {
+          nextLargestNum = nums[i];
+          nextLargestNumIdx = i;
+        }
+      } else if (nums[i] < nextLargestNum && nums[i] > nums[startSearchIdx]) {
+        nextLargestNum = nums[i];
+        nextLargestNumIdx = i;
+      }
+    }
+
+    let temp = nums[startSearchIdx];
+    nums[startSearchIdx] = nums[nextLargestNumIdx];
+    nums[nextLargestNumIdx] = temp;
+  }
+
+  // starts from the right side
+  function startOfWrongOrder(nums) {
+    for (let i = nums.length - 1; i >= 0; i--) {
+      let j = i - 1;
+      if (nums[i] > nums[j]) {
+        return j;
+      }
+    }
+  }
+
+  function inOrder(nums) {
+    for (let i = 0; i < nums.length; i++) {
+      let j = i + 1;
+      if (nums[j] > nums[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+};
+
+/*
+var nextPermutation = function(nums) {
+  let i = nums.length - 2;
+  while (i >= 0 && nums[i+1] <= nums[i]) {
+      i--;
+  }
+  if (i >= 0) {
+      let j = nums.length - 1;
+      while (j >= 0 && nums[j] <= nums[i]) {
+          j--;
+      }
+      swap(nums, i, j);
+  }
+  
+  let k = i + 1;
+  let l = nums.length - 1;
+  while (k < l) {
+      swap(nums, k, l);
+      k++;
+      l--;
+  }
+};
+
+function swap(nums, i, j) {
+  const temp = nums[i];
+  nums[i] = nums[j];
+  nums[j] = temp;
+}
+*/
+
+// nextPermutation([2, 3, 1, 3, 3]);
+// nextPermutation([2, 3, 1]);
+
+var trap = function (height) {
+  let waterVol = 0;
+  let left = 0;
+  let right = height.length - 1;
+  let leftWall = height[left];
+  let rightWall = height[right];
+
+  while (left < right) {
+    if (height[left] < height[right]) {
+      if (height[left] < leftWall) {
+        waterVol += leftWall - height[left];
+      } else {
+        leftWall = height[left];
+      }
+      left++;
+    } else {
+      if (height[right] < rightWall) {
+        waterVol += rightWall - height[right];
+      } else {
+        rightWall = height[right];
+      }
+      right--;
+    }
+  }
+  return waterVol;
+};
+
+// console.log(trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]));
+
+// 70. Climbing Stairs
+var climbStairs = function (n) {
+  if (n === 1) {
+    return 1;
+  }
+  if (n === 2) {
+    return 2;
+  }
+
+  let history = [1, 2];
+  while (n - 2 > 0) {
+    let last = history[history.length - 1];
+    let secondLast = history[history.length - 2];
+    history.push(last + secondLast);
+    n -= 1;
+  }
+
+  return history[history.length - 1];
+};

@@ -40,19 +40,21 @@ var findLength = function (head) {
 // #143 - Reorder List
 var reorderList = function (head) {
     if (head === null || head.next === null) {
-        break;
+        return;
     }
     let node1 = head;
-    let length = listCounter(node1);
+    let length = listLength(node1);
 
+    // get to middle of Linked List
     for (let i = 1; i < length / 2; i++) {
         node1 = node1.next;
     }
+    // splits the Linked List in half
     let node2 = node1.next;
     node1.next = null;
     node1 = head;
     node2 = reverseList(node2);
-    console.log('node1: ', node1, 'node2: ', node2)
+
     merge(node1, node2);
 };
 
@@ -67,7 +69,7 @@ function merge(node1, node2) {
     }
 }
 
-function listCounter(node) {
+function listLength(node) {
     let count = 0;
     while (node) {
         count += 1;
