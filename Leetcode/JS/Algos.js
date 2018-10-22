@@ -1024,7 +1024,7 @@ var trap = function (height) {
 
 // console.log(trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]));
 
-// 70. Climbing Stairs
+// 70. Climbing Stairs WITH N SPACE
 var climbStairs = function (n) {
   if (n === 1) {
     return 1;
@@ -1043,3 +1043,27 @@ var climbStairs = function (n) {
 
   return history[history.length - 1];
 };
+
+// 70. Climbing Stairs WITH O(1) SPACE
+var climbStairs2 = function (n) {
+  if (n === 1) {
+    return 1;
+  }
+  if (n === 2) {
+    return 2;
+  }
+
+  let prev = 2;
+  let prevPrev = 1;
+
+  while (n - 3 > 0) {
+    let temp = prevPrev;
+    prevPrev = prev;
+    prev += temp;
+    n -= 1;
+  }
+
+  return prev + prevPrev;
+};
+
+// console.log(climbStairs2(4))
