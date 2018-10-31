@@ -255,13 +255,13 @@ class MinHeap {
   }
 }
 
-let minheap = new MinHeap();
-minheap.insert(3);
-minheap.insert(1);
-minheap.insert(6);
-minheap.insert(5);
-minheap.insert(2);
-minheap.insert(4);
-console.log(minheap);
-minheap.pop();
-console.log(minheap);
+// let minheap = new MinHeap();
+// minheap.insert(3);
+// minheap.insert(1);
+// minheap.insert(6);
+// minheap.insert(5);
+// minheap.insert(2);
+// minheap.insert(4);
+// console.log(minheap);
+// minheap.pop();
+// console.log(minheap);
