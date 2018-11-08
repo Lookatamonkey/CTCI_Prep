@@ -1,5 +1,5 @@
 //  #258 - Add Digits
-var addDigits = function (num) {
+var addDigits = function(num) {
   if (num < 10) {
     return num;
   }
@@ -19,7 +19,7 @@ var addDigits = function (num) {
 };
 
 // #283 - Move Zeros
-var moveZeroes = function (nums) {
+var moveZeroes = function(nums) {
   let nonZeroIdx = 0;
 
   for (let i = 0; i < nums.length; i++) {
@@ -35,7 +35,7 @@ var moveZeroes = function (nums) {
 };
 
 // #27 - Remove Element
-var removeElement = function (nums, val) {
+var removeElement = function(nums, val) {
   let notValIdx = 0;
 
   for (let i = 0; i < nums.length; i++) {
@@ -49,7 +49,7 @@ var removeElement = function (nums, val) {
 };
 
 //  #26 - Remove Dups
-var removeDuplicates = function (nums) {
+var removeDuplicates = function(nums) {
   const set = new Set();
   let uniqueIdx = 0;
 
@@ -65,7 +65,7 @@ var removeDuplicates = function (nums) {
 };
 
 // #35 - Search Insert
-var searchInsert = function (nums, target) {
+var searchInsert = function(nums, target) {
   if (nums.length === 0) {
     return 0;
   }
@@ -84,7 +84,7 @@ var searchInsert = function (nums, target) {
 };
 
 // #763 - Partition Labels
-var partitionLabels = function (S) {
+var partitionLabels = function(S) {
   let store = new Array(26);
   let res = [];
 
@@ -110,7 +110,7 @@ var partitionLabels = function (S) {
 // console.log(partitionLabels("ababcbacadefegdehijhklij"));
 
 // 300. Longest Increasing Subsequence
-var lengthOfLIS = function (nums) {
+var lengthOfLIS = function(nums) {
   let copy = nums.slice();
   copy.sort((a, b) => {
     return a - b;
@@ -145,7 +145,7 @@ var lengthOfLIS = function (nums) {
 // [2,3,5,7,9,10,18,101]
 
 // #205 Isomorphic Strings
-var isIsomorphic = function (s, t) {
+var isIsomorphic = function(s, t) {
   let dictionaryA = {};
   let dictionaryB = {};
 
@@ -184,7 +184,7 @@ var isIsomorphic = function (s, t) {
 // P L    I G
 // A      N
 
-var convert = function (s, numRows) {
+var convert = function(s, numRows) {
   let result = [];
   let step = 1,
     index = 0;
@@ -211,7 +211,7 @@ var convert = function (s, numRows) {
 
 // 13. Roman Numeral to Integer
 
-var romanToInt = function (s) {
+var romanToInt = function(s) {
   const dictionary = {
     I: 1,
     V: 5,
@@ -250,7 +250,7 @@ var romanToInt = function (s) {
 // Input: 1994
 // Output: "MCMXCIV"
 
-var intToRoman = function (num) {
+var intToRoman = function(num) {
   const dictionary = {
     1: "I",
     4: "IV",
@@ -279,7 +279,7 @@ var intToRoman = function (num) {
   return res;
 };
 
-var createRN = function (num, dictionary) {
+var createRN = function(num, dictionary) {
   const keys = Object.keys(dictionary).reverse();
   let res = "";
 
@@ -295,7 +295,7 @@ var createRN = function (num, dictionary) {
   return res;
 };
 
-var splitNum = function (num) {
+var splitNum = function(num) {
   let res = [];
 
   while (num > 9) {
@@ -308,7 +308,7 @@ var splitNum = function (num) {
 };
 
 // #198 House Robber
-var rob = function (nums) {
+var rob = function(nums) {
   if (nums.length < 1) {
     return 0;
   }
@@ -334,7 +334,7 @@ var rob = function (nums) {
 // console.log(rob([100, 50, 200, 1000, 10]));
 
 // #53. Maximum Subarray
-var maxSubArray = function (nums) {
+var maxSubArray = function(nums) {
   if (nums.length < 1) {
     return 0;
   }
@@ -361,7 +361,7 @@ var maxSubArray = function (nums) {
 
 // console.log(maxSubArray([-2,1,-3,4,-1,2,1,-5,4])); // => 6
 
-var spiralOrder = function (matrix) {
+var spiralOrder = function(matrix) {
   if (matrix.length === 0) {
     return [];
   }
@@ -419,11 +419,7 @@ var spiralOrder = function (matrix) {
   return nums;
 };
 
-let matrix = [
-  [1, 2, 3],
-  [8, 9, 4],
-  [7, 6, 5]
-];
+let matrix = [[1, 2, 3], [8, 9, 4], [7, 6, 5]];
 
 // let matrix = [
 //     [ 1, 2, 3, 4 ],
@@ -442,7 +438,7 @@ let matrix = [
 
 // #345 Reverse Vowels of a String
 
-var reverseVowels = function (s) {
+var reverseVowels = function(s) {
   if (s.length <= 1) {
     return s;
   }
@@ -477,7 +473,7 @@ var reverseVowels = function (s) {
 // console.log(reverseVowels(".,"));
 
 // #200 Number of Islands
-var numIslands = function (grid) {
+var numIslands = function(grid) {
   // FOR SOME REASON USING A SET DOESNT WORK BUT USING A HASHMAP WORKS?
   if (grid.length === 0 || grid[0].length === 0) {
     return 0;
@@ -524,7 +520,7 @@ var numIslands = function (grid) {
 // console.log(numIslands(island));
 
 // 2228. Summary Ranges
-var summaryRanges = function (nums) {
+var summaryRanges = function(nums) {
   if (nums.length < 1) {
     return [];
   }
@@ -549,9 +545,9 @@ var summaryRanges = function (nums) {
     }
   }
 
-  head === tail ?
-    res.push(head.toString()) :
-    res.push(head.toString() + "->" + tail.toString());
+  head === tail
+    ? res.push(head.toString())
+    : res.push(head.toString() + "->" + tail.toString());
 
   return res;
 };
@@ -559,11 +555,11 @@ var summaryRanges = function (nums) {
 // 162. Find Peak Element
 // Question claims this could be done in O(logn) but it impossible to determine with 100% certainty
 // which side has the peak if it's a flat range like [1, 1, 1, 1, 1, 1, 1, 2].
-var findPeakElement = function (nums) {
+var findPeakElement = function(nums) {
   return fpeHelper(nums, 0, nums.length - 1);
 };
 
-var fpeHelper = function (nums, low, high) {
+var fpeHelper = function(nums, low, high) {
   console.log("nums: ", nums, "low: ", low, "high: ", high);
   if (low === high) {
     return low;
@@ -587,42 +583,40 @@ var fpeHelper = function (nums, low, high) {
 // console.log(findPeakElement(nums))
 
 // #253 Meeting Rooms II TODO
-var minMeetingRooms = function (intervals) {
+var minMeetingRooms = function(intervals) {
   if (intervals.length <= 0) {
     return 0;
   }
   if (intervals.length === 1) {
     return 1;
   }
-  intervals.sort((a, b) => a.start - b.start);
-  let minRooms = 1;
 
-  for (let i = 1; i < intervals.length; i++) {
-    for (let j = 0; j < i; j++) {
-      let current = intervals[i];
-      let prev = intervals[j];
+  let minRooms = 0;
+  let startTimes = intervals
+    .map(interval => interval.start)
+    .sort((a, b) => a - b);
 
-      if (prev.end > current.start) {
-        res += 1;
-        break;
-      }
+  let endTimes = intervals.map(interval => interval.end).sort((a, b) => a - b);
+
+  console.log("startTimes: ", startTimes, "endTimes: ", endTimes);
+
+  let endIdx = 0;
+  for (let startIdx = 0; startIdx < startTimes.length; startIdx++) {
+    if (startTimes[startIdx] < endTimes[endIdx]) {
+      minRooms += 1;
+    } else {
+      endIdx += 1;
     }
-    j = 0;
   }
 
   return minRooms;
 };
 
-let res = [
-  [0, 30],
-  [5, 10],
-  [15, 20],
-  [20, 30]
-];
-// let res = [[7,10],[2,4]];
+let res = [[0, 30], [5, 10], [15, 20], [20, 30]];
+// let res = [[7, 10], [2, 4]];
 // console.log(minMeetingRooms(res));
 
-var mergeIntervals = function (intervals) {
+var mergeIntervals = function(intervals) {
   if (intervals.length <= 0) {
     return [];
   }
@@ -656,7 +650,7 @@ var mergeIntervals = function (intervals) {
 // console.log(mergeIntervals([[1,4],[0,2],[3,5]]));
 
 // 325. Maximum Size Subarray Sum Equals k
-var maxSubArrayLen = function (nums, k) {
+var maxSubArrayLen = function(nums, k) {
   // int sum = 0, max = 0;
   // HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
   // for (int i = 0; i < nums.length; i++) {
@@ -695,7 +689,7 @@ var maxSubArrayLen = function (nums, k) {
 // console.log(maxSubArrayLen([1, -1, 5, -2, 3], 3));
 
 // 238. Product of Array Except Self
-var productExceptSelf = function (nums) {
+var productExceptSelf = function(nums) {
   const n = nums.length;
   let res = new Array(n);
   res[0] = 1;
@@ -713,7 +707,7 @@ var productExceptSelf = function (nums) {
 // console.log(productExceptSelf([1, 2, 3, 4]));
 
 // 1. Two Sum
-var twoSum = function (nums, target) {
+var twoSum = function(nums, target) {
   let store = {};
   for (let i = 0; i < nums.length; i++) {
     store[nums[i]] = i;
@@ -729,7 +723,7 @@ var twoSum = function (nums, target) {
 };
 // console.log(twoSum([2, 7, 11, 15], 9));
 // 23. Merge k Sorted Lists
-var mergeKLists = function (lists) {
+var mergeKLists = function(lists) {
   if (lists.length <= 1) {
     return lists;
   }
@@ -777,7 +771,7 @@ function merge(listA, listB) {
 ]
 Output: 1->1->2->3->4->4->5->6 */
 
-var wordBreak = function (s, wordDict) {
+var wordBreak = function(s, wordDict) {
   let wordSet = new Set([]);
   wordDict.forEach(word => wordSet.add(word));
 
@@ -802,7 +796,7 @@ var wordBreak = function (s, wordDict) {
 // console.log(wordBreak(s, wordDict));
 
 // 22. Generate Parentheses
-var generateParenthesis = function (n) {
+var generateParenthesis = function(n) {
   let store = [];
   generateHelper(n * 2, 1, 0, "(", store);
   return store;
@@ -843,7 +837,7 @@ rotate the input matrix in-place such that it becomes:
   [9,6,3]
 ] */
 
-var rotate = function (matrix) {
+var rotate = function(matrix) {
   matrix.reverse();
 
   let offset = 0;
@@ -863,14 +857,12 @@ var rotate = function (matrix) {
 // console.log(rotate(test));
 
 // 78. Subsets
-var subsets = function (nums) {
+var subsets = function(nums) {
   if (nums.length === 0) {
     return [];
   }
 
-  let res = [
-    []
-  ];
+  let res = [[]];
 
   for (let i = 0; i < nums.length; i++) {
     res.push([nums[i]]);
@@ -881,7 +873,7 @@ var subsets = function (nums) {
   return res;
 };
 
-var subHelper = function (nums, current, res) {
+var subHelper = function(nums, current, res) {
   if (nums.length === 0) {
     return null;
   }
@@ -894,7 +886,7 @@ var subHelper = function (nums, current, res) {
 // console.log(subsets([1, 2, 3, 4]));
 
 // 31. Next Permutation MINE IS TRASH
-var nextPermutation = function (nums) {
+var nextPermutation = function(nums) {
   if (nums.length === 1) {
     return;
   }
@@ -995,7 +987,7 @@ function swap(nums, i, j) {
 // nextPermutation([2, 3, 1, 3, 3]);
 // nextPermutation([2, 3, 1]);
 
-var trap = function (height) {
+var trap = function(height) {
   let waterVol = 0;
   let left = 0;
   let right = height.length - 1;
@@ -1025,7 +1017,7 @@ var trap = function (height) {
 // console.log(trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]));
 
 // 70. Climbing Stairs WITH N SPACE
-var climbStairs = function (n) {
+var climbStairs = function(n) {
   if (n === 1) {
     return 1;
   }
@@ -1045,7 +1037,7 @@ var climbStairs = function (n) {
 };
 
 // 70. Climbing Stairs WITH O(1) SPACE
-var climbStairs2 = function (n) {
+var climbStairs2 = function(n) {
   if (n === 1) {
     return 1;
   }
@@ -1067,3 +1059,38 @@ var climbStairs2 = function (n) {
 };
 
 // console.log(climbStairs2(4))
+
+var findMinArrowShots = function(points) {
+  if (points.length === 0) {
+    return 0;
+  }
+  if (points.length === 1) {
+    return 1;
+  }
+
+  points.sort((a, b) => a[0] - b[0]);
+  let start = points[0][0];
+  let end = points[0][1];
+  let minArrows = 1;
+
+  points.slice(1).forEach(point => {
+    let newStart = point[0];
+    let newEnd = point[1];
+
+    if (newStart > end) {
+      start = newStart;
+      end = newEnd;
+      minArrows += 1;
+    } else if (newEnd < end) {
+      end = newEnd;
+    }
+  });
+
+  console.log(minArrows);
+  return minArrows;
+};
+
+let ex = [[1, 2], [3, 4], [5, 6], [7, 8]];
+// let ex = [[10, 16], [2, 8], [1, 6], [7, 12]];
+// let ex = [[2, 8], [1, 10]];
+findMinArrowShots(ex);
