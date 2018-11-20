@@ -419,7 +419,7 @@ var spiralOrder = function(matrix) {
   return nums;
 };
 
-let matrix = [[1, 2, 3], [8, 9, 4], [7, 6, 5]];
+// let matrix = [[1, 2, 3], [8, 9, 4], [7, 6, 5]];
 
 // let matrix = [
 //     [ 1, 2, 3, 4 ],
@@ -987,6 +987,7 @@ function swap(nums, i, j) {
 // nextPermutation([2, 3, 1, 3, 3]);
 // nextPermutation([2, 3, 1]);
 
+// 42. Trapping Rain Water
 var trap = function(height) {
   let waterVol = 0;
   let left = 0;
@@ -1060,6 +1061,7 @@ var climbStairs2 = function(n) {
 
 // console.log(climbStairs2(4))
 
+// 452. Minimum Number of Arrows to Burst Balloons
 var findMinArrowShots = function(points) {
   if (points.length === 0) {
     return 0;
@@ -1090,7 +1092,176 @@ var findMinArrowShots = function(points) {
   return minArrows;
 };
 
-let ex = [[1, 2], [3, 4], [5, 6], [7, 8]];
+// let ex = [[1, 2], [3, 4], [5, 6], [7, 8]];
 // let ex = [[10, 16], [2, 8], [1, 6], [7, 12]];
 // let ex = [[2, 8], [1, 10]];
-findMinArrowShots(ex);
+// findMinArrowShots(ex);
+
+// 289. Game of Life
+var gameOfLife = function(board) {
+  if (board[0].length === 0 && board.length === 0) {
+    return board;
+  }
+  let row, col;
+  row = col = 0;
+  gameOfLifeHelper(board, row, col);
+
+  return board;
+};
+
+var gameOfLifeHelper = function(board, row, col) {
+  let count, res;
+  count = res = topBorder = leftBorder = 0;
+  let rightBorder = board[0].length;
+  let bottomBorder = board.length;
+
+  // calls every function
+  checkNeighbors();
+  let cell = board[row][col];
+
+  if (cell === 1) {
+    // starts alive
+    if (count < 2) {
+      // dies
+      res = 0;
+    } else if (count === 2 || count === 3) {
+      // lives
+      res = 1;
+    } else if (count > 3) {
+      // dies
+      res = 0;
+    }
+  } else {
+    if (count === 3) {
+      // lives
+      res = 1;
+    }
+  }
+  let newCoords = nextCell(row, col);
+  if (newCoords === "done") {
+    board[row][col] = res;
+    return;
+  } else {
+    let newRow = newCoords["row"];
+    let newCol = newCoords["col"];
+    gameOfLifeHelper(board, newRow, newCol);
+    board[row][col] = res;
+  }
+
+  // check up
+  function checkNeighbors() {
+    console.log("board: ", board, "row: ", row, "col: ", col);
+    if (row !== 0) {
+      // check up
+      if (board[row - 1][col] === 1) {
+        count += 1;
+      }
+      // check upper-let
+      if (board[row - 1][col - 1] === 1) {
+        count += 1;
+      }
+      // check upper-right
+      if (board[row - 1][col + 1] === 1) {
+        count += 1;
+      }
+    }
+    // check left
+    if (board[row][col - 1] === 1) {
+      count += 1;
+    }
+    if (row + 1 !== bottomBorder) {
+      // check down
+      if (board[row + 1][col] === 1) {
+        count += 1;
+      }
+      // check lower-left
+      if (board[row + 1][col - 1] === 1) {
+        count += 1;
+      }
+      // check lower-right
+      if (board[row + 1][col + 1] === 1) {
+        count += 1;
+      }
+    }
+    // check right
+    if (board[row][col + 1] === 1) {
+      count += 1;
+    }
+  }
+
+  function nextCell(row, col) {
+    if (col + 1 >= rightBorder && row + 1 >= bottomBorder) {
+      return "done";
+    } else if (col + 1 === rightBorder) {
+      col = 0;
+      row += 1;
+    } else {
+      col += 1;
+    }
+    return { row: row, col: col };
+  }
+};
+// let matrix = [[0, 1, 0], [0, 0, 1], [1, 1, 1], [0, 0, 0]];
+// let matrix = [[1]];
+// console.log(gameOfLife(matrix));
+
+var dailyTemperatures = function(T) {
+  let res = Array.from({ length: T.length }, x => 0);
+  let stack = [];
+  for (let i = 0; i < T.length; i++) {
+    // console.log(
+    //   "T[i]: ",
+    //   T[i],
+    //   "| T[stack[stack.length - 1]]: ",
+    //   T[stack[stack.length - 1]],
+    //   "| stack: ",
+    //   stack,
+    //   "| res: ",
+    //   res
+    // );
+    while (stack.length > 0 && T[stack[stack.length - 1]] < T[i]) {
+      let j = stack.pop();
+      res[j] = i - j;
+    }
+    stack.push(i);
+  }
+  // console.log("res: ", res);
+  return res;
+};
+
+// [1, 1, 4, 2, 1, 1, 0, 0];
+dailyTemperatures([73, 74, 75, 71, 69, 72, 76, 73]);
+
+var ladderLength = function(beginWord, endWord, wordList) {
+  let seen = {};
+
+  function oneLetterAway(firstWord, secondWord) {
+    let difference = 0;
+    let first = firstWord.split("").sort();
+    let second = secondWord.split("").sort();
+
+    for (let i = 0; i < first.length; i++) {
+      if (first[i] !== second[i]) {
+        difference += 1;
+      }
+      if (difference > 1) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+};
+
+var groupAnagrams = function(strs) {
+  let store = {};
+  strs.forEach(word => {
+    let sortedWord = word.split("").sort();
+    store[sortedWord]
+      ? store[sortedWord].push(word)
+      : (store[sortedWord] = [word]);
+  });
+
+  return Object.values(store);
+};
+// console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]));
