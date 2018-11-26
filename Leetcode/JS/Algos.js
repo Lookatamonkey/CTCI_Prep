@@ -696,7 +696,7 @@ var productExceptSelf = function(nums) {
   for (let i = 1; i < n; i++) {
     res[i] = res[i - 1] * nums[i - 1];
   }
-  console.log("first run: ", res);
+  // console.log("first run: ", res);
   let right = 1;
   for (let i = n - 1; i >= 0; i--) {
     res[i] *= right;
@@ -704,7 +704,7 @@ var productExceptSelf = function(nums) {
   }
   return res;
 };
-// console.log(productExceptSelf([1, 2, 3, 4]));
+// console.log(productExceptSelf([1, 2, 3, 4, 5]));
 
 // 1. Two Sum
 var twoSum = function(nums, target) {
@@ -1205,6 +1205,7 @@ var gameOfLifeHelper = function(board, row, col) {
 // let matrix = [[1]];
 // console.log(gameOfLife(matrix));
 
+// 739. Daily Temperatures
 var dailyTemperatures = function(T) {
   let res = Array.from({ length: T.length }, x => 0);
   let stack = [];
@@ -1232,6 +1233,7 @@ var dailyTemperatures = function(T) {
 // [1, 1, 4, 2, 1, 1, 0, 0];
 dailyTemperatures([73, 74, 75, 71, 69, 72, 76, 73]);
 
+// 127. Word Ladder
 var ladderLength = function(beginWord, endWord, wordList) {
   let seen = {};
 
@@ -1253,6 +1255,7 @@ var ladderLength = function(beginWord, endWord, wordList) {
   }
 };
 
+// 49. Group Anagrams
 var groupAnagrams = function(strs) {
   let store = {};
   strs.forEach(word => {
@@ -1265,3 +1268,103 @@ var groupAnagrams = function(strs) {
   return Object.values(store);
 };
 // console.log(groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]));
+
+// 204. Count Primes
+var countPrimes = function(n) {
+  if (n == 0 || n == 1) {
+    return 0;
+  }
+
+  let bool_array = new Array(n).fill(true);
+  let totalPrimes = 0;
+
+  for (let i = 2; i < bool_array.length; i++) {
+    if (bool_array[i] === true) {
+      totalPrimes++;
+
+      for (let j = i; j < bool_array.length; j += i) {
+        bool_array[j] = false;
+      }
+    }
+  }
+
+  return totalPrimes;
+};
+// console.log(countPrimes(10));
+
+// 167. Two Sum II - Input array is sorted
+var twoSum = function(numbers, target) {
+  let head = 0;
+  let tail = numbers.length - 1;
+
+  while (head < tail) {
+    let total = numbers[head] + numbers[tail];
+    if (total === target) {
+      return [head + 1, tail + 1];
+    } else if (total > target) {
+      tail -= 1;
+    } else {
+      head += 1;
+    }
+  }
+};
+
+var twoSumWithBSearch = function(numbers, target) {
+  for (let i = 0; i < numbers.length - 1; i++) {
+    let otherNum = target - numbers[i];
+    let res = binarySearch(numbers, otherNum, 0, numbers.length);
+    if (res !== -1 && res !== i) {
+      return [i, res].sort();
+    }
+  }
+
+  function binarySearch(arr, target, l, r) {
+    while (l <= r) {
+      let mid = Math.floor(l + (r - l) / 2);
+      if (arr[mid] === target) {
+        return mid;
+      } else if (arr[mid] > target) {
+        r = mid - 1;
+      } else {
+        l = mid + 1;
+      }
+    }
+    return -1;
+  }
+};
+
+var setZeroes = function(matrix) {
+  setZeroesHelper(matrix, (row = 0), (col = 0));
+  console.log(matrix);
+};
+
+var setZeroesHelper = function(matrix, row, col) {
+  let maxRow = matrix.length - 1;
+  let maxCol = matrix[0].length - 1;
+
+  if (row > maxRow && col <= maxCol) {
+    return;
+  }
+  let isZero = false;
+  if (matrix[row][col] === 0) {
+    isZero = true;
+  }
+
+  if (row <= maxRow && col < maxCol) {
+    setZeroesHelper(matrix, row, col + 1);
+  } else if (row <= maxRow && col === maxCol) {
+    setZeroesHelper(matrix, row + 1, 0);
+  }
+  if (isZero) {
+    // change row
+    for (let i = 0; i < matrix[row].length; i++) {
+      matrix[row][i] = 0;
+    }
+    // change col
+    for (let j = 0; j < matrix.length; j++) {
+      matrix[j][col] = 0;
+    }
+  }
+};
+
+setZeroes([[0]]);
