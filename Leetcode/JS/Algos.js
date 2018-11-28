@@ -1367,4 +1367,24 @@ var setZeroesHelper = function(matrix, row, col) {
   }
 };
 
-setZeroes([[0]]);
+// setZeroes([[0]]);
+// 11. Container With Most Water
+var maxArea = function(height) {
+  let headIdx = 0;
+  let tailIdx = height.length - 1;
+  let max = 0;
+  
+  while (headIdx < tailIdx) {
+      let head = height[headIdx]
+      let tail = height[tailIdx]
+      let temp = getArea(head, tail, tailIdx - headIdx);
+      if (temp > max) { max = temp; }
+      head > tail ? tailIdx -= 1 : headIdx += 1
+  }
+  
+  return max;
+  
+  function getArea(h1, h2, range) {
+      return Math.min(h1, h2) * range;
+  }
+};
