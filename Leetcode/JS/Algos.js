@@ -339,27 +339,16 @@ var maxSubArray = function(nums) {
     return 0;
   }
   let max = nums[0];
-  let current = nums[0];
+  let currentMax = nums[0];
 
   for (let i = 1; i < nums.length; i++) {
-    if (current > max) {
-      max = current;
-    }
-    if (current < 0 && nums[i] > current) {
-      current = nums[i];
-      continue;
-    }
-    if (current + nums[i] > 0) {
-      current += nums[i];
-    } else {
-      current = nums[i];
-    }
+    currentMax = Math.max(nums[i], nums[i] + currentMax);
+    max = Math.max(currentMax, max);
   }
-
-  return current > max ? current : max;
+  return max;
 };
 
-// console.log(maxSubArray([-2,1,-3,4,-1,2,1,-5,4])); // => 6
+// console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4])); // => 6
 
 var spiralOrder = function(matrix) {
   if (matrix.length === 0) {
@@ -1366,27 +1355,89 @@ var setZeroesHelper = function(matrix, row, col) {
     }
   }
 };
-
 // setZeroes([[0]]);
+
 // 11. Container With Most Water
 var maxArea = function(height) {
   let headIdx = 0;
   let tailIdx = height.length - 1;
   let max = 0;
-  
+
   while (headIdx < tailIdx) {
-      let head = height[headIdx]
-      let tail = height[tailIdx]
-      let temp = getArea(head, tail, tailIdx - headIdx);
-      if (temp > max) { max = temp; }
-      head > tail ? tailIdx -= 1 : headIdx += 1
+    let head = height[headIdx];
+    let tail = height[tailIdx];
+    let temp = getArea(head, tail, tailIdx - headIdx);
+    if (temp > max) {
+      max = temp;
+    }
+    head > tail ? (tailIdx -= 1) : (headIdx += 1);
   }
-  
+
   return max;
-  
+
   function getArea(h1, h2, range) {
-      return Math.min(h1, h2) * range;
+    return Math.min(h1, h2) * range;
   }
 };
 
+// 325. Maximum Size Subarray Sum Equals k
+var maxSubArrayLen = function(nums, k) {
+  let store = {};
+  let res = 0;
+  let acc = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    acc += nums[i];
+    if (!store[acc]) {
+      store[acc] = i;
+    }
+
+    if (store[acc - k]) {
+      res = Math.max(res, i - store[acc - k]);
+    }
+  }
+
+  return res;
+};
+<<<<<<< HEAD
+
 // console.log(maxArea([1,8,6,2,5,4,8,3,7]));
+=======
+// console.log(maxSubArrayLen([-2, -1, 2, 1], 1));
+
+// 165. Compare Version Numbers
+var compareVersion = function(version1, version2) {
+  let v1 = version1.split(".").map(num => parseInt(num));
+  let v2 = version2.split(".").map(num => parseInt(num));
+
+  console.log(v1, v2);
+  let i = 0;
+  while (i < v1.length && i < v2.length) {
+    if (v1[i] > v2[i]) {
+      return 1;
+    } else if (v1[i] < v2[i]) {
+      return -1;
+    }
+    i += 1;
+  }
+
+  if (v1.length > v2.length) {
+    if (v1.slice(i, v1.length).every(num => num === 0)) {
+      return 0;
+    } else {
+      return 1;
+    }
+  } else if (v2.length > v1.length) {
+    if (v2.slice(i, v2.length).every(num => num === 0)) {
+      console.log("hi", v2.slice(i, v2.length));
+      return 0;
+    } else {
+      return -1;
+    }
+  } else {
+    return 0;
+  }
+};
+
+console.log(compareVersion("1", "1.1"));
+>>>>>>> bdc06f866e22afdee56283dc12c3638fec10f028
