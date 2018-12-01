@@ -1388,3 +1388,5 @@ var maxArea = function(height) {
       return Math.min(h1, h2) * range;
   }
 };
+
+// console.log(maxArea([1,8,6,2,5,4,8,3,7]));
