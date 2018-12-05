@@ -640,24 +640,13 @@ var mergeIntervals = function(intervals) {
 
 // 325. Maximum Size Subarray Sum Equals k
 var maxSubArrayLen = function(nums, k) {
-  // int sum = 0, max = 0;
-  // HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-  // for (int i = 0; i < nums.length; i++) {
-  //     sum = sum + nums[i];
-  //     if (sum == k) max = i + 1;
-  //     else if (map.containsKey(sum - k)) max = Math.max(max, i - map.get(sum - k));
-  //     if (!map.containsKey(sum)) map.put(sum, i);
-  // }
-  // return max;
-
   if (nums.length < 1) {
     return 0;
   }
-  let max = 0,
-    sum = 0;
+  let max = 0;
+  let sum = 0;
   let store = {};
 
-  // sum - k = sum(i);
   for (let i = 0; i < nums.length; i++) {
     sum += nums[i];
     if (sum === k) {
@@ -673,7 +662,7 @@ var maxSubArrayLen = function(nums, k) {
 };
 
 // console.log(maxSubArrayLen([-2, -1, 2, 1], 1));
-// console.log(maxSubArrayLen([1, 0 , -1], -1));
+// console.log(maxSubArrayLen([1, 0, -1], -1));
 // console.log(maxSubArrayLen([-2, 1, 3, -3, 1], 1));
 // console.log(maxSubArrayLen([1, -1, 5, -2, 3], 3));
 
@@ -1382,17 +1371,37 @@ var maxArea = function(height) {
 
 // 325. Maximum Size Subarray Sum Equals k
 var maxSubArrayLen = function(nums, k) {
+  // if (nums.length < 1) {
+  //   return 0;
+  // }
+  // let max = 0;
+  // let sum = 0;
+  // let store = {};
+
+  // // sum - k = sum(i);
+  // for (let i = 0; i < nums.length; i++) {
+  //   sum += nums[i];
+  //   if (sum === k) {
+  //     max = i + 1;
+  //   } else if (store[sum - k] === 0 || store[sum - k]) {
+  //     max = Math.max(max, i - store[sum - k]);
+  //   }
+  //   if (!store[sum] && !(store[sum] === 0)) {
+  //     store[sum] = i;
+  //   }
+  // }
+  // return max;
   let store = {};
   let res = 0;
   let acc = 0;
 
   for (let i = 0; i < nums.length; i++) {
     acc += nums[i];
-    if (!store[acc]) {
+    if (!store[acc] && store[acc] !== 0) {
       store[acc] = i;
     }
 
-    if (store[acc - k]) {
+    if (store[acc - k] || store[acc - k] === 0) {
       res = Math.max(res, i - store[acc - k]);
     }
   }
@@ -1406,7 +1415,6 @@ var compareVersion = function(version1, version2) {
   let v1 = version1.split(".").map(num => parseInt(num));
   let v2 = version2.split(".").map(num => parseInt(num));
 
-  console.log(v1, v2);
   let i = 0;
   while (i < v1.length && i < v2.length) {
     if (v1[i] > v2[i]) {
@@ -1418,21 +1426,59 @@ var compareVersion = function(version1, version2) {
   }
 
   if (v1.length > v2.length) {
-    if (v1.slice(i, v1.length).every(num => num === 0)) {
-      return 0;
-    } else {
+    if (v1.slice(i, v1.length).some(num => num !== 0)) {
       return 1;
     }
   } else if (v2.length > v1.length) {
-    if (v2.slice(i, v2.length).every(num => num === 0)) {
-      console.log("hi", v2.slice(i, v2.length));
-      return 0;
-    } else {
+    if (v2.slice(i, v2.length).some(num => num !== 0)) {
       return -1;
     }
-  } else {
-    return 0;
   }
+  return 0;
+};
+// console.log(compareVersion("1", "1.1"));
+
+// 300. Longest Increasing Subsequence
+var lengthOfLIS = function(nums) {
+  if (!nums.length) return 0;
+
+  let arr = new Array(nums.length).fill(1);
+
+  for (let i = 1; i < nums.length; i++) {
+    for (let j = 0; j < i; j++) {
+      if (nums[j] < nums[i]) {
+        console.log(nums[j], nums[i]);
+        arr[i] = Math.max(arr[i], arr[j] + 1);
+        console.log(arr);
+      }
+    }
+  }
+  console.log(arr);
+
+  return Math.max(...arr);
 };
 
-console.log(compareVersion("1", "1.1"));
+lengthOfLIS([10, 9, 2, 5, 3, 4]);
+// lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]);
+
+// 118. Pascal's Triangle
+var generate = function(numRows) {
+  if (numRows === 0) {
+    return [];
+  }
+  if (numRows === 1) {
+    return [[1]];
+  }
+  let res = [[1], [1, 1]];
+
+  while (res.length < numRows) {
+    let lastRow = res[res.length - 1];
+    let temp = new Array(lastRow.length + 1).fill(1);
+
+    for (let i = 1; i < temp.length - 1; i++) {
+      temp[i] = lastRow[i - 1] + lastRow[i];
+    }
+    res.push(temp);
+  }
+  return res;
+};
