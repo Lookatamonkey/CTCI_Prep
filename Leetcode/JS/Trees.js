@@ -282,3 +282,27 @@ var isSymmetric = function(root) {
     }
   }
 };
+
+// 701. Insert into a Binary Search Tree
+var insertIntoBST = function(root, val) {
+  const node = root;
+  let foundPlace = false;
+  while (foundPlace) {
+    if (root.val > val) {
+      if (root.left === null) {
+        root.left = new TreeNode(val);
+        foundPlace = true;
+      } else {
+        root = root.left;
+      }
+    } else {
+      if (root.right === null) {
+        root.right = new TreeNode(val);
+        foundPlace = true;
+      } else {
+        root = root.right;
+      }
+    }
+  }
+  return node;
+};
