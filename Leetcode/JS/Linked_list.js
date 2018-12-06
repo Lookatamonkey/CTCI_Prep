@@ -196,29 +196,3 @@ var test = function(node) {
 
   console.log("arr: ", arr);
 };
-
-// 101. Symmetric Tree
-var isSymmetric = function(root) {
-  if (!root) {
-    return true;
-  }
-  return isSym(root.left, root.right);
-
-  function isSym(left, right) {
-    if (!left && !right) {
-      return true;
-    }
-    if (left && !right) {
-      return false;
-    }
-    if (right && !left) {
-      return false;
-    }
-
-    if (left.val === right.val) {
-      return isSym(left.left, right.right) && isSym(left.right, right.left);
-    } else {
-      return false;
-    }
-  }
-};

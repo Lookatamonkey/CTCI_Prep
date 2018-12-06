@@ -1458,7 +1458,7 @@ var lengthOfLIS = function(nums) {
   return Math.max(...arr);
 };
 
-lengthOfLIS([10, 9, 2, 5, 3, 4]);
+// lengthOfLIS([10, 9, 2, 5, 3, 4]);
 // lengthOfLIS([10, 9, 2, 5, 3, 7, 101, 18]);
 
 // 118. Pascal's Triangle
@@ -1482,3 +1482,22 @@ var generate = function(numRows) {
   }
   return res;
 };
+
+// 119. Pascal's Triangle II
+var getRow = function(rowIndex) {
+  if (rowIndex === 0) {
+    return [1];
+  }
+
+  let current = [1, 1];
+  for (let i = 2; i < rowIndex + 1; i++) {
+    let newArr = new Array(i + 1).fill(1);
+    for (let j = 1; j < newArr.length - 1; j++) {
+      newArr[j] = current[j - 1] + current[j];
+    }
+    current = newArr;
+  }
+
+  return current;
+};
+console.log(getRow(1));
