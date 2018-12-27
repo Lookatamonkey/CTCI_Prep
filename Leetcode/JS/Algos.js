@@ -1500,4 +1500,60 @@ var getRow = function(rowIndex) {
 
   return current;
 };
-console.log(getRow(1));
+// console.log(getRow(1));
+
+// 409. Longest Palindrome
+var longestPalindrome = function(s) {
+  let store = {};
+
+  for (let i = 0; i < s.length; i++) {
+    store[s[i]] ? (store[s[i]] += 1) : (store[s[i]] = 1);
+  }
+  console.log(store);
+  let res = 0;
+  let haveOdd = false;
+
+  for (let ltr in store) {
+    // is even
+    if (store[ltr] % 2 === 0) {
+      res += store[ltr];
+    } else {
+      res += store[ltr] - 1;
+      haveOdd = true;
+    }
+  }
+
+  return haveOdd ? res + 1 : res;
+};
+// console.log(longestPalindrome("abccccdd"));
+
+// 686. Repeated String Match
+var repeatedStringMatch = function(A, B) {
+  for (let i = 0; i < A.length; i++) {
+    if (A[i] === B[0]) {
+      let subString = isSubString(i);
+      if (subString) {
+        return Math.ceil(subString / A.length);
+      }
+    }
+  }
+  return -1;
+
+  function isSubString(i) {
+    let k = i;
+    let j = 0;
+
+    while (j < B.length) {
+      if (A[k % A.length] === B[j]) {
+        A[k % A.length];
+        k += 1;
+        j += 1;
+      } else {
+        return false;
+      }
+    }
+    return k;
+  }
+};
+
+console.log(repeatedStringMatch("aaaaaaaaaaaaaaaaaaaaaab", "ba"));
