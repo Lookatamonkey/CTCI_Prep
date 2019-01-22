@@ -306,3 +306,29 @@ var insertIntoBST = function(root, val) {
   }
   return node;
 };
+
+// 687. Longest Univalue Path
+var longestUnivaluePath = function(root) {
+  let ans = 0;
+  
+  const arrowLength = node => {
+    if (!node) return 0;
+    
+    let leftLength = arrowLength(node.left);
+    let rightLength = arrowLength(node.right);
+    let leftArrow = 0;
+    let rightArrow = 0;
+    
+    if (node.left && node.left.val === node.val) {
+      leftArrow = leftLength + 1
+    }
+    if (node.right && node.right.val === node.val) {
+      rightArrow = rightLength + 1
+    }
+    ans = Math.max(ans, leftArrow + rightArrow);
+    return Math.max(leftArrow, rightArrow);
+  }
+  
+  arrowLength(root);
+  return ans;
+};
