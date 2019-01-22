@@ -1531,29 +1531,129 @@ var longestPalindrome = function(s) {
 var repeatedStringMatch = function(A, B) {
   for (let i = 0; i < A.length; i++) {
     if (A[i] === B[0]) {
-      let subString = isSubString(i);
-      if (subString) {
-        return Math.ceil(subString / A.length);
+      let j = i;  
+      let ans = isSubstring(j);
+      if (ans) {
+        return Math.ceil(ans / A.length);
       }
     }
   }
   return -1;
 
-  function isSubString(i) {
-    let k = i;
-    let j = 0;
-
-    while (j < B.length) {
-      if (A[k % A.length] === B[j]) {
-        A[k % A.length];
-        k += 1;
-        j += 1;
-      } else {
+  function isSubstring(j) {
+    for (let k = 0; k < B.length; k++) {
+      if (A[j % A.length] !== B[k]) {
         return false;
       }
+      j += 1;
     }
-    return k;
+    return j;
+  }
+}
+
+// console.log(repeatedStringMatch("abcd", "cdabcdab"));
+
+var nextClosestTime = function(time) {
+  let onlyNumsTime = time
+    .split("")
+    .filter(char => char.charCodeAt() >= 48 && char.charCodeAt() <= 57);
+  let nums = onlyNumsTime.slice().sort((a, b) => a - b);
+  let res = onlyNumsTime.slice();
+
+  for (let i = onlyNumsTime.length - 1; i >= 0; i--) {
+    let nextNum = findNextNum(res[i]);
+    res[i] = nextNum;
+    if (i === 3 && nextNum > onlyNumsTime[i]) {
+      return res.slice(0, 2).join("") + ":" + res.slice(2, 4).join("");
+    }
+    if (i === 2 && res[2] >= 6) {
+      i += 1;
+      continue;
+    }
+    if (i === 1) {
+      if (parseInt(res.slice(0, 2).join("")) > 24) {
+        i += 1;
+        continue;
+      } else {
+        return res.slice(0, 2).join("") + ":" + res.slice(2, 4).join("");
+      }
+    }
+  }
+
+  function findNextNum(num) {
+    for (let j = 0; j < nums.length; j++) {
+      if (nums[j] > num) {
+        return nums[j];
+      }
+    }
+    return nums[0];
   }
 };
 
-console.log(repeatedStringMatch("aaaaaaaaaaaaaaaaaaaaaab", "ba"));
+// console.log(nextClosestTime("23:59")); // 22:22
+// console.log(nextClosestTime("13:55")); // 15:11
+// console.log(nextClosestTime("22:23")); // 15:11
+
+var licenseKeyFormatting = function(S, K) {
+  let filteredString = filterString(S);
+  let numDashes = S.length - filteredString.length;
+  let numCharsInFirstGroup = (S.length - numDashes) % K;
+  
+
+  let res = "";
+  let idx = 0;
+
+  if (numCharsInFirstGroup) {
+    for (idx; idx < numCharsInFirstGroup; idx++) {
+      let ch = filteredString.shift().toUpperCase();
+      res += ch;
+    }
+    if (filteredString.length > 0) {
+      res += "-";
+    }
+  }
+
+  
+
+  for (idx = 0; idx < filteredString.length; idx++) {
+    if (idx >= K && idx % K === 0) { 
+      res += "-"
+    }
+    res += filteredString[idx].toUpperCase(); 
+  }
+
+  return res;
+
+  function filterString(s) {
+    let res = []
+    for (let i = 0; i < s.length; i++) {
+      if (s[i] !== "-") {
+        res.push(s[i]);
+      }
+    }
+    return res;
+  }
+};
+
+// console.log(licenseKeyFormatting("5F3Z-2e-9-w", 4)) //"5F3Z-2E9W" | 5F3Z2E9W
+// console.log(licenseKeyFormatting("2-5g-3-J", 2)) //"2-5G-3J" | 25G3J
+
+// 66. Plus One
+let carryOver = 1;
+    let res = digits.slice();
+    
+    for (let i = res.length - 1; i >= 0; i--) {
+      let num  = res[i] + carryOver;
+      
+      if (num >= 10) {
+        res[i] = num - 10;
+        carryOver = 1;
+      } else {
+        res[i] = num;
+        return res;
+      }
+    }
+    if (carryOver) { 
+      res.unshift(carryOver);
+    }
+    return res;
